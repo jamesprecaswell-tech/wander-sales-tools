@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WanderOS ROI Calculator — See What Direct Bookings Could Do</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B2838;--coral:#FF6B35;--teal:#2EC4B6;
+  --bg:#F7F8FA;--white:#FFFFFF;--gray-100:#E8EAED;--gray-200:#D1D5DB;
+  --gray-500:#6B7280;--gray-700:#374151;--gray-900:#111827;
+  --shadow-sm:0 1px 3px rgba(27,40,56,.08);
+  --shadow-md:0 4px 16px rgba(27,40,56,.1);
+  --shadow-lg:0 8px 32px rgba(27,40,56,.14);
+  --radius:12px;--radius-lg:16px;
+}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--gray-900);line-height:1.6;min-height:100vh}
+
+/* NAV */
+nav{background:var(--navy);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.nav-brand{font-weight:800;font-size:1.125rem;color:var(--white);letter-spacing:-.02em}
+.nav-brand span{color:var(--coral)}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.8125rem;font-weight:500;padding:6px 12px;border-radius:6px;transition:all .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:rgba(255,255,255,.1)}
+.nav-links a.active{background:rgba(255,107,53,.2);color:var(--coral)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#243447 100%);padding:48px 24px 56px;text-align:center}
+.hero h1{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;color:var(--white);letter-spacing:-.03em;margin-bottom:8px}
+.hero h1 span{color:var(--coral)}
+.hero p{color:rgba(255,255,255,.65);font-size:clamp(.9rem,2vw,1.1rem);max-width:520px;margin:0 auto;font-weight:400}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 20px}
+
+/* INPUT SECTION */
+.input-section{margin-top:-32px;position:relative;z-index:10}
+.input-card{background:var(--white);border-radius:var(--radius-lg);padding:32px 28px;box-shadow:var(--shadow-lg)}
+.input-card h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:24px;text-transform:uppercase;letter-spacing:.04em;font-size:.75rem}
+.input-group{margin-bottom:28px}
+.input-group:last-child{margin-bottom:0}
+.input-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.input-label label{font-size:.875rem;font-weight:600;color:var(--gray-700)}
+.input-value{font-size:1.25rem;font-weight:800;color:var(--navy);min-width:80px;text-align:right}
+.input-value .prefix,.input-value .suffix{font-weight:600;color:var(--gray-500);font-size:.875rem}
+
+/* RANGE SLIDERS */
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;outline:none;cursor:pointer;background:var(--gray-100)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--coral);cursor:pointer;box-shadow:0 2px 6px rgba(255,107,53,.35);transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--coral);cursor:pointer;border:none;box-shadow:0 2px 6px rgba(255,107,53,.35)}
+.range-labels{display:flex;justify-content:space-between;margin-top:4px;font-size:.7rem;color:var(--gray-500);font-weight:500}
+
+/* RESULTS */
+.results-section{margin-top:32px;padding-bottom:48px}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.result-card{background:var(--white);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.04);transition:transform .2s,box-shadow .2s}
+.result-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.result-card.highlight{background:linear-gradient(135deg,var(--navy),#243447);color:var(--white);grid-column:1/-1}
+.result-card.highlight .result-label{color:rgba(255,255,255,.65)}
+.result-card.highlight .result-number{color:var(--coral)}
+.result-label{font-size:.75rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.result-number{font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.result-number.positive{color:var(--teal)}
+.result-number.accent{color:var(--coral)}
+.result-sub{font-size:.75rem;color:var(--gray-500);margin-top:2px;font-weight:500}
+.result-card.highlight .result-sub{color:rgba(255,255,255,.5)}
+
+/* COMPARISON TABLE */
+.comparison{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:24px;border:1px solid rgba(0,0,0,.04)}
+.comparison-header{background:var(--navy);padding:16px 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center}
+.comparison-header span{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.55)}
+.comparison-header span:first-child{text-align:left}
+.comparison-header .curr{color:rgba(255,255,255,.8)}
+.comparison-header .wos{color:var(--coral)}
+.comparison-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:14px 20px;border-bottom:1px solid var(--gray-100);text-align:center;align-items:center}
+.comparison-row:last-child{border-bottom:none}
+.comparison-row span:first-child{text-align:left;font-size:.8125rem;font-weight:500;color:var(--gray-700)}
+.comparison-row .val{font-size:.9375rem;font-weight:700}
+.comparison-row .val.old{color:var(--gray-500)}
+.comparison-row .val.new{color:var(--teal)}
+
+/* GROWTH */
+.growth-card{background:linear-gradient(135deg,#0d1b2a,var(--navy));border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-md);color:var(--white)}
+.growth-card h3{font-size:.875rem;font-weight:700;color:var(--coral);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.growth-card h3 .icon{font-size:1.1rem}
+.growth-card .growth-desc{font-size:.8125rem;color:rgba(255,255,255,.55);margin-bottom:16px}
+.growth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.growth-stat .growth-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.45);font-weight:600}
+.growth-stat .growth-num{font-size:1.375rem;font-weight:800;color:var(--teal)}
+
+/* INSIGHT BAR */
+.insight{background:var(--white);border-left:4px solid var(--coral);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.insight p{font-size:.8125rem;color:var(--gray-700);font-weight:500}
+.insight strong{color:var(--navy)}
+.insight .big{font-weight:800;color:var(--coral)}
+
+/* KEY POINTS */
+.key-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.kp{background:var(--white);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.04)}
+.kp .kp-icon{font-size:1.25rem;margin-bottom:6px}
+.kp .kp-text{font-size:.75rem;color:var(--gray-700);font-weight:500;line-height:1.5}
+.kp .kp-text strong{color:var(--navy)}
+
+/* FOOTER */
+footer{background:var(--navy);padding:32px 24px;text-align:center}
+footer p{color:rgba(255,255,255,.45);font-size:.75rem;font-weight:500}
+footer a{color:var(--coral);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .hero{padding:36px 20px 44px}
+  .input-card{padding:24px 20px}
+  .results-grid{grid-template-columns:1fr}
+  .key-points{grid-template-columns:1fr}
+  .comparison-header,.comparison-row{grid-template-columns:1.2fr 1fr 1fr;font-size:.8rem}
+  .growth-grid{grid-template-columns:1fr}
+  nav{padding:0 16px}
+  .nav-links a{font-size:.75rem;padding:5px 8px}
+}
+
+/* ANIMATION */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.result-card,.comparison,.growth-card,.insight,.kp{animation:fadeUp .4s ease both}
+.result-card:nth-child(2){animation-delay:.05s}
+.result-card:nth-child(3){animation-delay:.1s}
+.result-card:nth-child(4){animation-delay:.15s}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Wander<span>OS</span> Sales Tools</div>
+  <div class="nav-links">
+    <a href="index.html" class="active">ROI Calculator</a>
+    <a href="outreach.html">Outreach Portfolio</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>See What <span>Direct Bookings</span> Could Do for Your Portfolio</h1>
+  <p>Input your portfolio details. See exactly how much OTA commissions are costing you — and what WanderOS changes.</p>
+</section>
+
+<div class="container">
+
+  <!-- INPUTS -->
+  <section class="input-section">
+    <div class="input-card">
+      <h2>Your Portfolio</h2>
+
+      <div class="input-group">
+        <div class="input-label">
+          <label for="units">Number of Units</label>
+          <div class="input-value" id="unitsValue">25</div>
+        </div>
+        <input type="range" id="units" min="1" max="500" value="25" step="1">
+        <div class="range-labels"><span>1</span><span>500</span></div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">
+          <label for="adr">Average Nightly Rate</label>
+          <div class="input-value"><span class="prefix">$</span><span id="adrValue">250</span></div>
+        </div>
+        <input type="range" id="adr" min="50" max="1000" value="250" step="5">
+        <div class="range-labels"><span>$50</span><span>$1,000</span></div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">
+          <label for="directPct">Current Direct Booking %</label>
+          <div class="input-value"><span id="directPctValue">15</span><span class="suffix">%</span></div>
+        </div>
+        <input type="range" id="directPct" min="0" max="100" value="15" step="1">
+        <div class="range-labels"><span>0%</span><span>100%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results-section">
+
+    <div class="insight" id="insightBar">
+      <p>Every <strong>1% shift</strong> from OTA to direct saves you <span class="big" id="perPctSaving">$0</span> per year.</p>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-label">Current Annual Revenue</div>
+        <div class="result-number" id="currentRevenue">$0</div>
+        <div class="result-sub">at 65% occupancy</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Lost to OTA Commissions</div>
+        <div class="result-number accent" id="otaLost">$0</div>
+        <div class="result-sub">@ 15% avg take rate</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">WanderOS Annual Savings</div>
+        <div class="result-number positive" id="annualSavings">$0</div>
+        <div class="result-sub">net of 3% WanderOS fee</div>
+      </div>
+      <div class="result-card highlight">
+        <div class="result-label">Return on Investment</div>
+        <div class="result-number" id="roiPct">0%</div>
+        <div class="result-sub" id="roiSub">net benefit vs. WanderOS cost</div>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="comparison">
+      <div class="comparison-header">
+        <span>Metric</span>
+        <span class="curr">Current</span>
+        <span class="wos">WanderOS</span>
+      </div>
+      <div class="comparison-row">
+        <span>Direct Booking %</span>
+        <span class="val old" id="cmpDirect">15%</span>
+        <span class="val new" id="cmpDirectWos">40%</span>
+      </div>
+      <div class="comparison-row">
+        <span>OTA Commission Paid</span>
+        <span class="val old" id="cmpOta">$0</span>
+        <span class="val new" id="cmpOtaWos">$0</span>
+      </div>
+      <div class="comparison-row">
+        <span>WanderOS Fee (3%)</span>
+        <span class="val old">$0</span>
+        <span class="val new" id="cmpWosFee">$0</span>
+      </div>
+      <div class="comparison-row">
+        <span>Total Platform Costs</span>
+        <span class="val old" id="cmpTotalOld">$0</span>
+        <span class="val new" id="cmpTotalNew">$0</span>
+      </div>
+      <div class="comparison-row">
+        <span>You Keep</span>
+        <span class="val old" id="cmpKeepOld">$0</span>
+        <span class="val new" id="cmpKeepNew">$0</span>
+      </div>
+    </div>
+
+    <!-- KEY POINTS -->
+    <div class="key-points">
+      <div class="kp">
+        <div class="kp-icon">&#x1F310;</div>
+        <div class="kp-text"><strong>Replace, don't add.</strong> WanderOS replaces your direct booking site, preserves your SEO, and charges just 3%.</div>
+      </div>
+      <div class="kp">
+        <div class="kp-icon">&#x1F4C8;</div>
+        <div class="kp-text"><strong>20-35% lift</strong> in direct bookings within 6 months. Average customer sees results in weeks.</div>
+      </div>
+      <div class="kp">
+        <div class="kp-icon">&#x1F4B0;</div>
+        <div class="kp-text"><strong>OTAs take 15-18%.</strong> Airbnb & Vrbo commissions add up fast. WanderOS cuts that to 3%.</div>
+      </div>
+      <div class="kp">
+        <div class="kp-icon">&#x26A1;</div>
+        <div class="kp-text"><strong>No migration.</strong> Integrates with your existing PMS. Go live in days, not months.</div>
+      </div>
+    </div>
+
+    <!-- GROWTH PROJECTION -->
+    <div class="growth-card">
+      <h3><span class="icon">&#x1F680;</span> Growth Projection: What if you added 50 units?</h3>
+      <p class="growth-desc">Scaling your portfolio amplifies the savings. Here's what WanderOS looks like at your current size + 50 units.</p>
+      <div class="growth-grid">
+        <div class="growth-stat">
+          <div class="growth-label">Projected Revenue</div>
+          <div class="growth-num" id="growthRevenue">$0</div>
+        </div>
+        <div class="growth-stat">
+          <div class="growth-label">WanderOS Savings</div>
+          <div class="growth-num" id="growthSavings">$0</div>
+        </div>
+        <div class="growth-stat">
+          <div class="growth-label">OTA Costs Avoided</div>
+          <div class="growth-num" id="growthOtaAvoided">$0</div>
+        </div>
+        <div class="growth-stat">
+          <div class="growth-label">ROI</div>
+          <div class="growth-num" id="growthRoi">0%</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<footer>
+  <p>Built by James Caswell &mdash; AI Sales Automation for Vacation Rental SaaS<br>
+  <a href="outreach.html">See the Outreach Portfolio &rarr;</a></p>
+</footer>
+
+<script>
+(function(){
+  const OCCUPANCY = 0.65;
+  const OTA_RATE  = 0.15;
+  const WOS_FEE   = 0.03;
+  const LIFT      = 0.25; // 25 percentage-point lift
+  const CAP       = 0.85;
+  const GROWTH    = 50;   // extra units for projection
+
+  const $units     = document.getElementById('units');
+  const $adr       = document.getElementById('adr');
+  const $directPct = document.getElementById('directPct');
+
+  function fmt(n){
+    if(Math.abs(n)>=1e6) return '$'+( n/1e6).toFixed(1)+'M';
+    if(Math.abs(n)>=1e3) return '$'+(n/1e3).toFixed(n>=1e5?0:1)+'K';
+    return '$'+Math.round(n).toLocaleString('en-US');
+  }
+  function fmtFull(n){return '$'+Math.round(n).toLocaleString('en-US')}
+  function pct(n){return Math.round(n*100)+'%'}
+
+  function calc(){
+    var units    = +$units.value;
+    var adr      = +$adr.value;
+    var directP  = +$directPct.value / 100;
+
+    // Display values
+    document.getElementById('unitsValue').textContent = units;
+    document.getElementById('adrValue').textContent   = adr;
+    document.getElementById('directPctValue').textContent = $directPct.value;
+
+    // Update slider track fills
+    updateTrack($units);
+    updateTrack($adr);
+    updateTrack($directPct);
+
+    // Core calculations
+    var revenue      = units * adr * 365 * OCCUPANCY;
+    var otaRevenue   = revenue * (1 - directP);
+    var otaLost      = otaRevenue * OTA_RATE;
+
+    var wosDirect    = Math.min(directP + LIFT, CAP);
+    var wosOtaRev    = revenue * (1 - wosDirect);
+    var wosOtaLost   = wosOtaRev * OTA_RATE;
+    var wosFee       = revenue * wosDirect * WOS_FEE;
+    var wosTotalCost = wosOtaLost + wosFee;
+
+    var savings      = otaLost - wosTotalCost;
+    var wosCost      = wosFee; // WanderOS cost is just their fee
+    var roiVal       = wosCost > 0 ? (savings / wosCost) * 100 : 0;
+
+    // Per-percent saving
+    var perPctSave   = revenue * 0.01 * (OTA_RATE - WOS_FEE);
+
+    // Results
+    document.getElementById('currentRevenue').textContent = fmt(revenue);
+    document.getElementById('otaLost').textContent        = fmt(otaLost);
+    document.getElementById('annualSavings').textContent  = fmt(savings);
+    document.getElementById('roiPct').textContent         = Math.round(roiVal) + '%';
+    document.getElementById('roiSub').textContent         = fmtFull(savings)+' net benefit / '+fmtFull(wosCost)+' WanderOS cost';
+    document.getElementById('perPctSaving').textContent   = fmtFull(perPctSave);
+
+    // Comparison table
+    document.getElementById('cmpDirect').textContent    = Math.round(directP*100)+'%';
+    document.getElementById('cmpDirectWos').textContent  = Math.round(wosDirect*100)+'%';
+    document.getElementById('cmpOta').textContent        = fmt(otaLost);
+    document.getElementById('cmpOtaWos').textContent     = fmt(wosOtaLost);
+    document.getElementById('cmpWosFee').textContent     = fmt(wosFee);
+    document.getElementById('cmpTotalOld').textContent   = fmt(otaLost);
+    document.getElementById('cmpTotalNew').textContent   = fmt(wosTotalCost);
+    document.getElementById('cmpKeepOld').textContent    = fmt(revenue - otaLost);
+    document.getElementById('cmpKeepNew').textContent    = fmt(revenue - wosTotalCost);
+
+    // Growth projection (+50 units)
+    var gUnits       = units + GROWTH;
+    var gRevenue     = gUnits * adr * 365 * OCCUPANCY;
+    var gOtaRev      = gRevenue * (1 - directP);
+    var gOtaLost     = gOtaRev * OTA_RATE;
+    var gWosDirect   = Math.min(directP + LIFT, CAP);
+    var gWosOtaRev   = gRevenue * (1 - gWosDirect);
+    var gWosOtaLost  = gWosOtaRev * OTA_RATE;
+    var gWosFee      = gRevenue * gWosDirect * WOS_FEE;
+    var gWosTotalCost= gWosOtaLost + gWosFee;
+    var gSavings     = gOtaLost - gWosTotalCost;
+    var gRoi         = gWosFee > 0 ? (gSavings / gWosFee) * 100 : 0;
+
+    document.getElementById('growthRevenue').textContent    = fmt(gRevenue);
+    document.getElementById('growthSavings').textContent    = fmt(gSavings);
+    document.getElementById('growthOtaAvoided').textContent = fmt(gOtaLost);
+    document.getElementById('growthRoi').textContent        = Math.round(gRoi)+'%';
+  }
+
+  function updateTrack(el){
+    var min = +el.min, max = +el.max, val = +el.value;
+    var pct = ((val - min) / (max - min)) * 100;
+    el.style.background = 'linear-gradient(to right, #FF6B35 0%, #FF6B35 '+pct+'%, #E8EAED '+pct+'%, #E8EAED 100%)';
+  }
+
+  $units.addEventListener('input', calc);
+  $adr.addEventListener('input', calc);
+  $directPct.addEventListener('input', calc);
+
+  // Initial calculation
+  calc();
+})();
+</script>
+</body>
+</html>
