@@ -629,6 +629,45 @@ footer a:hover{color:rgba(255,255,255,.7)}
           <div class="occ-hint" id="occ-hint" style="font-size:.75rem;color:var(--content-muted);margin-top:4px;font-weight:500">US national average: ~55%. Adjust for your market and property tier.</div>
         </div>
 
+        <!-- MARKET SELECTOR -->
+        <div class="slider-group">
+          <div class="slider-top">
+            <div class="slider-label">
+              Primary Rental Market
+              <small>Adjusts seasonality in the 12-month breakdown</small>
+            </div>
+          </div>
+          <select id="market-select" style="width:100%;padding:12px 16px;border:1px solid var(--border-secondary);border-radius:var(--radius);font-family:var(--font);font-size:.9375rem;font-weight:500;color:var(--content-primary);background:var(--surface-primary);cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22><path d=%22M1 1l5 5 5-5%22 stroke=%22%23636363%22 fill=%22none%22 stroke-width=%221.5%22/></svg>');background-repeat:no-repeat;background-position:right 14px center">
+            <optgroup label="Steady / Default">
+              <option value="flat" selected>Year-Round Average (no seasonality)</option>
+            </optgroup>
+            <optgroup label="Beach / Coastal">
+              <option value="gulf-coast">Gulf Coast (Destin, PCB, Gulf Shores)</option>
+              <option value="southeast-coast">Southeast Coast (Hilton Head, OBX)</option>
+              <option value="florida">Florida (Orlando, Miami, Keys)</option>
+              <option value="socal">Southern California (San Diego, LA)</option>
+              <option value="hawaii">Hawaii (Maui, Big Island)</option>
+              <option value="texas-coast">Texas Coast (South Padre, Galveston)</option>
+            </optgroup>
+            <optgroup label="Mountain / Ski">
+              <option value="smoky-mountains">Smoky Mountains (Gatlinburg, Pigeon Forge)</option>
+              <option value="rocky-ski">Rocky Mountain Ski (Park City, Big Sky)</option>
+              <option value="lake-tahoe">Lake Tahoe</option>
+              <option value="appalachian">Appalachian (Asheville, Blue Ridge)</option>
+            </optgroup>
+            <optgroup label="Desert / Southwest">
+              <option value="arizona">Arizona (Scottsdale, Sedona, Tucson)</option>
+              <option value="palm-springs">Palm Springs</option>
+              <option value="las-vegas">Las Vegas</option>
+            </optgroup>
+            <optgroup label="Urban">
+              <option value="major-city">Major Cities (NYC, Chicago, SF, DC)</option>
+              <option value="event-city">Nashville / Austin / New Orleans</option>
+            </optgroup>
+          </select>
+          <div id="season-sparkline" style="display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:10px"></div>
+        </div>
+
         <!-- DIRECT BOOKING SLIDER -->
         <div class="slider-group">
           <div class="slider-top">
@@ -874,14 +913,37 @@ footer a:hover{color:rgba(255,255,255,.7)}
 
 <script>
 /* CONSTANTS */
-const SEASONAL = {Jan:.75,Feb:.82,Mar:.95,Apr:1.05,May:1.10,Jun:1.25,Jul:1.35,Aug:1.28,Sep:1.02,Oct:.95,Nov:.78,Dec:.90};
+const SEASONAL_PROFILES = {
+  "flat":{"label":"Year-Round Average","months":[1,1,1,1,1,1,1,1,1,1,1,1]},
+  "gulf-coast":{"label":"Gulf Coast (Destin, PCB, Gulf Shores)","months":[.45,.50,.85,1.10,1.20,1.65,1.80,1.70,.75,.55,.40,.55]},
+  "southeast-coast":{"label":"Southeast Coast (Hilton Head, OBX)","months":[.35,.40,.70,.90,1.20,1.70,1.85,1.75,.85,.55,.35,.40]},
+  "florida":{"label":"Florida (Orlando, Miami, Keys)","months":[1.20,1.25,1.40,1.30,.90,1.00,1.10,.95,.60,.65,.80,1.35]},
+  "socal":{"label":"Southern California (San Diego, LA)","months":[.80,.85,.95,1.00,1.05,1.20,1.30,1.25,1.05,.90,.80,.85]},
+  "hawaii":{"label":"Hawaii (Maui, Big Island)","months":[1.30,1.25,1.20,1.05,.85,.95,1.05,1.00,.70,.75,.85,1.55]},
+  "texas-coast":{"label":"Texas Coast (South Padre, Galveston)","months":[.50,.55,1.40,1.20,1.00,1.50,1.60,1.45,.65,.50,.35,.80]},
+  "smoky-mountains":{"label":"Smoky Mountains (Gatlinburg, Pigeon Forge)","months":[.60,.55,.80,.90,1.00,1.40,1.50,1.35,1.00,1.45,.85,1.10]},
+  "rocky-ski":{"label":"Rocky Mountain Ski (Park City, Big Sky)","months":[1.45,1.50,1.40,.70,.45,.90,1.20,1.10,.65,.50,.70,1.45]},
+  "lake-tahoe":{"label":"Lake Tahoe","months":[1.35,1.40,1.20,.55,.50,1.10,1.45,1.40,.75,.55,.60,1.15]},
+  "appalachian":{"label":"Appalachian (Asheville, Blue Ridge)","months":[.50,.55,.75,.90,1.05,1.30,1.40,1.30,1.15,1.35,.85,.90]},
+  "arizona":{"label":"Arizona (Scottsdale, Sedona, Tucson)","months":[1.40,1.50,1.55,1.35,.90,.45,.35,.35,.55,.80,1.20,1.60]},
+  "palm-springs":{"label":"Palm Springs","months":[1.45,1.55,1.60,1.40,.80,.35,.25,.30,.45,.75,1.30,1.80]},
+  "las-vegas":{"label":"Las Vegas","months":[.90,.95,1.15,1.10,1.00,.95,.90,.85,.95,1.10,1.05,1.10]},
+  "major-city":{"label":"Major Cities (NYC, Chicago, SF, DC)","months":[.80,.80,.90,1.00,1.10,1.15,1.20,1.15,1.10,1.05,.85,.90]},
+  "event-city":{"label":"Nashville / Austin / New Orleans","months":[.85,.90,1.30,1.20,1.10,1.05,1.00,.90,.85,1.10,.90,.85]}
+};
+
+let activeMarket = 'flat';
+function getSeasonalMultipliers(){
+  const raw = SEASONAL_PROFILES[activeMarket].months;
+  const sum = raw.reduce((a,b)=>a+b,0);
+  const factor = 12/sum;
+  return raw.map(v => v * factor);
+}
+
 const MONTH_KEYS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MONTH_LABELS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-const rawSum = Object.values(SEASONAL).reduce((a,b)=>a+b,0);
-const normFactor = 12/rawSum;
-const NORM_SEASONAL = {};
-MONTH_KEYS.forEach(k => { NORM_SEASONAL[k] = SEASONAL[k]*normFactor; });
+/* Seasonal multipliers are now dynamic via getSeasonalMultipliers() */
 
 const DEFAULTS = {units:25, adr:250, occ:55, direct:20};
 
@@ -1021,8 +1083,9 @@ function buildMonthlyTable(r){
   tbody.innerHTML='';
   let ftRev=0,ftOta=0,ftWos=0,ftSave=0;
   const annualRev = r.revenue;
-  const savings_by_month = MONTH_KEYS.map(k=>{
-    const mRev = (annualRev/12)*NORM_SEASONAL[k];
+  const mults = getSeasonalMultipliers();
+  const savings_by_month = mults.map(mult=>{
+    const mRev = (annualRev/12)*mult;
     const mOta = annualRev>0?(r.otaCost/annualRev)*mRev:0;
     const mWos = annualRev>0?(r.totalWosCost/annualRev)*mRev:0;
     return mOta-mWos;
@@ -1030,7 +1093,7 @@ function buildMonthlyTable(r){
   const maxSavings = Math.max(...savings_by_month, 1);
 
   MONTH_KEYS.forEach((key,i)=>{
-    const mult = NORM_SEASONAL[key];
+    const mult = mults[i];
     const mRev = (annualRev/12)*mult;
     const mOta = annualRev>0?(r.otaCost/annualRev)*mRev:0;
     const mWos = annualRev>0?(r.totalWosCost/annualRev)*mRev:0;
@@ -1343,6 +1406,27 @@ inpOcc.addEventListener('blur',()=>{
   if(v>100) inpOcc.value=100;
 });
 window.addEventListener('resize',reposOccTip);
+
+// Market selector
+const marketSelect = document.getElementById('market-select');
+const sparkline = document.getElementById('season-sparkline');
+function updateSparkline(){
+  const mults = getSeasonalMultipliers();
+  const max = Math.max(...mults);
+  sparkline.innerHTML = mults.map((m,i)=>{
+    const h = Math.round((m/max)*100);
+    const isPeak = m >= 1.2;
+    const isLow = m < 0.7;
+    const color = isPeak ? 'var(--success-light)' : isLow ? 'var(--error)' : 'var(--neutral-200)';
+    return `<div title="${MONTH_KEYS[i]}: ${(m*100).toFixed(0)}%" style="flex:1;height:${h}%;min-height:3px;background:${color};border-radius:2px;transition:height .3s"></div>`;
+  }).join('');
+}
+marketSelect.addEventListener('change',()=>{
+  activeMarket = marketSelect.value;
+  updateSparkline();
+  updateAll();
+});
+updateSparkline();
 
 // Direct booking: 0-100
 const slDirect = document.getElementById('sl-direct');
