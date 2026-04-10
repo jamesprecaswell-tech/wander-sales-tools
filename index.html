@@ -10,7 +10,6 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* Wander Design System — exact tokens */
   --neutral-0:#ffffff;
   --neutral-50:#f7f7f7;
   --neutral-100:#f0f0f0;
@@ -24,8 +23,6 @@
   --neutral-900:#202020;
   --neutral-950:#151515;
   --neutral-1000:#000000;
-
-  /* Semantic */
   --surface-primary:#ffffff;
   --surface-secondary:#f7f7f7;
   --content-primary:#202020;
@@ -33,8 +30,6 @@
   --content-muted:#8e8e8e;
   --border-primary:rgba(0,0,0,0.05);
   --border-secondary:rgba(0,0,0,0.08);
-
-  /* Accents */
   --accent-blue:#0073cb;
   --success:#008433;
   --success-light:#22c55e;
@@ -43,276 +38,168 @@
   --amber:#f59e0b;
   --amber-bg:rgba(245,158,11,.06);
   --amber-border:rgba(245,158,11,.2);
-
-  /* Shadows — minimal */
   --shadow-xs:0 1px 2px rgba(0,0,0,.03);
   --shadow-sm:0 1px 3px rgba(0,0,0,.04);
-
-  /* Radii */
   --radius:12px;
   --radius-lg:16px;
   --radius-xl:24px;
   --radius-full:9999px;
-
   --font:'Instrument Sans',Inter,system-ui,-apple-system,sans-serif;
 }
 html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--font);background:var(--surface-secondary);color:var(--content-primary);line-height:1.6;min-height:100vh}
 
-/* NAV — glassmorphism white */
 nav{
-  background:rgba(255,255,255,0.8);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  padding:0 28px;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:200;
-  border-bottom:1px solid var(--border-primary);
+  background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;border-bottom:1px solid var(--border-primary);
 }
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-globe{width:26px;height:26px;flex-shrink:0;border-radius:4px}
 .nav-wordmark{height:15px;flex-shrink:0}
-.nav-os-badge{
-  font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--content-muted);background:var(--neutral-100);
-  padding:2px 7px;border-radius:var(--radius-full);
-}
+.nav-os-badge{font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--content-muted);background:var(--neutral-100);padding:2px 7px;border-radius:var(--radius-full)}
 .nav-links{display:flex;gap:4px}
-.nav-links a{
-  color:var(--content-secondary);text-decoration:none;font-size:.8125rem;font-weight:500;
-  padding:6px 14px;border-radius:var(--radius-full);transition:all .18s;
-}
+.nav-links a{color:var(--content-secondary);text-decoration:none;font-size:.8125rem;font-weight:500;padding:6px 14px;border-radius:var(--radius-full);transition:all .18s}
 .nav-links a:hover{color:var(--neutral-1000);background:var(--neutral-100)}
 .nav-links a.active{color:var(--neutral-1000);font-weight:600}
 
-/* STICKY TICKER */
 #sticky-ticker{
-  position:fixed;top:64px;left:0;right:0;z-index:190;
-  background:var(--neutral-1000);
-  padding:9px 24px;
+  position:fixed;top:64px;left:0;right:0;z-index:190;background:var(--neutral-1000);padding:9px 24px;
   display:flex;align-items:center;justify-content:center;gap:12px;
-  transform:translateY(-100%);opacity:0;
-  transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .35s;pointer-events:none;
+  transform:translateY(-100%);opacity:0;transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .35s;pointer-events:none;
 }
 #sticky-ticker.visible{transform:translateY(0);opacity:1;pointer-events:auto}
-.ticker-label{color:rgba(255,255,255,.8);font-size:.875rem;font-weight:600}
+.ticker-label{color:rgba(255,255,255,.5);font-size:.8125rem;font-weight:500}
 .ticker-amount{color:var(--success-light);font-size:1.125rem;font-weight:700;letter-spacing:-.02em}
-.ticker-cta{
-  background:var(--neutral-0);color:var(--neutral-1000);text-decoration:none;
-  font-size:.75rem;font-weight:600;padding:6px 16px;border-radius:var(--radius-full);margin-left:6px;transition:all .18s;
-}
+.ticker-cta{background:var(--neutral-0);color:var(--neutral-1000);text-decoration:none;font-size:.75rem;font-weight:600;padding:6px 16px;border-radius:var(--radius-full);margin-left:6px;transition:all .18s}
 .ticker-cta:hover{background:var(--neutral-100)}
 
-/* HERO — pure black */
 .hero{
-  background:#000000;
-  background-image:radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,255,255,.06), transparent);
+  background:#000;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(255,255,255,.06),transparent);
   padding:100px 24px 80px;text-align:center;position:relative;overflow:hidden;
 }
-.hero::before{
-  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-  background:radial-gradient(circle at 30% 40%, rgba(255,255,255,.015) 0%, transparent 50%),
-             radial-gradient(circle at 70% 60%, rgba(255,255,255,.01) 0%, transparent 50%);
-  pointer-events:none;
-}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.015) 0%,transparent 50%),radial-gradient(circle at 70% 60%,rgba(255,255,255,.01) 0%,transparent 50%);pointer-events:none}
 .hero-icon{width:48px;height:48px;margin:0 auto 20px;border-radius:12px;opacity:.9;filter:brightness(1.2)}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
-  color:#ffffff;font-size:.8125rem;font-weight:700;padding:10px 24px;
-  border-radius:var(--radius-full);margin-bottom:36px;letter-spacing:.06em;text-transform:uppercase;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-}
-.hero h1{
-  font-size:clamp(2.75rem,6.5vw,4.5rem);font-weight:700;color:#ffffff;
-  letter-spacing:-.04em;line-height:1.05;margin-bottom:24px;
-  max-width:760px;margin-left:auto;margin-right:auto;
-}
-.hero h1 .accent{color:rgba(255,255,255,.7)}
-.hero-sub{
-  color:rgba(255,255,255,.85);font-size:clamp(1.0625rem,2.2vw,1.25rem);
-  max-width:560px;margin:0 auto 48px;font-weight:500;line-height:1.7;
-}
-.hero-stats{
-  display:flex;justify-content:center;gap:44px;flex-wrap:wrap;
-  padding-top:32px;border-top:1px solid rgba(255,255,255,.15);max-width:720px;margin:0 auto;
-}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);font-size:.75rem;font-weight:600;padding:8px 20px;border-radius:var(--radius-full);margin-bottom:32px;letter-spacing:.06em;text-transform:uppercase;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:700;color:#fff;letter-spacing:-.04em;line-height:1.05;margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto}
+.hero h1 .accent{background:linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:rgba(255,255,255,.55);font-size:clamp(1rem,2vw,1.125rem);max-width:540px;margin:0 auto 48px;font-weight:400;line-height:1.7}
+.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;padding-top:32px;border-top:1px solid rgba(255,255,255,.1);max-width:680px;margin:0 auto}
 .hero-stat{text-align:center}
-.hero-stat-num{font-size:1.75rem;font-weight:700;color:#ffffff;letter-spacing:-.02em;line-height:1}
-.hero-stat-num .acc{color:rgba(255,255,255,.7)}
-.hero-stat-label{font-size:.75rem;color:rgba(255,255,255,.7);margin-top:8px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-.hero-divider{width:1px;height:36px;background:rgba(255,255,255,.2);align-self:center}
+.hero-stat-num{font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1}
+.hero-stat-num .acc{color:rgba(255,255,255,.45)}
+.hero-stat-label{font-size:.7rem;color:rgba(255,255,255,.4);margin-top:6px;font-weight:500;text-transform:uppercase;letter-spacing:.05em}
+.hero-divider{width:1px;height:32px;background:rgba(255,255,255,.12);align-self:center}
 
-/* LAYOUT */
 .container{max-width:780px;margin:0 auto;padding:0 20px}
-.container-wide{max-width:1060px;margin:0 auto;padding:0 20px}
-
-/* SECTION LABELS */
 .section-eyebrow{font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--content-muted);margin-bottom:6px}
 .section-title{font-size:1.375rem;font-weight:600;color:var(--content-primary);letter-spacing:-.025em;margin-bottom:4px}
 .section-sub{font-size:.875rem;color:var(--content-secondary);font-weight:400}
-
-/* CARD — flat, minimal */
 .card{background:var(--surface-primary);border-radius:var(--radius-lg);border:1px solid var(--border-primary)}
 
-/* INPUT SECTION */
 .input-section{margin-top:-44px;position:relative;z-index:10}
 .input-card{padding:36px 32px 28px}
 .input-card-header{margin-bottom:28px}
 .sliders-grid{display:flex;flex-direction:column;gap:30px}
-
-/* SLIDER GROUP */
 .slider-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:12px}
 .slider-label{font-size:.875rem;font-weight:600;color:var(--neutral-800)}
 .slider-label small{display:block;font-size:.75rem;font-weight:400;color:var(--content-muted);margin-top:2px}
 .slider-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 
-/* CUSTOM INPUT */
 .custom-input-wrap{display:flex;align-items:center;gap:0;border:1.5px solid var(--neutral-150);border-radius:8px;overflow:hidden;background:var(--surface-primary);transition:border-color .18s}
 .custom-input-wrap:focus-within{border-color:var(--neutral-900)}
 .custom-input-prefix{font-size:.875rem;font-weight:600;color:var(--content-muted);padding:0 8px 0 10px;background:var(--neutral-50);border-right:1.5px solid var(--neutral-150);height:36px;display:flex;align-items:center;flex-shrink:0}
 .custom-input-suffix{font-size:.875rem;font-weight:600;color:var(--content-muted);padding:0 10px 0 8px;background:var(--neutral-50);border-left:1.5px solid var(--neutral-150);height:36px;display:flex;align-items:center;flex-shrink:0}
-.custom-num-input{
-  border:none;outline:none;background:transparent;
-  font-family:var(--font);font-size:.9375rem;font-weight:600;color:var(--content-primary);
-  padding:0 8px;width:90px;height:36px;text-align:center;
-  -moz-appearance:textfield;
-}
+.custom-num-input{border:none;outline:none;background:transparent;font-family:var(--font);font-size:.9375rem;font-weight:600;color:var(--content-primary);padding:0 8px;width:90px;height:36px;text-align:center;-moz-appearance:textfield}
 .custom-num-input::-webkit-outer-spin-button,.custom-num-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
-.fully-direct-badge{
-  display:none;align-items:center;gap:5px;
-  background:rgba(0,132,51,.08);border:1px solid rgba(0,132,51,.2);
-  color:var(--success);font-size:.6875rem;font-weight:700;padding:3px 9px;border-radius:var(--radius-full);
-  letter-spacing:.03em;
-}
+.fully-direct-badge{display:none;align-items:center;gap:5px;background:rgba(0,132,51,.08);border:1px solid rgba(0,132,51,.2);color:var(--success);font-size:.6875rem;font-weight:700;padding:3px 9px;border-radius:var(--radius-full);letter-spacing:.03em}
 .fully-direct-badge.visible{display:inline-flex}
 
-/* SLIDER */
 .slider-wrapper{position:relative;padding-top:22px}
-.slider-tooltip{
-  position:absolute;top:0;transform:translateX(-50%);
-  background:var(--neutral-1000);color:var(--neutral-0);font-size:.6875rem;font-weight:600;
-  padding:3px 8px;border-radius:4px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;
-}
-.slider-tooltip::after{
-  content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
-  border:4px solid transparent;border-top-color:var(--neutral-1000);
-}
+.slider-tooltip{position:absolute;top:0;transform:translateX(-50%);background:var(--neutral-1000);color:var(--neutral-0);font-size:.6875rem;font-weight:600;padding:3px 8px;border-radius:4px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s}
+.slider-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:var(--neutral-1000)}
 .slider-wrapper:hover .slider-tooltip,.slider-wrapper.dragging .slider-tooltip{opacity:1}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;outline:none;cursor:pointer;background:transparent}
 input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--neutral-0);border:3px solid var(--neutral-1000);box-shadow:0 2px 6px rgba(0,0,0,.12);cursor:grab;margin-top:-8px;transition:box-shadow .15s}
 input[type=range]::-webkit-slider-thumb:active{cursor:grabbing;box-shadow:0 4px 12px rgba(0,0,0,.18)}
 input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--neutral-0);border:3px solid var(--neutral-1000);box-shadow:0 2px 6px rgba(0,0,0,.12);cursor:grab}
-/* Units: light to dark (small portfolio to enterprise) */
-#sl-units::-webkit-slider-runnable-track{background:linear-gradient(to right,#d1d1d1,#636363,#202020)}
-#sl-units::-moz-range-track{background:linear-gradient(to right,#d1d1d1,#636363,#202020);height:6px;border-radius:3px}
-/* ADR: cool blue to warm gold (budget to luxury) */
-#sl-adr::-webkit-slider-runnable-track{background:linear-gradient(to right,#0073cb,#22c55e,#f59e0b)}
-#sl-adr::-moz-range-track{background:linear-gradient(to right,#0073cb,#22c55e,#f59e0b);height:6px;border-radius:3px}
-/* Occupancy: red (low) to green (high) */
-#sl-occ::-webkit-slider-runnable-track{background:linear-gradient(to right,#c32727,#ea580c,#f59e0b,#22c55e)}
-#sl-occ::-moz-range-track{background:linear-gradient(to right,#c32727,#ea580c,#f59e0b,#22c55e);height:6px;border-radius:3px}
-/* Direct booking: red (OTA dependent) to green (mostly direct) */
 #sl-direct::-webkit-slider-runnable-track{background:linear-gradient(to right,var(--error),var(--warning),var(--success-light))}
 #sl-direct::-moz-range-track{background:linear-gradient(to right,var(--error),var(--warning),var(--success-light));height:6px;border-radius:3px}
+#sl-units::-webkit-slider-runnable-track,#sl-adr::-webkit-slider-runnable-track,#sl-occ::-webkit-slider-runnable-track{background:var(--neutral-150)}
+#sl-units::-moz-range-track,#sl-adr::-moz-range-track,#sl-occ::-moz-range-track{background:var(--neutral-150);height:6px;border-radius:3px}
 .slider-ticks{display:flex;justify-content:space-between;margin-top:8px}
 .slider-tick{font-size:.6875rem;color:var(--content-muted);font-weight:500}
 .portfolio-categories{display:flex;justify-content:space-between;margin-top:6px;pointer-events:none}
 .portfolio-cat{font-size:.6875rem;color:var(--content-muted);font-weight:500;text-align:center}
 .portfolio-cat.active{color:var(--content-primary);font-weight:700}
 
-/* INPUT ACTIONS */
+.market-select{
+  font-family:var(--font);font-size:.875rem;font-weight:500;color:var(--content-primary);
+  background:var(--surface-primary);border:1.5px solid var(--neutral-150);border-radius:8px;
+  padding:8px 32px 8px 12px;width:100%;max-width:420px;height:40px;cursor:pointer;outline:none;transition:border-color .18s;
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238e8e8e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;background-size:12px;
+}
+.market-select:focus{border-color:var(--neutral-900)}
+.market-select optgroup{font-weight:600;color:var(--content-primary);font-size:.8125rem}
+.market-select option{font-weight:400;color:var(--content-secondary);padding:4px 0}
+
+.seasonal-sparkline{display:flex;align-items:flex-end;gap:3px;height:36px;margin-top:8px}
+.spark-bar{flex:1;border-radius:2px 2px 0 0;transition:height .3s ease,background .3s ease;min-width:0}
+.spark-bar.peak{background:var(--success-light)}
+.spark-bar.mid{background:var(--neutral-200)}
+.spark-bar.low{background:var(--neutral-150)}
+.spark-labels{display:flex;gap:3px;margin-top:2px}
+.spark-labels span{flex:1;font-size:.5rem;color:var(--content-muted);text-align:center;font-weight:500}
+
+.ota-channel-group{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ota-chip{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:var(--radius-full);border:1.5px solid var(--neutral-150);background:var(--surface-primary);font-size:.75rem;font-weight:500;color:var(--content-secondary);cursor:pointer;transition:all .18s;font-family:var(--font)}
+.ota-chip:hover{border-color:var(--neutral-300)}
+.ota-chip.active{border-color:var(--neutral-1000);background:var(--neutral-1000);color:var(--neutral-0)}
+.ota-chip-rate{font-weight:700}
+
 .input-actions{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid var(--neutral-100)}
-.reset-btn{
-  display:inline-flex;align-items:center;gap:5px;background:none;border:1.5px solid var(--neutral-150);
-  color:var(--content-muted);font-size:.8125rem;font-weight:500;padding:7px 14px;border-radius:var(--radius-full);
-  cursor:pointer;transition:all .18s;font-family:var(--font);
-}
+.reset-btn{display:inline-flex;align-items:center;gap:5px;background:none;border:1.5px solid var(--neutral-150);color:var(--content-muted);font-size:.8125rem;font-weight:500;padding:7px 14px;border-radius:var(--radius-full);cursor:pointer;transition:all .18s;font-family:var(--font)}
 .reset-btn:hover{border-color:var(--neutral-300);color:var(--content-secondary)}
-.share-btn{
-  display:inline-flex;align-items:center;gap:6px;background:var(--surface-primary);
-  border:1.5px solid var(--neutral-150);color:var(--content-secondary);font-size:.8125rem;font-weight:500;
-  padding:7px 16px;border-radius:var(--radius-full);cursor:pointer;transition:all .18s;font-family:var(--font);
-}
+.share-btn{display:inline-flex;align-items:center;gap:6px;background:var(--surface-primary);border:1.5px solid var(--neutral-150);color:var(--content-secondary);font-size:.8125rem;font-weight:500;padding:7px 16px;border-radius:var(--radius-full);cursor:pointer;transition:all .18s;font-family:var(--font)}
 .share-btn:hover{border-color:var(--neutral-900);color:var(--content-primary)}
 .share-btn.copied{border-color:var(--success);color:var(--success)}
 
-/* RESULTS */
 .results-section{margin-top:24px}
 .results-header{margin-bottom:16px}
 .metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
-.metric-card{
-  background:var(--surface-primary);border-radius:var(--radius-lg);padding:20px 18px 18px;
-  border:1px solid var(--border-primary);position:relative;overflow:hidden;
-}
+.metric-card{background:var(--surface-primary);border-radius:var(--radius-lg);padding:20px 18px 18px;border:1px solid var(--border-primary);position:relative;overflow:hidden}
 .metric-label{font-size:.6875rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--content-muted);margin-bottom:8px}
 .metric-value{font-size:1.625rem;font-weight:700;color:var(--content-primary);letter-spacing:-.035em;line-height:1;margin-bottom:4px}
 .metric-value.positive{color:var(--success)}
 .metric-value.negative-val{color:var(--error)}
 .metric-value.accent{color:var(--neutral-1000)}
 .metric-sub{font-size:.75rem;color:var(--content-muted);font-weight:400}
-.benchmark-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  background:rgba(0,132,51,.06);border:1px solid rgba(0,132,51,.12);
-  color:var(--success);font-size:.625rem;font-weight:600;padding:3px 8px;
-  border-radius:var(--radius-full);margin-top:8px;line-height:1.3;
-}
+.benchmark-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(0,132,51,.06);border:1px solid rgba(0,132,51,.12);color:var(--success);font-size:.625rem;font-weight:600;padding:3px 8px;border-radius:var(--radius-full);margin-top:8px;line-height:1.3}
 .benchmark-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--success);flex-shrink:0}
 
-/* NEGATIVE ROI WARNING */
-.negative-roi-callout{
-  display:none;
-  margin:16px 0;
-  padding:18px 22px;
-  background:var(--amber-bg);
-  border:1px solid var(--amber-border);
-  border-radius:var(--radius);
-  font-size:.875rem;
-  color:var(--neutral-700);
-  line-height:1.6;
-}
+.negative-roi-callout{display:none;margin:16px 0;padding:18px 22px;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:var(--radius);font-size:.875rem;color:var(--neutral-700);line-height:1.6}
 .negative-roi-callout.visible{display:block}
 .negative-roi-callout strong{color:var(--content-primary);font-weight:600}
 .negative-roi-icon{font-size:1.125rem;margin-right:6px;vertical-align:middle}
 
-/* OTA RATE TOOLTIP */
 .ota-rate-note{display:inline-flex;align-items:center;gap:4px;position:relative;cursor:help}
-.ota-rate-note .info-icon{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:14px;height:14px;border-radius:50%;
-  background:var(--neutral-150);color:var(--content-secondary);
-  font-size:.625rem;font-weight:700;line-height:1;flex-shrink:0;
-}
-.ota-tooltip{
-  display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
-  background:var(--neutral-1000);color:var(--neutral-0);font-size:.6875rem;
-  padding:10px 14px;border-radius:8px;width:280px;line-height:1.5;
-  box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:50;font-weight:400;
-}
-.ota-tooltip::after{
-  content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
-  border:5px solid transparent;border-top-color:var(--neutral-1000);
-}
+.ota-rate-note .info-icon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--neutral-150);color:var(--content-secondary);font-size:.625rem;font-weight:700;line-height:1;flex-shrink:0}
+.ota-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--neutral-1000);color:var(--neutral-0);font-size:.6875rem;padding:10px 14px;border-radius:8px;width:280px;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:50;font-weight:400}
+.ota-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--neutral-1000)}
 .ota-rate-note:hover .ota-tooltip{display:block}
 
-/* INFO BAR */
 .info-bar{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-.info-bar-card{
-  flex:1;min-width:220px;background:var(--surface-primary);border-radius:var(--radius-lg);
-  padding:14px 18px;border:1px solid var(--border-primary);
-}
+.info-bar-card{flex:1;min-width:200px;background:var(--surface-primary);border-radius:var(--radius-lg);padding:14px 18px;border:1px solid var(--border-primary)}
 .info-bar-label{font-size:.6875rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--content-muted);margin-bottom:4px}
 .info-bar-value{font-size:1.125rem;font-weight:700;letter-spacing:-.02em}
 .info-bar-sub{font-size:.6875rem;color:var(--content-muted);margin-top:2px}
 
-/* DONUT + COST COMPARE */
 .visual-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.donut-card{
-  background:var(--surface-primary);border-radius:var(--radius-lg);padding:24px;
-  border:1px solid var(--border-primary);
-  display:flex;flex-direction:column;align-items:center;gap:16px;
-}
+.donut-card{background:var(--surface-primary);border-radius:var(--radius-lg);padding:24px;border:1px solid var(--border-primary);display:flex;flex-direction:column;align-items:center;gap:16px}
 .donut-title{font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--content-muted);align-self:flex-start}
 .donut-wrap{position:relative;width:140px;height:140px;flex-shrink:0}
 .donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
@@ -323,10 +210,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 .legend-label{color:var(--content-muted);flex:1}
 .legend-val{font-weight:600;color:var(--content-primary)}
-.cost-compare-card{
-  background:var(--surface-primary);border-radius:var(--radius-lg);padding:24px;
-  border:1px solid var(--border-primary);
-}
+.cost-compare-card{background:var(--surface-primary);border-radius:var(--radius-lg);padding:24px;border:1px solid var(--border-primary)}
 .cost-compare-title{font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--content-muted);margin-bottom:16px}
 .cost-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--neutral-50)}
 .cost-row:last-child{border-bottom:none}
@@ -337,7 +221,6 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .cost-row.total .cost-row-label{font-weight:700;color:var(--content-primary);font-size:.875rem}
 .cost-row.total .cost-row-val{font-size:1.0625rem;color:var(--success)}
 
-/* PAYBACK */
 .payback-bar-section{margin-top:12px}
 .payback-bar-card{background:var(--surface-primary);border-radius:var(--radius-lg);padding:24px 24px 20px;border:1px solid var(--border-primary)}
 .payback-bar-label{font-size:.75rem;font-weight:600;color:var(--content-muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
@@ -347,7 +230,6 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .payback-info{display:flex;justify-content:space-between;margin-top:10px;font-size:.75rem;color:var(--content-muted)}
 .payback-months-label{font-weight:600;color:var(--content-primary)}
 
-/* MONTHLY TABLE */
 .monthly-section{margin-top:24px}
 .monthly-card{padding:28px 28px 20px}
 .monthly-header{margin-bottom:20px}
@@ -359,9 +241,13 @@ tbody td{padding:9px 10px;border-bottom:1px solid var(--neutral-50);color:var(--
 tbody td:not(:first-child){text-align:right}
 tbody tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:var(--neutral-50)}
+tbody tr.peak-row td{background:rgba(0,132,51,.02)}
+tbody tr.peak-row:hover td{background:rgba(0,132,51,.05)}
 .month-savings-cell{font-weight:700;color:var(--success)}
 .month-savings-cell.negative{color:var(--error)}
-.month-peak{display:inline-block;background:rgba(0,0,0,.04);color:var(--content-secondary);font-size:.625rem;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle}
+.month-badge{display:inline-block;font-size:.5625rem;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;letter-spacing:.03em}
+.month-badge.peak{background:rgba(0,132,51,.08);color:var(--success)}
+.month-badge.off{background:rgba(0,0,0,.04);color:var(--content-muted)}
 .impact-text{font-size:.75rem;font-weight:600;white-space:nowrap}
 .impact-strong{color:var(--success)}
 .impact-solid{color:var(--success)}
@@ -371,93 +257,43 @@ tfoot td{padding:10px 10px;font-weight:700;color:var(--content-primary);font-siz
 tfoot td:not(:first-child){text-align:right}
 tfoot .savings-total{color:var(--success)}
 
-/* METHODOLOGY NOTE */
-.methodology-note{
-  margin-top:16px;padding:14px 18px;
-  background:var(--neutral-50);border:1px solid var(--border-primary);
-  border-radius:var(--radius);
-  font-size:.6875rem;color:var(--content-muted);line-height:1.65;
-}
+.methodology-note{margin-top:16px;padding:14px 18px;background:var(--neutral-50);border:1px solid var(--border-primary);border-radius:var(--radius);font-size:.6875rem;color:var(--content-muted);line-height:1.65}
 .methodology-note strong{color:var(--content-secondary);font-weight:600}
 
-/* SAVINGS EQUIVALENTS - BLACK SECTION */
-.savings-hero{
-  margin-top:32px;
-  background:var(--neutral-1000);
-  border-radius:var(--radius-xl);
-  padding:52px 44px 48px;
-  position:relative;overflow:hidden;
-}
+.savings-hero{margin-top:32px;background:var(--neutral-1000);border-radius:var(--radius-xl);padding:52px 44px 48px;position:relative;overflow:hidden}
 .savings-hero-header{margin-bottom:12px;position:relative;z-index:1}
-.savings-hero-eyebrow{
-  font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  color:rgba(255,255,255,.75);margin-bottom:8px;display:flex;align-items:center;gap:8px;
-}
+.savings-hero-eyebrow{font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .savings-hero-title{font-size:1.625rem;font-weight:600;color:var(--neutral-0);letter-spacing:-.03em;line-height:1.2}
-.savings-hero-title .savings-inline{color:rgba(255,255,255,.8)}
-.savings-hero-sub{font-size:.9375rem;color:rgba(255,255,255,.7);margin-top:6px;font-weight:500}
-.savings-hero-amount{
-  position:relative;z-index:1;
-  font-size:3rem;font-weight:700;color:var(--neutral-0);letter-spacing:-.04em;
-  line-height:1;margin:20px 0 8px;
-}
-.savings-hero-amount .per-year{font-size:1.125rem;font-weight:500;color:rgba(255,255,255,.7);margin-left:4px}
-.savings-hero-tagline{
-  position:relative;z-index:1;
-  font-size:1.0625rem;color:rgba(255,255,255,.75);margin-bottom:36px;
-}
-.equiv-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:1;
-}
-.equiv-card{
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
-  border-radius:var(--radius);padding:24px 20px;
-  transition:all .22s;
-}
+.savings-hero-title .savings-inline{color:rgba(255,255,255,.5)}
+.savings-hero-sub{font-size:.875rem;color:rgba(255,255,255,.3);margin-top:6px;font-weight:400}
+.savings-hero-amount{position:relative;z-index:1;font-size:3rem;font-weight:700;color:var(--neutral-0);letter-spacing:-.04em;line-height:1;margin:20px 0 8px}
+.savings-hero-amount .per-year{font-size:1rem;font-weight:400;color:rgba(255,255,255,.3);margin-left:4px}
+.savings-hero-tagline{position:relative;z-index:1;font-size:1rem;color:rgba(255,255,255,.35);margin-bottom:36px}
+.equiv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:1}
+.equiv-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:24px 20px;transition:all .22s}
 .equiv-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
 .equiv-icon{font-size:1.75rem;margin-bottom:12px;display:block;line-height:1}
-.equiv-number{
-  font-size:2rem;font-weight:700;color:var(--neutral-0);letter-spacing:-.03em;line-height:1;margin-bottom:6px;
-}
-.equiv-label{font-size:.875rem;color:rgba(255,255,255,.75);line-height:1.5;font-weight:500}
-.equiv-detail{font-size:.8125rem;color:rgba(255,255,255,.65);margin-top:8px;line-height:1.5}
+.equiv-number{font-size:2rem;font-weight:700;color:var(--neutral-0);letter-spacing:-.03em;line-height:1;margin-bottom:6px}
+.equiv-label{font-size:.8125rem;color:rgba(255,255,255,.45);line-height:1.5;font-weight:400}
+.equiv-detail{font-size:.75rem;color:rgba(255,255,255,.2);margin-top:8px;line-height:1.4}
 .equiv-row-2{margin-top:12px}
 
-/* CTA SECTION */
 .cta-section{margin-top:32px;margin-bottom:56px}
-.cta-card{
-  background:var(--surface-primary);border-radius:var(--radius-xl);padding:56px 44px;
-  text-align:center;position:relative;overflow:hidden;
-  border:1px solid var(--border-primary);
-}
+.cta-card{background:var(--surface-primary);border-radius:var(--radius-xl);padding:56px 44px;text-align:center;position:relative;overflow:hidden;border:1px solid var(--border-primary)}
 .cta-eyebrow{font-size:.6875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--content-muted);margin-bottom:14px}
 .cta-headline{font-size:clamp(1.5rem,3vw,2.125rem);font-weight:600;color:var(--content-primary);letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
 .cta-sub{font-size:.9375rem;color:var(--content-secondary);max-width:480px;margin:0 auto 32px;line-height:1.65}
 .cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--neutral-1000);color:var(--neutral-0);
-  text-decoration:none;font-size:.9375rem;font-weight:600;
-  padding:14px 30px;border-radius:var(--radius-full);
-  transition:all .18s;letter-spacing:-.01em;
-}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--neutral-1000);color:var(--neutral-0);text-decoration:none;font-size:.9375rem;font-weight:600;padding:14px 30px;border-radius:var(--radius-full);transition:all .18s;letter-spacing:-.01em}
 .btn-primary:hover{background:var(--neutral-900);transform:translateY(-1px)}
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--neutral-100);color:var(--content-primary);
-  text-decoration:none;font-size:.9375rem;font-weight:600;
-  padding:14px 30px;border-radius:var(--radius-full);
-  transition:all .18s;letter-spacing:-.01em;
-}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--neutral-100);color:var(--content-primary);text-decoration:none;font-size:.9375rem;font-weight:600;padding:14px 30px;border-radius:var(--radius-full);transition:all .18s;letter-spacing:-.01em}
 .btn-secondary:hover{background:var(--neutral-150)}
 .cta-proof{margin-top:22px;color:var(--content-muted);font-size:.75rem}
 
-/* FOOTER — black */
-footer{background:var(--neutral-1000);padding:24px 24px;text-align:center;color:var(--content-muted);font-size:.75rem}
+footer{background:var(--neutral-1000);padding:24px;text-align:center;color:var(--content-muted);font-size:.75rem}
 footer a{color:var(--neutral-0);text-decoration:none}
 footer a:hover{color:rgba(255,255,255,.7)}
 
-/* RESPONSIVE */
 @media(max-width:680px){
   .input-card{padding:24px 18px}
   .metrics-row{grid-template-columns:1fr 1fr}
@@ -472,19 +308,17 @@ footer a:hover{color:rgba(255,255,255,.7)}
   .savings-hero-amount{font-size:2.25rem}
   .slider-top{flex-direction:column;align-items:flex-start}
   .slider-right{width:100%;justify-content:space-between}
+  .market-select{max-width:100%}
   .input-actions{flex-direction:column;gap:10px;align-items:stretch}
   .reset-btn,.share-btn{justify-content:center}
   .info-bar{flex-direction:column}
   .info-bar-card{min-width:unset}
 }
-@media(max-width:440px){
-  .equiv-grid{grid-template-columns:1fr}
-}
+@media(max-width:440px){.equiv-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
     <img class="nav-globe" src="https://www.wander.com/Wander-Brand-Assets/png/Wander+Icon.png" alt="Wander" onerror="this.style.display='none'">
@@ -499,46 +333,30 @@ footer a:hover{color:rgba(255,255,255,.7)}
   </div>
 </nav>
 
-<!-- STICKY TICKER -->
 <div id="sticky-ticker" aria-live="polite">
   <span class="ticker-label">Your estimated annual savings:</span>
   <span class="ticker-amount" id="ticker-val">$0</span>
   <a class="ticker-cta" href="https://wander.com/os" target="_blank" rel="noopener">Get started</a>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <img class="hero-icon" src="https://www.wander.com/Wander-Brand-Assets/png/Wander+Icon.png" alt="WanderOS" onerror="this.style.display='none'">
   <div class="hero-badge">WanderOS Direct Booking ROI Calculator</div>
   <h1>See exactly what OTAs<br>are costing you <span class="accent">every year</span></h1>
-  <p class="hero-sub">Input your portfolio details. See the real cost of OTA commissions — and what happens when you shift bookings direct with WanderOS.</p>
+  <p class="hero-sub">Input your portfolio details. See the real cost of OTA commissions &mdash; and what happens when you shift bookings direct with WanderOS.</p>
   <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-num">$67M<span class="acc">+</span></div>
-      <div class="hero-stat-label">Total bookings processed</div>
-    </div>
+    <div class="hero-stat"><div class="hero-stat-num">$67M<span class="acc">+</span></div><div class="hero-stat-label">Total bookings processed</div></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">20<span class="acc">%+</span></div>
-      <div class="hero-stat-label">Avg direct booking lift</div>
-    </div>
+    <div class="hero-stat"><div class="hero-stat-num">25<span class="acc">%+</span></div><div class="hero-stat-label">Avg direct booking lift</div></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">400<span class="acc">+</span></div>
-      <div class="hero-stat-label">Leading PMs</div>
-    </div>
+    <div class="hero-stat"><div class="hero-stat-num">400<span class="acc">+</span></div><div class="hero-stat-label">Leading PMs</div></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">60K<span class="acc">+</span></div>
-      <div class="hero-stat-label">Nights booked</div>
-    </div>
+    <div class="hero-stat"><div class="hero-stat-num">60K<span class="acc">+</span></div><div class="hero-stat-label">Nights booked</div></div>
   </div>
 </section>
 
-<!-- MAIN CONTENT -->
 <div class="container" style="padding-bottom:0">
 
-  <!-- INPUT CARD -->
   <section class="input-section">
     <div class="card input-card">
       <div class="input-card-header">
@@ -549,13 +367,10 @@ footer a:hover{color:rgba(255,255,255,.7)}
 
       <div class="sliders-grid">
 
-        <!-- UNITS SLIDER -->
+        <!-- UNITS -->
         <div class="slider-group">
           <div class="slider-top">
-            <div class="slider-label">
-              Properties under management
-              <small>Total active listings in your portfolio</small>
-            </div>
+            <div class="slider-label">Properties under management<small>Total active listings in your portfolio</small></div>
             <div class="slider-right">
               <div class="custom-input-wrap">
                 <input type="number" id="inp-units" class="custom-num-input" value="25" min="1" max="99999" step="1" aria-label="Number of properties">
@@ -574,13 +389,10 @@ footer a:hover{color:rgba(255,255,255,.7)}
           </div>
         </div>
 
-        <!-- ADR SLIDER -->
+        <!-- ADR -->
         <div class="slider-group">
           <div class="slider-top">
-            <div class="slider-label">
-              Average Daily Rate (ADR)
-              <small>Per property, per night</small>
-            </div>
+            <div class="slider-label">Average Daily Rate (ADR)<small>Per property, per night</small></div>
             <div class="slider-right">
               <div class="custom-input-wrap">
                 <span class="custom-input-prefix">$</span>
@@ -592,22 +404,13 @@ footer a:hover{color:rgba(255,255,255,.7)}
             <div class="slider-tooltip" id="tip-adr">$250/night</div>
             <input type="range" id="sl-adr" min="50" max="1500" value="250" step="10">
           </div>
-          <div class="slider-ticks">
-            <span class="slider-tick">$50</span>
-            <span class="slider-tick">$400</span>
-            <span class="slider-tick">$750</span>
-            <span class="slider-tick">$1,100</span>
-            <span class="slider-tick">$1,500+</span>
-          </div>
+          <div class="slider-ticks"><span class="slider-tick">$50</span><span class="slider-tick">$400</span><span class="slider-tick">$750</span><span class="slider-tick">$1,100</span><span class="slider-tick">$1,500+</span></div>
         </div>
 
-        <!-- OCCUPANCY RATE SLIDER -->
+        <!-- OCCUPANCY -->
         <div class="slider-group">
           <div class="slider-top">
-            <div class="slider-label">
-              Estimated Occupancy Rate
-              <small>Annual average — percentage of nights booked</small>
-            </div>
+            <div class="slider-label">Estimated Occupancy Rate<small>Annual average &mdash; percentage of nights booked</small></div>
             <div class="slider-right">
               <div class="custom-input-wrap">
                 <input type="number" id="inp-occ" class="custom-num-input" value="55" min="10" max="100" step="1" style="width:72px" aria-label="Occupancy rate percent">
@@ -619,62 +422,14 @@ footer a:hover{color:rgba(255,255,255,.7)}
             <div class="slider-tooltip" id="tip-occ">55%</div>
             <input type="range" id="sl-occ" min="10" max="90" value="55" step="1">
           </div>
-          <div class="slider-ticks">
-            <span class="slider-tick">10%</span>
-            <span class="slider-tick">30%</span>
-            <span class="slider-tick">55%</span>
-            <span class="slider-tick">75%</span>
-            <span class="slider-tick">90%</span>
-          </div>
+          <div class="slider-ticks"><span class="slider-tick">10%</span><span class="slider-tick">30%</span><span class="slider-tick">55%</span><span class="slider-tick">75%</span><span class="slider-tick">90%</span></div>
           <div class="occ-hint" id="occ-hint" style="font-size:.75rem;color:var(--content-muted);margin-top:4px;font-weight:500">US national average: ~55%. Adjust for your market and property tier.</div>
         </div>
 
-        <!-- MARKET SELECTOR -->
+        <!-- DIRECT BOOKING -->
         <div class="slider-group">
           <div class="slider-top">
-            <div class="slider-label">
-              Primary Rental Market
-              <small>Adjusts seasonality in the 12-month breakdown</small>
-            </div>
-          </div>
-          <select id="market-select" style="width:100%;padding:12px 16px;border:1px solid var(--border-secondary);border-radius:var(--radius);font-family:var(--font);font-size:.9375rem;font-weight:500;color:var(--content-primary);background:var(--surface-primary);cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22><path d=%22M1 1l5 5 5-5%22 stroke=%22%23636363%22 fill=%22none%22 stroke-width=%221.5%22/></svg>');background-repeat:no-repeat;background-position:right 14px center">
-            <optgroup label="Steady / Default">
-              <option value="flat" selected>Year-Round Average (no seasonality)</option>
-            </optgroup>
-            <optgroup label="Beach / Coastal">
-              <option value="gulf-coast">Gulf Coast (Destin, PCB, Gulf Shores)</option>
-              <option value="southeast-coast">Southeast Coast (Hilton Head, OBX)</option>
-              <option value="florida">Florida (Orlando, Miami, Keys)</option>
-              <option value="socal">Southern California (San Diego, LA)</option>
-              <option value="hawaii">Hawaii (Maui, Big Island)</option>
-              <option value="texas-coast">Texas Coast (South Padre, Galveston)</option>
-            </optgroup>
-            <optgroup label="Mountain / Ski">
-              <option value="smoky-mountains">Smoky Mountains (Gatlinburg, Pigeon Forge)</option>
-              <option value="rocky-ski">Rocky Mountain Ski (Park City, Big Sky)</option>
-              <option value="lake-tahoe">Lake Tahoe</option>
-              <option value="appalachian">Appalachian (Asheville, Blue Ridge)</option>
-            </optgroup>
-            <optgroup label="Desert / Southwest">
-              <option value="arizona">Arizona (Scottsdale, Sedona, Tucson)</option>
-              <option value="palm-springs">Palm Springs</option>
-              <option value="las-vegas">Las Vegas</option>
-            </optgroup>
-            <optgroup label="Urban">
-              <option value="major-city">Major Cities (NYC, Chicago, SF, DC)</option>
-              <option value="event-city">Nashville / Austin / New Orleans</option>
-            </optgroup>
-          </select>
-          <div id="season-sparkline" style="display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:10px"></div>
-        </div>
-
-        <!-- DIRECT BOOKING SLIDER -->
-        <div class="slider-group">
-          <div class="slider-top">
-            <div class="slider-label">
-              Current direct booking rate
-              <small>Percentage of bookings not through OTAs</small>
-            </div>
+            <div class="slider-label">Current direct booking rate<small>Percentage of bookings not through OTAs</small></div>
             <div class="slider-right">
               <span class="fully-direct-badge" id="fully-direct-badge">&#10003; Fully Direct</span>
               <div class="custom-input-wrap">
@@ -687,40 +442,78 @@ footer a:hover{color:rgba(255,255,255,.7)}
             <div class="slider-tooltip" id="tip-direct">20%</div>
             <input type="range" id="sl-direct" min="0" max="100" value="20" step="1">
           </div>
-          <div class="slider-ticks">
-            <span class="slider-tick">0%</span>
-            <span class="slider-tick">25%</span>
-            <span class="slider-tick">50%</span>
-            <span class="slider-tick">75%</span>
-            <span class="slider-tick">100%</span>
-          </div>
+          <div class="slider-ticks"><span class="slider-tick">0%</span><span class="slider-tick">25%</span><span class="slider-tick">50%</span><span class="slider-tick">75%</span><span class="slider-tick">100%</span></div>
         </div>
 
-      </div><!-- /sliders-grid -->
+        <!-- OTA CHANNEL MIX -->
+        <div class="slider-group">
+          <div class="slider-top">
+            <div class="slider-label">Primary OTA Channel<small>Determines commission rate used in calculations</small></div>
+          </div>
+          <div class="ota-channel-group" id="ota-channel-group">
+            <button class="ota-chip" data-rate="0.155" onclick="setOtaChannel(this)">Mostly Airbnb <span class="ota-chip-rate">15.5%</span></button>
+            <button class="ota-chip" data-rate="0.08" onclick="setOtaChannel(this)">Mostly VRBO <span class="ota-chip-rate">8%</span></button>
+            <button class="ota-chip active" data-rate="0.13" onclick="setOtaChannel(this)">Mixed Channels <span class="ota-chip-rate">13%</span></button>
+            <button class="ota-chip" data-rate="0.15" onclick="setOtaChannel(this)">Mostly Booking.com <span class="ota-chip-rate">15%</span></button>
+          </div>
+          <div style="font-size:.6875rem;color:var(--content-muted);margin-top:6px;line-height:1.5">As of Oct 2025, Airbnb charges 15.5% host-only fee for PMS-connected properties. VRBO ~8% (5% + 3% processing). Booking.com ~15%.</div>
+        </div>
 
-      <div class="input-actions">
-        <button class="reset-btn" id="reset-btn" onclick="resetDefaults()">
-          &#8635; Reset to defaults
-        </button>
-        <button class="share-btn" id="share-btn" onclick="copyShareLink()">
-          &#128279; Copy shareable link
-        </button>
+        <!-- MARKET SELECTOR -->
+        <div class="slider-group">
+          <div class="slider-top">
+            <div class="slider-label">Primary Rental Market<small>Applies seasonal demand curve to monthly projections</small></div>
+          </div>
+          <select class="market-select" id="market-select" onchange="setMarket(this.value)">
+            <optgroup label="Beach / Coastal">
+              <option value="gulf-coast">Gulf Coast (Destin, PCB, Gulf Shores)</option>
+              <option value="southeast-coast">Southeast Coast (Hilton Head, OBX)</option>
+              <option value="florida">Florida (Orlando, Miami, Keys)</option>
+              <option value="socal">Southern California (San Diego, LA)</option>
+              <option value="hawaii">Hawaii (Maui, Big Island)</option>
+              <option value="texas-coast">Texas Coast (South Padre, Galveston)</option>
+            </optgroup>
+            <optgroup label="Mountain / Ski">
+              <option value="smoky-mountains">Smoky Mountains (Gatlinburg, Pigeon Forge)</option>
+              <option value="rocky-ski">Rocky Mountain Ski (Park City, Big Sky, Aspen)</option>
+              <option value="lake-tahoe">Lake Tahoe</option>
+              <option value="appalachian">Appalachian (Asheville, Blue Ridge)</option>
+            </optgroup>
+            <optgroup label="Desert / Southwest">
+              <option value="arizona">Arizona (Scottsdale, Sedona, Tucson)</option>
+              <option value="palm-springs">Palm Springs</option>
+              <option value="las-vegas">Las Vegas</option>
+            </optgroup>
+            <optgroup label="Urban">
+              <option value="major-city">Major Cities (NYC, Chicago, SF, DC)</option>
+              <option value="event-city">Nashville / Austin / New Orleans</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="flat" selected>Custom / Year-Round Average</option>
+            </optgroup>
+          </select>
+          <div class="seasonal-sparkline" id="seasonal-sparkline"></div>
+          <div class="spark-labels" id="spark-labels"></div>
+        </div>
+
       </div>
 
-    </div><!-- /input-card -->
+      <div class="input-actions">
+        <button class="reset-btn" id="reset-btn" onclick="resetDefaults()">&#8635; Reset to defaults</button>
+        <button class="share-btn" id="share-btn" onclick="copyShareLink()">&#128279; Copy shareable link</button>
+      </div>
+    </div>
   </section>
 
-  <!-- RESULTS -->
   <section class="results-section" id="results-anchor">
     <div class="results-header">
       <div class="section-eyebrow">Your results</div>
       <div class="section-title">Revenue impact with WanderOS</div>
     </div>
 
-    <!-- NEGATIVE ROI CALLOUT -->
     <div class="negative-roi-callout" id="negative-roi-callout">
       <span class="negative-roi-icon">&#9888;&#65039;</span>
-      <strong>Your direct booking rate is already strong.</strong> WanderOS delivers the most value for operators under 40% direct bookings. At your current rate, the platform fee may exceed the OTA savings. <a href="https://wander.com/os" target="_blank" rel="noopener" style="color:var(--accent-blue);font-weight:600;text-decoration:underline">Talk to us about custom pricing for high-direct portfolios.</a>
+      <strong>Your direct booking rate is already strong.</strong> WanderOS delivers the most value for operators under 50% direct bookings. At your current rate, the platform fee may exceed the OTA savings. <a href="https://wander.com/os" target="_blank" rel="noopener" style="color:var(--accent-blue);font-weight:600;text-decoration:underline">Contact us about enterprise pricing for high-direct portfolios.</a>
     </div>
 
     <div class="metrics-row">
@@ -739,12 +532,11 @@ footer a:hover{color:rgba(255,255,255,.7)}
       <div class="metric-card">
         <div class="metric-label">Annual Gross Revenue</div>
         <div class="metric-value" id="m-revenue">$0</div>
-        <div class="metric-sub" id="m-revenue-sub">at 65% occupancy</div>
+        <div class="metric-sub" id="m-revenue-sub">at 55% occupancy</div>
         <div class="benchmark-badge"><span class="dot"></span><span id="bench-rev">WanderOS operators avg 31% direct</span></div>
       </div>
     </div>
 
-    <!-- LIFT + OTA INFO BAR -->
     <div class="info-bar">
       <div class="info-bar-card">
         <div class="info-bar-label">Projected Direct Booking Lift</div>
@@ -752,41 +544,25 @@ footer a:hover{color:rgba(255,255,255,.7)}
         <div class="info-bar-sub" id="lift-detail">from 20% to 32% direct</div>
       </div>
       <div class="info-bar-card">
-        <div class="info-bar-label">Estimated Occupancy Rate</div>
-        <div class="info-bar-value" style="color:var(--content-primary)" id="occ-display">68%</div>
-        <div class="info-bar-sub" id="occ-detail">Adjusted by ADR tier (budget to ultra-luxury)</div>
+        <div class="info-bar-label">Estimated Occupancy</div>
+        <div class="info-bar-value" style="color:var(--content-primary)" id="occ-display">55%</div>
+        <div class="info-bar-sub" id="occ-detail">User-set &middot; national avg ~55%</div>
       </div>
       <div class="info-bar-card">
-        <div style="display:flex;align-items:center;gap:4px" class="info-bar-label">
-          Blended OTA Commission
-          <span class="ota-rate-note">
-            <span class="info-icon">i</span>
-            <span class="ota-tooltip">Based on typical SMB OTA channel mix: Airbnb (~3% host fee), Vrbo (~5-8%), Booking.com (~15%). Blended host-side rate averages ~8%. Adjust mentally for your specific channel mix.</span>
-          </span>
-        </div>
-        <div class="info-bar-value" style="color:var(--error)">8%</div>
-        <div class="info-bar-sub">Host-side commission on OTA bookings</div>
+        <div style="display:flex;align-items:center;gap:4px" class="info-bar-label">OTA Commission Rate<span class="ota-rate-note"><span class="info-icon">i</span><span class="ota-tooltip">As of Oct 2025: Airbnb charges 15.5% host-only fee (PMS-connected). VRBO ~8% (5% + 3% processing). Booking.com ~15%. Select your primary channel above for the most accurate rate.</span></span></div>
+        <div class="info-bar-value" style="color:var(--error)" id="ota-rate-display">13%</div>
+        <div class="info-bar-sub" id="ota-rate-detail">Blended host-side commission (mixed channels)</div>
       </div>
     </div>
 
-    <!-- PAYBACK BAR -->
     <div class="payback-bar-section">
       <div class="card payback-bar-card">
         <div class="payback-bar-label">Time to positive ROI</div>
-        <div class="payback-track">
-          <div class="payback-fill" id="payback-fill" style="width:0%">
-            <div class="payback-marker"></div>
-          </div>
-        </div>
-        <div class="payback-info">
-          <span>Day 1</span>
-          <span class="payback-months-label" id="payback-label">Calculating...</span>
-          <span>12 months</span>
-        </div>
+        <div class="payback-track"><div class="payback-fill" id="payback-fill" style="width:0%"><div class="payback-marker"></div></div></div>
+        <div class="payback-info"><span>Day 1</span><span class="payback-months-label" id="payback-label">Calculating...</span><span>12 months</span></div>
       </div>
     </div>
 
-    <!-- DONUT + COST COMPARE -->
     <div class="visual-row" style="margin-top:12px">
       <div class="card donut-card">
         <div class="donut-title">Where your revenue goes today</div>
@@ -795,17 +571,14 @@ footer a:hover{color:rgba(255,255,255,.7)}
             <circle cx="70" cy="70" r="52" fill="none" stroke="#eaeaea" stroke-width="16"/>
             <circle id="donut-ota" cx="70" cy="70" r="52" fill="none" stroke="#c32727" stroke-width="16" stroke-dasharray="0 327" stroke-linecap="round" style="transition:stroke-dasharray .5s cubic-bezier(.4,0,.2,1)"/>
             <circle id="donut-wos" cx="70" cy="70" r="52" fill="none" stroke="#008433" stroke-width="16" stroke-dasharray="0 327" stroke-linecap="round" style="transition:stroke-dasharray .5s cubic-bezier(.4,0,.2,1)"/>
-            <circle id="donut-keep" cx="70" cy="70" r="52" fill="none" stroke="#000000" stroke-width="16" stroke-dasharray="0 327" stroke-linecap="round" style="transition:stroke-dasharray .5s cubic-bezier(.4,0,.2,1)"/>
+            <circle id="donut-keep" cx="70" cy="70" r="52" fill="none" stroke="#000" stroke-width="16" stroke-dasharray="0 327" stroke-linecap="round" style="transition:stroke-dasharray .5s cubic-bezier(.4,0,.2,1)"/>
           </svg>
-          <div class="donut-center">
-            <div class="donut-pct" id="donut-keep-pct">0%</div>
-            <div class="donut-pct-label">you keep</div>
-          </div>
+          <div class="donut-center"><div class="donut-pct" id="donut-keep-pct">0%</div><div class="donut-pct-label">you keep</div></div>
         </div>
         <div class="donut-legend">
           <div class="legend-item"><div class="legend-dot" style="background:#c32727"></div><span class="legend-label">OTA commissions</span><span class="legend-val" id="leg-ota">$0</span></div>
           <div class="legend-item"><div class="legend-dot" style="background:#008433"></div><span class="legend-label">WanderOS fee</span><span class="legend-val" id="leg-wos">$0</span></div>
-          <div class="legend-item"><div class="legend-dot" style="background:#000000"></div><span class="legend-label">You keep</span><span class="legend-val" id="leg-keep">$0</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#000"></div><span class="legend-label">You keep</span><span class="legend-val" id="leg-keep">$0</span></div>
         </div>
       </div>
 
@@ -825,660 +598,374 @@ footer a:hover{color:rgba(255,255,255,.7)}
     </div>
   </section>
 
-  <!-- MONTHLY BREAKDOWN -->
   <section class="monthly-section">
     <div class="card monthly-card">
       <div class="monthly-header">
         <div class="section-eyebrow">Month by month</div>
         <div class="section-title">12-Month Revenue Impact</div>
-        <div class="section-sub">Seasonal multipliers applied. Peak seasons show highest savings.</div>
+        <div class="section-sub" id="monthly-market-label">Flat distribution &mdash; select a market above for seasonal adjustments</div>
       </div>
       <div class="monthly-table-wrap">
         <table id="monthly-table">
-          <thead>
-            <tr>
-              <th>Month</th>
-              <th>Gross Revenue</th>
-              <th>Current OTA Cost</th>
-              <th>WanderOS Cost</th>
-              <th>Monthly Savings</th>
-              <th style="text-align:right;padding-right:10px">Impact</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Month</th><th>Gross Revenue</th><th>Current OTA Cost</th><th>WanderOS Cost</th><th>Monthly Savings</th><th style="text-align:right;padding-right:10px">Impact</th></tr></thead>
           <tbody id="monthly-tbody"></tbody>
-          <tfoot>
-            <tr>
-              <td>Annual Total</td>
-              <td id="ft-rev">-</td>
-              <td id="ft-ota">-</td>
-              <td id="ft-wos">-</td>
-              <td class="savings-total" id="ft-save">-</td>
-              <td></td>
-            </tr>
-          </tfoot>
+          <tfoot><tr><td>Annual Total</td><td id="ft-rev">-</td><td id="ft-ota">-</td><td id="ft-wos">-</td><td class="savings-total" id="ft-save">-</td><td></td></tr></tfoot>
         </table>
       </div>
-      <!-- Methodology note -->
-      <div class="methodology-note">
-        <strong>Assumptions:</strong> Occupancy estimated by ADR tier (72% budget to 35% ultra-luxury). OTA commission uses 8% blended host-side rate (Airbnb ~3%, Vrbo ~5-8%, Booking.com ~15%). Direct booking lift uses a diminishing returns model calibrated to WanderOS customer data -- higher starting direct rates see smaller incremental gains. WanderOS charges 3% on all direct bookings processed through the platform.
-      </div>
+      <div class="methodology-note" id="methodology-note"></div>
     </div>
   </section>
 
-  <!-- SAVINGS EQUIVALENTS - FEATURED SECTION -->
   <section class="savings-hero" id="savings-hero-section">
     <div class="savings-hero-header">
-      <div class="savings-hero-eyebrow">
-        <img src="https://www.wander.com/Wander-Brand-Assets/png/Wander+Icon.png" style="height:16px;border-radius:2px" alt="" onerror="this.style.display='none'">
-        What your savings could fund
-      </div>
+      <div class="savings-hero-eyebrow"><img src="https://www.wander.com/Wander-Brand-Assets/png/Wander+Icon.png" style="height:16px;border-radius:2px" alt="" onerror="this.style.display='none'"> What your savings could fund</div>
       <div class="savings-hero-title">Put <span class="savings-inline" id="persp-headline-amt">$0</span> back to work</div>
       <div class="savings-hero-sub">Real costs, real impact. Here is what that money buys.</div>
     </div>
     <div class="savings-hero-amount" id="savings-hero-big">$0<span class="per-year">/year</span></div>
-    <div class="savings-hero-tagline" id="savings-hero-tagline">in recovered revenue, redirected from OTA commissions</div>
-
-    <div class="equiv-grid" id="equiv-grid">
-      <!-- Row 1: 3 cards -->
-    </div>
-    <div class="equiv-grid equiv-row-2" id="equiv-grid-2">
-      <!-- Row 2: 2 cards wide -->
-    </div>
+    <div class="savings-hero-tagline">in recovered revenue, redirected from OTA commissions</div>
+    <div class="equiv-grid" id="equiv-grid"></div>
+    <div class="equiv-grid equiv-row-2" id="equiv-grid-2"></div>
   </section>
 
-</div><!-- /container -->
+</div>
 
-<!-- CTA SECTION -->
 <div class="container cta-section">
   <div class="cta-card">
     <div class="cta-eyebrow">Ready to capture this?</div>
     <div class="cta-headline">Supercharge your direct bookings.</div>
     <div class="cta-sub">WanderOS is the all-in-one platform for direct bookings. A conversion-optimized website, automated guest marketing, and AI-powered distribution to millions.</div>
     <div class="cta-buttons">
-      <a href="https://wander.com/os" target="_blank" rel="noopener" class="btn-primary">
-        Get started with WanderOS &#8599;
-      </a>
-      <a href="https://wander.com/os" target="_blank" rel="noopener" class="btn-secondary">
-        See how it works
-      </a>
+      <a href="https://wander.com/os" target="_blank" rel="noopener" class="btn-primary">Get started with WanderOS &#8599;</a>
+      <a href="https://wander.com/os" target="_blank" rel="noopener" class="btn-secondary">See how it works</a>
     </div>
     <div class="cta-proof">400+ property managers. $67M+ in bookings. 8+ PMS integrations.</div>
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <a href="https://wander.com/os" target="_blank" rel="noopener">WanderOS</a> &nbsp;&middot;&nbsp; Direct Booking Platform &nbsp;&middot;&nbsp; wander.com/os
 </footer>
 
 <script>
-/* CONSTANTS */
 const SEASONAL_PROFILES = {
-  "flat":{"label":"Year-Round Average","months":[1,1,1,1,1,1,1,1,1,1,1,1]},
-  "gulf-coast":{"label":"Gulf Coast (Destin, PCB, Gulf Shores)","months":[.45,.50,.85,1.10,1.20,1.65,1.80,1.70,.75,.55,.40,.55]},
-  "southeast-coast":{"label":"Southeast Coast (Hilton Head, OBX)","months":[.35,.40,.70,.90,1.20,1.70,1.85,1.75,.85,.55,.35,.40]},
-  "florida":{"label":"Florida (Orlando, Miami, Keys)","months":[1.20,1.25,1.40,1.30,.90,1.00,1.10,.95,.60,.65,.80,1.35]},
-  "socal":{"label":"Southern California (San Diego, LA)","months":[.80,.85,.95,1.00,1.05,1.20,1.30,1.25,1.05,.90,.80,.85]},
-  "hawaii":{"label":"Hawaii (Maui, Big Island)","months":[1.30,1.25,1.20,1.05,.85,.95,1.05,1.00,.70,.75,.85,1.55]},
-  "texas-coast":{"label":"Texas Coast (South Padre, Galveston)","months":[.50,.55,1.40,1.20,1.00,1.50,1.60,1.45,.65,.50,.35,.80]},
-  "smoky-mountains":{"label":"Smoky Mountains (Gatlinburg, Pigeon Forge)","months":[.60,.55,.80,.90,1.00,1.40,1.50,1.35,1.00,1.45,.85,1.10]},
-  "rocky-ski":{"label":"Rocky Mountain Ski (Park City, Big Sky)","months":[1.45,1.50,1.40,.70,.45,.90,1.20,1.10,.65,.50,.70,1.45]},
-  "lake-tahoe":{"label":"Lake Tahoe","months":[1.35,1.40,1.20,.55,.50,1.10,1.45,1.40,.75,.55,.60,1.15]},
-  "appalachian":{"label":"Appalachian (Asheville, Blue Ridge)","months":[.50,.55,.75,.90,1.05,1.30,1.40,1.30,1.15,1.35,.85,.90]},
-  "arizona":{"label":"Arizona (Scottsdale, Sedona, Tucson)","months":[1.40,1.50,1.55,1.35,.90,.45,.35,.35,.55,.80,1.20,1.60]},
-  "palm-springs":{"label":"Palm Springs","months":[1.45,1.55,1.60,1.40,.80,.35,.25,.30,.45,.75,1.30,1.80]},
-  "las-vegas":{"label":"Las Vegas","months":[.90,.95,1.15,1.10,1.00,.95,.90,.85,.95,1.10,1.05,1.10]},
-  "major-city":{"label":"Major Cities (NYC, Chicago, SF, DC)","months":[.80,.80,.90,1.00,1.10,1.15,1.20,1.15,1.10,1.05,.85,.90]},
-  "event-city":{"label":"Nashville / Austin / New Orleans","months":[.85,.90,1.30,1.20,1.10,1.05,1.00,.90,.85,1.10,.90,.85]}
+  "gulf-coast":{label:"Gulf Coast (Destin, PCB, Gulf Shores)",months:[0.45,0.50,0.85,1.10,1.20,1.65,1.80,1.70,0.75,0.55,0.40,0.55]},
+  "southeast-coast":{label:"Southeast Coast (Hilton Head, OBX)",months:[0.35,0.40,0.70,0.90,1.20,1.70,1.85,1.75,0.85,0.55,0.35,0.40]},
+  "florida":{label:"Florida (Orlando, Miami, Keys)",months:[1.20,1.25,1.40,1.30,0.90,1.00,1.10,0.95,0.60,0.65,0.80,1.35]},
+  "socal":{label:"Southern California (San Diego, LA)",months:[0.80,0.85,0.95,1.00,1.05,1.20,1.30,1.25,1.05,0.90,0.80,0.85]},
+  "hawaii":{label:"Hawaii (Maui, Big Island)",months:[1.30,1.25,1.20,1.05,0.85,0.95,1.05,1.00,0.70,0.75,0.85,1.55]},
+  "texas-coast":{label:"Texas Coast (South Padre, Galveston)",months:[0.50,0.55,1.40,1.20,1.00,1.50,1.60,1.45,0.65,0.50,0.35,0.80]},
+  "smoky-mountains":{label:"Smoky Mountains (Gatlinburg, Pigeon Forge)",months:[0.60,0.55,0.80,0.90,1.00,1.40,1.50,1.35,1.00,1.45,0.85,1.10]},
+  "rocky-ski":{label:"Rocky Mountain Ski (Park City, Big Sky, Aspen)",months:[1.45,1.50,1.40,0.70,0.45,0.90,1.20,1.10,0.65,0.50,0.70,1.45]},
+  "lake-tahoe":{label:"Lake Tahoe",months:[1.35,1.40,1.20,0.55,0.50,1.10,1.45,1.40,0.75,0.55,0.60,1.15]},
+  "appalachian":{label:"Appalachian (Asheville, Blue Ridge)",months:[0.50,0.55,0.75,0.90,1.05,1.30,1.40,1.30,1.15,1.35,0.85,0.90]},
+  "arizona":{label:"Arizona (Scottsdale, Sedona, Tucson)",months:[1.40,1.50,1.55,1.35,0.90,0.45,0.35,0.35,0.55,0.80,1.20,1.60]},
+  "palm-springs":{label:"Palm Springs",months:[1.45,1.55,1.60,1.40,0.80,0.35,0.25,0.30,0.45,0.75,1.30,1.80]},
+  "las-vegas":{label:"Las Vegas",months:[0.90,0.95,1.15,1.10,1.00,0.95,0.90,0.85,0.95,1.10,1.05,1.10]},
+  "major-city":{label:"Major Cities (NYC, Chicago, SF, DC)",months:[0.80,0.80,0.90,1.00,1.10,1.15,1.20,1.15,1.10,1.05,0.85,0.90]},
+  "event-city":{label:"Nashville / Austin / New Orleans",months:[0.85,0.90,1.30,1.20,1.10,1.05,1.00,0.90,0.85,1.10,0.90,0.85]},
+  "flat":{label:"Custom / Year-Round Average",months:[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0]}
 };
 
-let activeMarket = 'flat';
-function getSeasonalMultipliers(){
-  const raw = SEASONAL_PROFILES[activeMarket].months;
-  const sum = raw.reduce((a,b)=>a+b,0);
-  const factor = 12/sum;
-  return raw.map(v => v * factor);
+const MONTH_SHORT=['J','F','M','A','M','J','J','A','S','O','N','D'];
+const MONTH_LABELS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DEFAULTS={units:25,adr:250,occ:55,direct:20,otaRate:0.13,market:'flat'};
+
+let state={units:25,adr:250,occ:55,direct:0.20,otaRate:0.13,otaLabel:'Blended host-side commission (mixed channels)',market:'flat'};
+window._state=state;
+
+function getNormalizedMonths(mk){
+  const p=SEASONAL_PROFILES[mk]||SEASONAL_PROFILES['flat'];
+  const s=p.months.reduce((a,b)=>a+b,0);
+  const f=12/s;
+  return p.months.map(m=>m*f);
 }
 
-const MONTH_KEYS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const MONTH_LABELS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-/* Seasonal multipliers are now dynamic via getSeasonalMultipliers() */
-
-const DEFAULTS = {units:25, adr:250, occ:55, direct:20};
-
-/* STATE */
-let state = {units:25, adr:250, occ:55, direct:0.20};
-window._state = state;
-
-/* URL HASH */
 function parseHash(){
   try{
-    const h = location.hash.replace('#','');
-    if(!h) return;
-    const p = new URLSearchParams(h);
-    const u = parseInt(p.get('u')); const a = parseInt(p.get('a')); const d = parseInt(p.get('d'));
-    if(!isNaN(u)&&u>=1){ state.units=u; document.getElementById('sl-units').value=Math.min(u,500); document.getElementById('inp-units').value=u; }
-    if(!isNaN(a)&&a>=1){ state.adr=a; document.getElementById('sl-adr').value=Math.min(a,1500); document.getElementById('inp-adr').value=a; }
-    if(!isNaN(d)&&d>=0&&d<=100){ state.direct=d/100; document.getElementById('sl-direct').value=d; document.getElementById('inp-direct').value=d; }
-    const o = parseInt(p.get('o'));
-    if(!isNaN(o)&&o>=10&&o<=100){ state.occ=o; document.getElementById('sl-occ').value=Math.min(o,90); document.getElementById('inp-occ').value=o; }
+    const h=location.hash.replace('#','');if(!h)return;
+    const p=new URLSearchParams(h);
+    const u=parseInt(p.get('u')),a=parseInt(p.get('a')),d=parseInt(p.get('d'));
+    if(!isNaN(u)&&u>=1){state.units=u;document.getElementById('sl-units').value=Math.min(u,500);document.getElementById('inp-units').value=u}
+    if(!isNaN(a)&&a>=1){state.adr=a;document.getElementById('sl-adr').value=Math.min(a,1500);document.getElementById('inp-adr').value=a}
+    if(!isNaN(d)&&d>=0&&d<=100){state.direct=d/100;document.getElementById('sl-direct').value=d;document.getElementById('inp-direct').value=d}
+    const o=parseInt(p.get('o'));
+    if(!isNaN(o)&&o>=10&&o<=100){state.occ=o;document.getElementById('sl-occ').value=Math.min(o,90);document.getElementById('inp-occ').value=o}
+    const ota=parseFloat(p.get('ota'));
+    if(!isNaN(ota)&&ota>0&&ota<1){state.otaRate=ota;document.querySelectorAll('.ota-chip').forEach(c=>{c.classList.toggle('active',parseFloat(c.dataset.rate)===ota)})}
+    const mkt=p.get('mkt');
+    if(mkt&&SEASONAL_PROFILES[mkt]){state.market=mkt;document.getElementById('market-select').value=mkt}
   }catch(e){}
 }
 
 function copyShareLink(){
-  const btn = document.getElementById('share-btn');
-  const hash = `u=${state.units}&a=${state.adr}&o=${state.occ}&d=${Math.round(state.direct*100)}`;
+  const btn=document.getElementById('share-btn');
+  const hash=`u=${state.units}&a=${state.adr}&o=${state.occ}&d=${Math.round(state.direct*100)}&ota=${state.otaRate}&mkt=${state.market}`;
   history.replaceState(null,'',location.pathname+'#'+hash);
-  navigator.clipboard.writeText(location.href).then(()=>{
-    btn.classList.add('copied');
-    btn.innerHTML = '&#10003; Link copied!';
-    setTimeout(()=>{ btn.classList.remove('copied'); btn.innerHTML='&#128279; Copy shareable link'; },2200);
-  }).catch(()=>{
-    btn.innerHTML='&#10003; URL updated';
-    setTimeout(()=>{ btn.innerHTML='&#128279; Copy shareable link'; },2000);
-  });
+  navigator.clipboard.writeText(location.href).then(()=>{btn.classList.add('copied');btn.innerHTML='&#10003; Link copied!';setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='&#128279; Copy shareable link'},2200)}).catch(()=>{btn.innerHTML='&#10003; URL updated';setTimeout(()=>{btn.innerHTML='&#128279; Copy shareable link'},2000)});
 }
 
 function resetDefaults(){
-  state.units = DEFAULTS.units; state.adr = DEFAULTS.adr; state.occ = DEFAULTS.occ; state.direct = DEFAULTS.direct/100;
-  document.getElementById('sl-units').value = DEFAULTS.units;
-  document.getElementById('inp-units').value = DEFAULTS.units;
-  document.getElementById('sl-adr').value = DEFAULTS.adr;
-  document.getElementById('inp-adr').value = DEFAULTS.adr;
-  document.getElementById('sl-occ').value = DEFAULTS.occ;
-  document.getElementById('inp-occ').value = DEFAULTS.occ;
-  document.getElementById('sl-direct').value = DEFAULTS.direct;
-  document.getElementById('inp-direct').value = DEFAULTS.direct;
+  state.units=DEFAULTS.units;state.adr=DEFAULTS.adr;state.occ=DEFAULTS.occ;state.direct=DEFAULTS.direct/100;state.otaRate=DEFAULTS.otaRate;state.market=DEFAULTS.market;
+  state.otaLabel='Blended host-side commission (mixed channels)';
+  document.getElementById('sl-units').value=DEFAULTS.units;document.getElementById('inp-units').value=DEFAULTS.units;
+  document.getElementById('sl-adr').value=DEFAULTS.adr;document.getElementById('inp-adr').value=DEFAULTS.adr;
+  document.getElementById('sl-occ').value=DEFAULTS.occ;document.getElementById('inp-occ').value=DEFAULTS.occ;
+  document.getElementById('sl-direct').value=DEFAULTS.direct;document.getElementById('inp-direct').value=DEFAULTS.direct;
+  document.getElementById('market-select').value='flat';
+  document.querySelectorAll('.ota-chip').forEach(c=>{c.classList.toggle('active',parseFloat(c.dataset.rate)===0.13)});
+  updateSparkline();updateAll();
+}
+
+function setOtaChannel(el){
+  document.querySelectorAll('.ota-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  state.otaRate=parseFloat(el.dataset.rate);
+  if(state.otaRate===0.155)state.otaLabel='Airbnb 15.5% host-only fee (post Oct 2025)';
+  else if(state.otaRate===0.08)state.otaLabel='VRBO ~8% (5% + 3% processing)';
+  else if(state.otaRate===0.15)state.otaLabel='Booking.com ~15%';
+  else state.otaLabel='Blended host-side commission (mixed channels)';
   updateAll();
 }
 
-/* CORRECTED CALCULATIONS - Realistic model */
-function calc(units, adr, directPct){
-  // Occupancy from user input
-  const occupancy = state.occ / 100;
+function setMarket(v){state.market=v;updateSparkline();updateAll()}
 
-  const revenue = units * adr * 365 * occupancy;
-
-  // Blended OTA commission rate (host-side): Airbnb 15.5%, VRBO 8%, Booking 15% → blended ~13%
-  const otaRate = 0.13;
-  const otaCost = revenue * (1 - directPct) * otaRate;
-
-  // Diminishing lift
-  const liftPP = 0.15 * Math.pow(1 - directPct, 0.6);
-  const wosDirect = Math.min(directPct + liftPP, 0.95);
-
-  const wosOtaCost = revenue * (1 - wosDirect) * otaRate;
-  const wosFee = revenue * wosDirect * 0.03;
-  const totalWosCost = wosOtaCost + wosFee;
-  const savings = otaCost - totalWosCost;
-  const roi = wosFee > 0 ? (savings/wosFee) : 0;
-
-  const isNegativeROI = savings < 0;
-
-  const keepPct = (revenue - otaCost)/revenue;
-  const paybackMonths = savings > 0 ? (500/(savings/12)) : 999;
-  return {revenue, occupancy, otaRate, otaCost, wosDirect, liftPP, wosOtaCost, wosFee, totalWosCost, savings, roi, keepPct, paybackMonths, isNegativeROI};
-}
-
-/* ANIMATED COUNTER */
-const animTargets={}, animCurrent={}, animStart={};
-const ANIM_DUR = 300;
-function animateTo(key, target, formatter){
-  const el = document.getElementById(key);
-  if(!el) return;
-  animTargets[key] = target;
-  animCurrent[key] = animCurrent[key] !== undefined ? animCurrent[key] : 0;
-  animStart[key] = performance.now();
-  if(el._raf) cancelAnimationFrame(el._raf);
-  function tick(now){
-    const elapsed = now - animStart[key];
-    const progress = Math.min(elapsed/ANIM_DUR,1);
-    const eased = 1 - Math.pow(1-progress,3);
-    const val = animCurrent[key] + (animTargets[key]-animCurrent[key])*eased;
-    el.textContent = formatter(val);
-    if(progress<1){ el._raf = requestAnimationFrame(tick); }
-    else { animCurrent[key] = animTargets[key]; el.textContent = formatter(animTargets[key]); }
-  }
-  el._raf = requestAnimationFrame(tick);
-}
-function fmtDollar(v){ return '$'+Math.round(v).toLocaleString(); }
-function fmtDollarNeg(v){ return '-$'+Math.round(Math.abs(v)).toLocaleString(); }
-function fmtX(v){ return v.toFixed(1)+'x'; }
-
-/* DONUT CHART */
-function updateDonut(revenue, otaCost, wosFee){
-  const total = revenue; if(total<=0) return;
-  const circ = 2*Math.PI*52;
-  const otaPct = otaCost/total; const wosPct = wosFee/total; const keepPct = Math.max(0,1-otaPct-wosPct);
-  const otaLen = otaPct*circ;
-  const wosLen = wosPct*circ;
-  const keepLen = keepPct*circ;
-  document.getElementById('donut-ota').style.strokeDasharray = `${otaLen} ${circ-otaLen}`;
-  document.getElementById('donut-ota').style.strokeDashoffset = 0;
-  document.getElementById('donut-wos').style.strokeDasharray = `${wosLen} ${circ-wosLen}`;
-  document.getElementById('donut-wos').style.strokeDashoffset = -otaLen;
-  document.getElementById('donut-keep').style.strokeDasharray = `${keepLen} ${circ-keepLen}`;
-  document.getElementById('donut-keep').style.strokeDashoffset = -(otaLen+wosLen);
-  document.getElementById('donut-keep-pct').textContent = Math.round(keepPct*100)+'%';
-  document.getElementById('leg-ota').textContent = fmtDollar(otaCost);
-  document.getElementById('leg-wos').textContent = fmtDollar(wosFee);
-  document.getElementById('leg-keep').textContent = fmtDollar(total-otaCost-wosFee);
-}
-
-/* IMPACT TEXT */
-function impactText(mSave, maxSave){
-  const ratio = maxSave > 0 ? mSave/maxSave : 0;
-  if(mSave < 0) return '<span class="impact-text" style="color:var(--error)">Negative</span>';
-  if(ratio > 0.85) return '<span class="impact-text impact-strong">Exceptional</span>';
-  if(ratio > 0.65) return '<span class="impact-text impact-strong">Very High</span>';
-  if(ratio > 0.45) return '<span class="impact-text impact-solid">High</span>';
-  if(ratio > 0.25) return '<span class="impact-text impact-moderate">Medium</span>';
-  return '<span class="impact-text impact-growing">Low</span>';
-}
-
-/* MONTHLY TABLE */
-function buildMonthlyTable(r){
-  const tbody = document.getElementById('monthly-tbody');
-  tbody.innerHTML='';
-  let ftRev=0,ftOta=0,ftWos=0,ftSave=0;
-  const annualRev = r.revenue;
-  const mults = getSeasonalMultipliers();
-  const savings_by_month = mults.map(mult=>{
-    const mRev = (annualRev/12)*mult;
-    const mOta = annualRev>0?(r.otaCost/annualRev)*mRev:0;
-    const mWos = annualRev>0?(r.totalWosCost/annualRev)*mRev:0;
-    return mOta-mWos;
+function updateSparkline(){
+  const c=document.getElementById('seasonal-sparkline'),l=document.getElementById('spark-labels');
+  const p=SEASONAL_PROFILES[state.market]||SEASONAL_PROFILES['flat'];
+  const ms=p.months,mx=Math.max(...ms);
+  c.innerHTML='';l.innerHTML='';
+  ms.forEach((m,i)=>{
+    const b=document.createElement('div');b.className='spark-bar';
+    b.style.height=(m/mx*100)+'%';
+    if(m>=1.2)b.classList.add('peak');else if(m<0.6)b.classList.add('low');else b.classList.add('mid');
+    c.appendChild(b);
+    const s=document.createElement('span');s.textContent=MONTH_SHORT[i];l.appendChild(s);
   });
-  const maxSavings = Math.max(...savings_by_month, 1);
+  const lbl=document.getElementById('monthly-market-label');
+  if(state.market==='flat')lbl.innerHTML='Flat distribution &mdash; select a market above for seasonal adjustments';
+  else lbl.textContent=p.label+' seasonal demand curve applied';
+}
 
-  MONTH_KEYS.forEach((key,i)=>{
-    const mult = mults[i];
-    const mRev = (annualRev/12)*mult;
-    const mOta = annualRev>0?(r.otaCost/annualRev)*mRev:0;
-    const mWos = annualRev>0?(r.totalWosCost/annualRev)*mRev:0;
-    const mSave = mOta-mWos;
+function calc(units,adr,directPct){
+  const occupancy=state.occ/100;
+  const revenue=units*adr*365*occupancy;
+  const otaRate=state.otaRate;
+  const otaCost=revenue*(1-directPct)*otaRate;
+  // Diminishing lift: 0.20 * (1-directPct)^0.5
+  const liftPP=0.20*Math.pow(1-directPct,0.5);
+  const wosDirect=Math.min(directPct+liftPP,0.95);
+  const wosOtaCost=revenue*(1-wosDirect)*otaRate;
+  const wosFee=revenue*wosDirect*0.03;
+  const totalWosCost=wosOtaCost+wosFee;
+  const savings=otaCost-totalWosCost;
+  const roi=wosFee>0?(savings/wosFee):0;
+  const isNegativeROI=savings<0;
+  const keepPct=(revenue-otaCost)/revenue;
+  const paybackMonths=savings>0?(500/(savings/12)):999;
+  return{revenue,occupancy,otaRate,otaCost,wosDirect,liftPP,wosOtaCost,wosFee,totalWosCost,savings,roi,keepPct,paybackMonths,isNegativeROI};
+}
+
+const animTargets={},animCurrent={},animStart={};
+const ANIM_DUR=300;
+function animateTo(key,target,formatter){
+  const el=document.getElementById(key);if(!el)return;
+  animTargets[key]=target;animCurrent[key]=animCurrent[key]!==undefined?animCurrent[key]:0;animStart[key]=performance.now();
+  if(el._raf)cancelAnimationFrame(el._raf);
+  function tick(now){const elapsed=now-animStart[key];const progress=Math.min(elapsed/ANIM_DUR,1);const eased=1-Math.pow(1-progress,3);const val=animCurrent[key]+(animTargets[key]-animCurrent[key])*eased;el.textContent=formatter(val);if(progress<1){el._raf=requestAnimationFrame(tick)}else{animCurrent[key]=animTargets[key];el.textContent=formatter(animTargets[key])}}
+  el._raf=requestAnimationFrame(tick);
+}
+function fmtDollar(v){return'$'+Math.round(v).toLocaleString()}
+function fmtDollarNeg(v){return'-$'+Math.round(Math.abs(v)).toLocaleString()}
+function fmtX(v){return v.toFixed(1)+'x'}
+
+function updateDonut(revenue,otaCost,wosFee){
+  const total=revenue;if(total<=0)return;
+  const circ=2*Math.PI*52;
+  const otaPct=otaCost/total,wosPct=wosFee/total,keepPct=Math.max(0,1-otaPct-wosPct);
+  document.getElementById('donut-ota').style.strokeDasharray=`${otaPct*circ} ${circ-otaPct*circ}`;
+  document.getElementById('donut-ota').style.strokeDashoffset=0;
+  document.getElementById('donut-wos').style.strokeDasharray=`${wosPct*circ} ${circ-wosPct*circ}`;
+  document.getElementById('donut-wos').style.strokeDashoffset=-otaPct*circ;
+  document.getElementById('donut-keep').style.strokeDasharray=`${keepPct*circ} ${circ-keepPct*circ}`;
+  document.getElementById('donut-keep').style.strokeDashoffset=-(otaPct+wosPct)*circ;
+  document.getElementById('donut-keep-pct').textContent=Math.round(keepPct*100)+'%';
+  document.getElementById('leg-ota').textContent=fmtDollar(otaCost);
+  document.getElementById('leg-wos').textContent=fmtDollar(wosFee);
+  document.getElementById('leg-keep').textContent=fmtDollar(total-otaCost-wosFee);
+}
+
+function impactText(mSave,maxSave){
+  const ratio=maxSave>0?mSave/maxSave:0;
+  if(mSave<0)return'<span class="impact-text" style="color:var(--error)">Negative</span>';
+  if(ratio>0.85)return'<span class="impact-text impact-strong">Exceptional</span>';
+  if(ratio>0.65)return'<span class="impact-text impact-strong">Very High</span>';
+  if(ratio>0.45)return'<span class="impact-text impact-solid">High</span>';
+  if(ratio>0.25)return'<span class="impact-text impact-moderate">Medium</span>';
+  return'<span class="impact-text impact-growing">Low</span>';
+}
+
+function buildMonthlyTable(r){
+  const tbody=document.getElementById('monthly-tbody');tbody.innerHTML='';
+  let ftRev=0,ftOta=0,ftWos=0,ftSave=0;
+  const annualRev=r.revenue;
+  const normMonths=getNormalizedMonths(state.market);
+  const rawMonths=(SEASONAL_PROFILES[state.market]||SEASONAL_PROFILES['flat']).months;
+  const savings_by_month=normMonths.map(mult=>{const mRev=(annualRev/12)*mult;const mOta=annualRev>0?(r.otaCost/annualRev)*mRev:0;const mWos=annualRev>0?(r.totalWosCost/annualRev)*mRev:0;return mOta-mWos});
+  const maxSavings=Math.max(...savings_by_month,1);
+
+  normMonths.forEach((mult,i)=>{
+    const mRev=(annualRev/12)*mult;
+    const mOta=annualRev>0?(r.otaCost/annualRev)*mRev:0;
+    const mWos=annualRev>0?(r.totalWosCost/annualRev)*mRev:0;
+    const mSave=mOta-mWos;
     ftRev+=mRev;ftOta+=mOta;ftWos+=mWos;ftSave+=mSave;
-    const isPeak = mult>=1.20;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${MONTH_LABELS[i]}${isPeak?'<span class="month-peak">PEAK</span>':''}</td>
-      <td>${fmtDollar(mRev)}</td>
-      <td style="color:var(--error);font-weight:600">-${fmtDollar(mOta).replace('-','')}</td>
-      <td style="color:var(--content-secondary);font-weight:500">-${fmtDollar(mWos).replace('-','')}</td>
-      <td class="month-savings-cell${mSave<0?' negative':''}">${mSave>=0?'+':''}${fmtDollar(mSave)}</td>
-      <td style="text-align:right;padding-right:10px">${impactText(mSave,maxSavings)}</td>`;
+    const raw=rawMonths[i];
+    const isPeak=raw>=1.20;const isOff=raw<0.60;
+    const tr=document.createElement('tr');
+    if(isPeak)tr.classList.add('peak-row');
+    let badge='';
+    if(isPeak)badge='<span class="month-badge peak">PEAK</span>';
+    else if(isOff&&state.market!=='flat')badge='<span class="month-badge off">OFF-SEASON</span>';
+    tr.innerHTML=`<td>${MONTH_LABELS[i]}${badge}</td><td>${fmtDollar(mRev)}</td><td style="color:var(--error);font-weight:600">-${fmtDollar(mOta).replace('-','')}</td><td style="color:var(--content-secondary);font-weight:500">-${fmtDollar(mWos).replace('-','')}</td><td class="month-savings-cell${mSave<0?' negative':''}">${mSave>=0?'+':''}${fmtDollar(mSave)}</td><td style="text-align:right;padding-right:10px">${impactText(mSave,maxSavings)}</td>`;
     tbody.appendChild(tr);
   });
 
-  document.getElementById('ft-rev').textContent = fmtDollar(ftRev);
-  document.getElementById('ft-ota').textContent = '-'+fmtDollar(ftOta);
-  document.getElementById('ft-wos').textContent = '-'+fmtDollar(ftWos);
-  document.getElementById('ft-save').textContent = (ftSave>=0?'':'')+fmtDollar(ftSave);
+  document.getElementById('ft-rev').textContent=fmtDollar(ftRev);
+  document.getElementById('ft-ota').textContent='-'+fmtDollar(ftOta);
+  document.getElementById('ft-wos').textContent='-'+fmtDollar(ftWos);
+  document.getElementById('ft-save').textContent=fmtDollar(ftSave);
 }
 
-/* SAVINGS EQUIVALENTS */
 function buildSavingsEquivalents(savings){
-  const s = Math.max(0, Math.round(savings));
-  const grid1 = document.getElementById('equiv-grid');
-  const grid2 = document.getElementById('equiv-grid-2');
-  const heroSection = document.getElementById('savings-hero-section');
+  const s=Math.max(0,Math.round(savings));
+  const g1=document.getElementById('equiv-grid'),g2=document.getElementById('equiv-grid-2');
+  const sec=document.getElementById('savings-hero-section');
+  if(savings<=0){sec.style.display='none';return}
+  sec.style.display='';
+  document.getElementById('persp-headline-amt').textContent=fmtDollar(s);
+  document.getElementById('savings-hero-big').innerHTML=fmtDollar(s)+'<span class="per-year">/year</span>';
 
-  if(savings <= 0){
-    heroSection.style.display = 'none';
-    return;
-  }
-  heroSection.style.display = '';
+  const sdr=(s/(55000/12)).toFixed(1);
+  const gAds=Math.floor(s/5000);
+  const renos=(s/15000).toFixed(1);
+  const autoYrs=(s/6000).toFixed(1);
+  const avgBV=state.adr*3.2;
+  const addBk=avgBV>0?Math.round((s/12)/avgBV):0;
 
-  const headlineEl = document.getElementById('persp-headline-amt');
-  if(headlineEl) headlineEl.textContent = fmtDollar(s);
-  const bigEl = document.getElementById('savings-hero-big');
-  if(bigEl) bigEl.innerHTML = fmtDollar(s)+'<span class="per-year">/year</span>';
-
-  const sdrMonths = (s / (55000/12)).toFixed(1);
-  const googleAdsCampaigns = Math.floor(s / 5000);
-  const renovations = (s / 15000).toFixed(1);
-  const automationYears = (s / 6000).toFixed(1);
-  const avgBookingVal = state.adr * 3.2;
-  const additionalBookings = avgBookingVal > 0 ? Math.round((s/12) / avgBookingVal) : 0;
-
-  const items = [
-    {
-      icon: '&#128100;',
-      number: parseFloat(sdrMonths) >= 1 ? Math.round(parseFloat(sdrMonths)) : '<1',
-      unit: parseFloat(sdrMonths) >= 1 ? ' months' : '',
-      label: 'of a full-time SDR salary',
-      detail: 'At $55K/year ($4,583/mo), your savings fund ' + Math.round(parseFloat(sdrMonths)) + ' months of dedicated outbound sales.'
-    },
-    {
-      icon: '&#128200;',
-      number: googleAdsCampaigns,
-      unit: '',
-      label: 'Google Ads campaigns at $5K/month',
-      detail: 'Fuel direct booking growth with ' + googleAdsCampaigns + ' months of paid search, compounding your OTA independence.'
-    },
-    {
-      icon: '&#127968;',
-      number: parseFloat(renovations) >= 1 ? Math.floor(parseFloat(renovations)) : '<1',
-      unit: '',
-      label: 'property renovations at $15K each',
-      detail: 'Upgrade ' + Math.floor(parseFloat(renovations)) + ' units to premium status. Higher ADR, better reviews, more direct demand.'
-    },
-    {
-      icon: '&#9881;&#65039;',
-      number: parseFloat(automationYears) >= 1 ? Math.floor(parseFloat(automationYears)) : '<1',
-      unit: parseFloat(automationYears) >= 1 ? ' years' : '',
-      label: 'of a full marketing automation platform',
-      detail: 'At $500/mo for tools like HubSpot or ActiveCampaign, your savings cover ' + Math.floor(parseFloat(automationYears)) + ' years of automation.'
-    },
-    {
-      icon: '&#128197;',
-      number: additionalBookings,
-      unit: '',
-      label: 'additional bookings per month (revenue equivalent)',
-      detail: 'At your $' + state.adr.toLocaleString() + ' ADR and avg 3.2-night stay, that is ' + additionalBookings + ' extra bookings worth of recovered revenue every month.'
-    }
+  const items=[
+    {icon:'&#128100;',number:parseFloat(sdr)>=1?Math.round(parseFloat(sdr)):'<1',unit:parseFloat(sdr)>=1?' months':'',label:'of a full-time SDR salary',detail:'At $55K/year ($4,583/mo), your savings fund '+Math.round(parseFloat(sdr))+' months of dedicated outbound sales.'},
+    {icon:'&#128200;',number:gAds,unit:'',label:'Google Ads campaigns at $5K/month',detail:'Fuel direct booking growth with '+gAds+' months of paid search, compounding your OTA independence.'},
+    {icon:'&#127968;',number:parseFloat(renos)>=1?Math.floor(parseFloat(renos)):'<1',unit:'',label:'property renovations at $15K each',detail:'Upgrade '+Math.floor(parseFloat(renos))+' units to premium status. Higher ADR, better reviews, more direct demand.'},
+    {icon:'&#9881;&#65039;',number:parseFloat(autoYrs)>=1?Math.floor(parseFloat(autoYrs)):'<1',unit:parseFloat(autoYrs)>=1?' years':'',label:'of a full marketing automation platform',detail:'At $500/mo for tools like HubSpot or ActiveCampaign, your savings cover '+Math.floor(parseFloat(autoYrs))+' years of automation.'},
+    {icon:'&#128197;',number:addBk,unit:'',label:'additional bookings per month (revenue equivalent)',detail:'At your $'+state.adr.toLocaleString()+' ADR and avg 3.2-night stay, that is '+addBk+' extra bookings worth of recovered revenue every month.'}
   ];
 
-  grid1.innerHTML = '';
-  items.slice(0,3).forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'equiv-card';
-    card.innerHTML = `
-      <span class="equiv-icon">${item.icon}</span>
-      <div class="equiv-number">${item.number}${item.unit}</div>
-      <div class="equiv-label">${item.label}</div>
-      <div class="equiv-detail">${item.detail}</div>
-    `;
-    grid1.appendChild(card);
-  });
-
-  grid2.innerHTML = '';
-  grid2.style.gridTemplateColumns = 'repeat(2,1fr)';
-  items.slice(3).forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'equiv-card';
-    card.innerHTML = `
-      <span class="equiv-icon">${item.icon}</span>
-      <div class="equiv-number">${item.number}${item.unit}</div>
-      <div class="equiv-label">${item.label}</div>
-      <div class="equiv-detail">${item.detail}</div>
-    `;
-    grid2.appendChild(card);
-  });
+  g1.innerHTML='';
+  items.slice(0,3).forEach(item=>{const c=document.createElement('div');c.className='equiv-card';c.innerHTML=`<span class="equiv-icon">${item.icon}</span><div class="equiv-number">${item.number}${item.unit}</div><div class="equiv-label">${item.label}</div><div class="equiv-detail">${item.detail}</div>`;g1.appendChild(c)});
+  g2.innerHTML='';g2.style.gridTemplateColumns='repeat(2,1fr)';
+  items.slice(3).forEach(item=>{const c=document.createElement('div');c.className='equiv-card';c.innerHTML=`<span class="equiv-icon">${item.icon}</span><div class="equiv-number">${item.number}${item.unit}</div><div class="equiv-label">${item.label}</div><div class="equiv-detail">${item.detail}</div>`;g2.appendChild(c)});
 }
 
-/* PORTFOLIO CATEGORY */
-function updatePortfolioCat(units){
-  document.getElementById('cat-small').classList.toggle('active', units<30);
-  document.getElementById('cat-mid').classList.toggle('active', units>=30&&units<150);
-  document.getElementById('cat-enterprise').classList.toggle('active', units>=150);
-}
+function updatePortfolioCat(u){document.getElementById('cat-small').classList.toggle('active',u<30);document.getElementById('cat-mid').classList.toggle('active',u>=30&&u<150);document.getElementById('cat-enterprise').classList.toggle('active',u>=150)}
+function updateFullyDirectBadge(d){document.getElementById('fully-direct-badge').classList.toggle('visible',d>=100)}
 
-/* FULLY DIRECT BADGE */
-function updateFullyDirectBadge(direct){
-  const badge = document.getElementById('fully-direct-badge');
-  if(direct >= 100){ badge.classList.add('visible'); }
-  else { badge.classList.remove('visible'); }
-}
-
-/* UPDATE ALL */
 function updateAll(){
-  const {units,adr,direct} = state;
-  window._state = state;
-  const r = calc(units,adr,direct);
-  updateOccHint();
-  reposOccTip();
+  const{units,adr,direct}=state;window._state=state;
+  const r=calc(units,adr,direct);
+  updateOccHint();reposOccTip();
 
-  const savingsEl = document.getElementById('m-savings');
-  if(r.isNegativeROI){
-    savingsEl.classList.remove('positive');
-    savingsEl.classList.add('negative-val');
-  } else {
-    savingsEl.classList.add('positive');
-    savingsEl.classList.remove('negative-val');
-  }
+  const sEl=document.getElementById('m-savings');
+  if(r.isNegativeROI){sEl.classList.remove('positive');sEl.classList.add('negative-val')}else{sEl.classList.add('positive');sEl.classList.remove('negative-val')}
   animateTo('m-savings',r.savings,fmtDollar);
   animateTo('m-roi',r.roi,fmtX);
   animateTo('m-revenue',r.revenue,fmtDollar);
 
-  document.getElementById('m-savings-sub').textContent = `vs. $${Math.round(r.otaCost).toLocaleString()} current OTA spend`;
-  document.getElementById('m-revenue-sub').textContent = `${units.toLocaleString()} units at ${state.occ}% occupancy \u00b7 $${adr.toLocaleString()}/night \u00b7 13% blended OTA rate`;
-  document.getElementById('bench-savings').textContent = r.savings>50000 ? 'Top 25% of WanderOS portfolios' : '400+ WanderOS operators avg savings';
+  const otaPctD=Math.round(r.otaRate*1000)/10;
+  document.getElementById('m-savings-sub').textContent=`vs. $${Math.round(r.otaCost).toLocaleString()} current OTA spend`;
+  document.getElementById('m-revenue-sub').textContent=`${units.toLocaleString()} units \u00b7 $${adr.toLocaleString()}/night \u00b7 ${state.occ}% occupancy \u00b7 ${otaPctD}% OTA rate`;
+  document.getElementById('bench-savings').textContent=r.savings>50000?'Top 25% of WanderOS portfolios':'400+ WanderOS operators avg savings';
 
-  const callout = document.getElementById('negative-roi-callout');
-  if(r.isNegativeROI){
-    callout.classList.add('visible');
-  } else {
-    callout.classList.remove('visible');
-  }
+  document.getElementById('negative-roi-callout').classList.toggle('visible',r.isNegativeROI);
 
-  const liftPPDisplay = Math.round(r.liftPP * 100);
-  const fromPct = Math.round(direct * 100);
-  const toPct = Math.round(r.wosDirect * 100);
-  document.getElementById('lift-display').textContent = '+' + liftPPDisplay + 'pp';
-  document.getElementById('lift-detail').textContent = 'from ' + fromPct + '% to ' + toPct + '% direct';
-  document.getElementById('occ-display').textContent = Math.round(r.occupancy * 100) + '%';
-  const occTier = adr <= 150 ? 'budget' : adr <= 400 ? 'mid-range' : adr <= 800 ? 'premium' : 'ultra-luxury';
-  document.getElementById('occ-detail').textContent = 'Based on $' + adr.toLocaleString() + '/night ' + occTier + ' tier';
+  const liftPPD=Math.round(r.liftPP*100);
+  document.getElementById('lift-display').textContent='+'+liftPPD+'pp';
+  document.getElementById('lift-detail').textContent='from '+Math.round(direct*100)+'% to '+Math.round(r.wosDirect*100)+'% direct (25%+ reported WanderOS lift)';
+  document.getElementById('occ-display').textContent=state.occ+'%';
+  document.getElementById('occ-detail').textContent='User-set \u00b7 national avg ~55% (AirDNA 2025)';
+  document.getElementById('ota-rate-display').textContent=otaPctD+'%';
+  document.getElementById('ota-rate-detail').textContent=state.otaLabel;
 
-  const pb = r.paybackMonths;
-  if(r.isNegativeROI){
-    document.getElementById('payback-fill').style.width = '0%';
-    document.getElementById('payback-label').textContent = 'See note above';
-  } else {
-    document.getElementById('payback-fill').style.width = Math.max(3,100-Math.min((pb/12)*100,100))+'%';
-    if(pb>=999) document.getElementById('payback-label').textContent='Activate WanderOS to see savings';
-    else if(pb<1) document.getElementById('payback-label').textContent='Positive ROI in under 1 month';
-    else document.getElementById('payback-label').textContent='Positive ROI in '+Math.ceil(pb)+(Math.ceil(pb)===1?' month':' months');
-  }
+  const pb=r.paybackMonths;
+  if(r.isNegativeROI){document.getElementById('payback-fill').style.width='0%';document.getElementById('payback-label').textContent='See note above'}
+  else{document.getElementById('payback-fill').style.width=Math.max(3,100-Math.min((pb/12)*100,100))+'%';if(pb>=999)document.getElementById('payback-label').textContent='Activate WanderOS to see savings';else if(pb<1)document.getElementById('payback-label').textContent='Positive ROI in under 1 month';else document.getElementById('payback-label').textContent='Positive ROI in '+Math.ceil(pb)+(Math.ceil(pb)===1?' month':' months')}
 
-  document.getElementById('cc-ota').textContent = fmtDollarNeg(r.otaCost);
-  document.getElementById('cc-wos-ota').textContent = fmtDollarNeg(r.wosOtaCost);
-  document.getElementById('cc-wos-fee').textContent = fmtDollarNeg(r.wosFee);
-  document.getElementById('cc-total-wos').textContent = fmtDollarNeg(r.totalWosCost);
+  document.getElementById('cc-ota').textContent=fmtDollarNeg(r.otaCost);
+  document.getElementById('cc-wos-ota').textContent=fmtDollarNeg(r.wosOtaCost);
+  document.getElementById('cc-wos-fee').textContent=fmtDollarNeg(r.wosFee);
+  document.getElementById('cc-total-wos').textContent=fmtDollarNeg(r.totalWosCost);
 
-  const ccSavingsEl = document.getElementById('cc-savings');
-  if(r.savings >= 0){
-    ccSavingsEl.textContent = fmtDollar(r.savings);
-    ccSavingsEl.className = 'cost-row-val positive';
-  } else {
-    ccSavingsEl.textContent = '-' + fmtDollar(Math.abs(r.savings));
-    ccSavingsEl.className = 'cost-row-val negative';
-  }
-
-  document.getElementById('cc-wos-direct').textContent = Math.round(r.wosDirect*100)+'%';
+  const ccS=document.getElementById('cc-savings');
+  if(r.savings>=0){ccS.textContent=fmtDollar(r.savings);ccS.className='cost-row-val positive'}else{ccS.textContent='-'+fmtDollar(Math.abs(r.savings));ccS.className='cost-row-val negative'}
+  document.getElementById('cc-wos-direct').textContent=Math.round(r.wosDirect*100)+'%';
 
   updateDonut(r.revenue,r.otaCost,r.wosFee);
   buildMonthlyTable(r);
   buildSavingsEquivalents(r.savings);
 
-  if(r.savings > 0){
-    document.getElementById('ticker-val').textContent = fmtDollar(r.savings);
-    document.getElementById('ticker-val').style.color = 'var(--success-light)';
-  } else {
-    document.getElementById('ticker-val').textContent = fmtDollar(r.savings);
-    document.getElementById('ticker-val').style.color = 'var(--error)';
-  }
+  document.getElementById('ticker-val').textContent=fmtDollar(r.savings);
+  document.getElementById('ticker-val').style.color=r.savings>0?'var(--success-light)':'var(--error)';
 
   updatePortfolioCat(units);
   updateFullyDirectBadge(Math.round(direct*100));
+
+  // Dynamic methodology
+  document.getElementById('methodology-note').innerHTML=`<strong>Methodology &amp; Assumptions:</strong> Occupancy: ${state.occ}% (user-set, national avg ~55%). OTA rate: ${otaPctD}% &mdash; ${state.otaLabel.toLowerCase()}. Direct booking lift: diminishing returns model based on WanderOS reported 25%+ customer lift &mdash; gives +${liftPPD}pp at your current ${Math.round(direct*100)}% direct rate. WanderOS fee: 3% on all direct bookings processed through the platform.${state.market!=='flat'?' Seasonal multipliers: '+(SEASONAL_PROFILES[state.market]||{}).label+' demand curve.':''}<br><br><strong>Sources:</strong> OTA fee data as of Oct 2025 (Airbnb host-only fee change). Occupancy benchmarks from AirDNA. Seasonal demand curves from market-level booking data.`;
 }
 
-/* SLIDER + INPUT WIRING */
-function wireSliderAndInput(slId, inpId, tipId, wrapId, getVal, setVal, fmtTip, slMin, slMax){
-  const sl = document.getElementById(slId);
-  const inp = document.getElementById(inpId);
-  const tip = document.getElementById(tipId);
-  const wrap = document.getElementById(wrapId);
-
-  function reposTooltip(){
-    const min=parseFloat(sl.min),max=parseFloat(sl.max),val=parseFloat(sl.value);
-    const pct=(val-min)/(max-min);
-    const trackW=sl.getBoundingClientRect().width||sl.offsetWidth||300;
-    tip.style.left=(pct*(trackW-22)+11)+'px';
-    tip.textContent=fmtTip(getVal());
-  }
-
-  sl.addEventListener('input',()=>{
-    const v=parseInt(sl.value);
-    setVal(v);
-    inp.value=v;
-    reposTooltip();
-    updateAll();
-  });
-  sl.addEventListener('mousedown',()=>{ wrap.classList.add('dragging'); reposTooltip(); });
-  sl.addEventListener('touchstart',()=>{ wrap.classList.add('dragging'); reposTooltip(); });
+function wireSliderAndInput(slId,inpId,tipId,wrapId,getVal,setVal,fmtTip,slMin,slMax){
+  const sl=document.getElementById(slId),inp=document.getElementById(inpId),tip=document.getElementById(tipId),wrap=document.getElementById(wrapId);
+  function repos(){const min=parseFloat(sl.min),max=parseFloat(sl.max),val=parseFloat(sl.value);const pct=(val-min)/(max-min);const tw=sl.getBoundingClientRect().width||sl.offsetWidth||300;tip.style.left=(pct*(tw-22)+11)+'px';tip.textContent=fmtTip(getVal())}
+  sl.addEventListener('input',()=>{const v=parseInt(sl.value);setVal(v);inp.value=v;repos();updateAll()});
+  sl.addEventListener('mousedown',()=>{wrap.classList.add('dragging');repos()});
+  sl.addEventListener('touchstart',()=>{wrap.classList.add('dragging');repos()});
   sl.addEventListener('mouseup',()=>wrap.classList.remove('dragging'));
   sl.addEventListener('touchend',()=>wrap.classList.remove('dragging'));
-
-  inp.addEventListener('input',()=>{
-    const raw=parseInt(inp.value)||0;
-    const clamped=Math.max(1,raw);
-    setVal(clamped);
-    sl.value=Math.min(clamped,slMax);
-    reposTooltip();
-    updateAll();
-  });
-  inp.addEventListener('blur',()=>{
-    if(!inp.value||parseInt(inp.value)<1) inp.value=1;
-  });
-
-  window.addEventListener('resize',reposTooltip);
-  reposTooltip();
+  inp.addEventListener('input',()=>{const raw=parseInt(inp.value)||0;const c=Math.max(1,raw);setVal(c);sl.value=Math.min(c,slMax);repos();updateAll()});
+  inp.addEventListener('blur',()=>{if(!inp.value||parseInt(inp.value)<1)inp.value=1});
+  window.addEventListener('resize',repos);repos();
 }
 
-wireSliderAndInput(
-  'sl-units','inp-units','tip-units','wrap-units',
-  ()=>state.units,
-  v=>{ state.units=v; },
-  v=>v+' units', 1, 500
-);
-wireSliderAndInput(
-  'sl-adr','inp-adr','tip-adr','wrap-adr',
-  ()=>state.adr,
-  v=>{ state.adr=v; },
-  v=>'$'+v.toLocaleString()+'/night', 50, 1500
-);
+wireSliderAndInput('sl-units','inp-units','tip-units','wrap-units',()=>state.units,v=>{state.units=v},v=>v+' units',1,500);
+wireSliderAndInput('sl-adr','inp-adr','tip-adr','wrap-adr',()=>state.adr,v=>{state.adr=v},v=>'$'+v.toLocaleString()+'/night',50,1500);
 
-// Occupancy: 10-90 slider, 10-100 input
-const slOcc = document.getElementById('sl-occ');
-const inpOcc = document.getElementById('inp-occ');
-const tipOcc = document.getElementById('tip-occ');
-const wrapOcc = document.getElementById('wrap-occ');
-const occHint = document.getElementById('occ-hint');
-function reposOccTip(){
-  const min=10,max=90,val=parseFloat(slOcc.value);
-  const pct=(val-min)/(max-min);
-  const trackW=slOcc.getBoundingClientRect().width||slOcc.offsetWidth||300;
-  tipOcc.style.left=(pct*(trackW-22)+11)+'px';
-  tipOcc.textContent=state.occ+'% occupancy';
-}
-function updateOccHint(){
-  const adr=state.adr;
-  if(adr<150) occHint.textContent='Budget tier — typical occupancy 55-62%. US avg ~55%.';
-  else if(adr<300) occHint.textContent='Mid-market — typical occupancy 50-56%. US avg ~55%.';
-  else if(adr<600) occHint.textContent='Premium tier — typical occupancy 42-50%.';
-  else occHint.textContent='Luxury tier — typical occupancy 35-45%. High ADR = lower occupancy.';
-}
-slOcc.addEventListener('input',()=>{
-  const v=parseInt(slOcc.value);
-  state.occ=v;
-  inpOcc.value=v;
-  reposOccTip();
-  updateAll();
-});
-slOcc.addEventListener('mousedown',()=>{ wrapOcc.classList.add('dragging'); reposOccTip(); });
-slOcc.addEventListener('touchstart',()=>{ wrapOcc.classList.add('dragging'); reposOccTip(); });
+const slOcc=document.getElementById('sl-occ'),inpOcc=document.getElementById('inp-occ'),tipOcc=document.getElementById('tip-occ'),wrapOcc=document.getElementById('wrap-occ'),occHint=document.getElementById('occ-hint');
+function reposOccTip(){const min=10,max=90,val=parseFloat(slOcc.value);const pct=(val-min)/(max-min);const tw=slOcc.getBoundingClientRect().width||slOcc.offsetWidth||300;tipOcc.style.left=(pct*(tw-22)+11)+'px';tipOcc.textContent=state.occ+'% occupancy'}
+function updateOccHint(){const a=state.adr;if(a<150)occHint.textContent='Budget tier \u2014 typical occupancy 55-62%. US avg ~55%.';else if(a<300)occHint.textContent='Mid-market \u2014 typical occupancy 50-56%. US avg ~55%.';else if(a<600)occHint.textContent='Premium tier \u2014 typical occupancy 42-50%.';else occHint.textContent='Luxury tier \u2014 typical occupancy 35-45%. High ADR = lower occupancy.'}
+slOcc.addEventListener('input',()=>{const v=parseInt(slOcc.value);state.occ=v;inpOcc.value=v;reposOccTip();updateAll()});
+slOcc.addEventListener('mousedown',()=>{wrapOcc.classList.add('dragging');reposOccTip()});
+slOcc.addEventListener('touchstart',()=>{wrapOcc.classList.add('dragging');reposOccTip()});
 slOcc.addEventListener('mouseup',()=>wrapOcc.classList.remove('dragging'));
 slOcc.addEventListener('touchend',()=>wrapOcc.classList.remove('dragging'));
-inpOcc.addEventListener('input',()=>{
-  const raw=parseInt(inpOcc.value)||0;
-  const clamped=Math.min(100,Math.max(10,raw));
-  state.occ=clamped;
-  slOcc.value=Math.min(clamped,90);
-  reposOccTip();
-  updateAll();
-});
-inpOcc.addEventListener('blur',()=>{
-  const v=parseInt(inpOcc.value);
-  if(isNaN(v)||v<10) inpOcc.value=10;
-  if(v>100) inpOcc.value=100;
-});
+inpOcc.addEventListener('input',()=>{const r=parseInt(inpOcc.value)||0;const c=Math.min(100,Math.max(10,r));state.occ=c;slOcc.value=Math.min(c,90);reposOccTip();updateAll()});
+inpOcc.addEventListener('blur',()=>{const v=parseInt(inpOcc.value);if(isNaN(v)||v<10)inpOcc.value=10;if(v>100)inpOcc.value=100});
 window.addEventListener('resize',reposOccTip);
 
-// Market selector
-const marketSelect = document.getElementById('market-select');
-const sparkline = document.getElementById('season-sparkline');
-function updateSparkline(){
-  const mults = getSeasonalMultipliers();
-  const max = Math.max(...mults);
-  sparkline.innerHTML = mults.map((m,i)=>{
-    const h = Math.round((m/max)*100);
-    const isPeak = m >= 1.2;
-    const isLow = m < 0.7;
-    const color = isPeak ? 'var(--success-light)' : isLow ? 'var(--error)' : 'var(--neutral-200)';
-    return `<div title="${MONTH_KEYS[i]}: ${(m*100).toFixed(0)}%" style="flex:1;height:${h}%;min-height:3px;background:${color};border-radius:2px;transition:height .3s"></div>`;
-  }).join('');
-}
-marketSelect.addEventListener('change',()=>{
-  activeMarket = marketSelect.value;
-  updateSparkline();
-  updateAll();
-});
-updateSparkline();
-
-// Direct booking: 0-100
-const slDirect = document.getElementById('sl-direct');
-const inpDirect = document.getElementById('inp-direct');
-const tipDirect = document.getElementById('tip-direct');
-const wrapDirect = document.getElementById('wrap-direct');
-function reposDirectTip(){
-  const min=0,max=100,val=parseFloat(slDirect.value);
-  const pct=(val-min)/(max-min);
-  const trackW=slDirect.getBoundingClientRect().width||slDirect.offsetWidth||300;
-  tipDirect.style.left=(pct*(trackW-22)+11)+'px';
-  tipDirect.textContent=Math.round(state.direct*100)+'% direct';
-}
-slDirect.addEventListener('input',()=>{
-  const v=parseInt(slDirect.value);
-  state.direct=v/100;
-  inpDirect.value=v;
-  reposDirectTip();
-  updateAll();
-});
-slDirect.addEventListener('mousedown',()=>{ wrapDirect.classList.add('dragging'); reposDirectTip(); });
-slDirect.addEventListener('touchstart',()=>{ wrapDirect.classList.add('dragging'); reposDirectTip(); });
+const slDirect=document.getElementById('sl-direct'),inpDirect=document.getElementById('inp-direct'),tipDirect=document.getElementById('tip-direct'),wrapDirect=document.getElementById('wrap-direct');
+function reposDirectTip(){const min=0,max=100,val=parseFloat(slDirect.value);const pct=(val-min)/(max-min);const tw=slDirect.getBoundingClientRect().width||slDirect.offsetWidth||300;tipDirect.style.left=(pct*(tw-22)+11)+'px';tipDirect.textContent=Math.round(state.direct*100)+'% direct'}
+slDirect.addEventListener('input',()=>{const v=parseInt(slDirect.value);state.direct=v/100;inpDirect.value=v;reposDirectTip();updateAll()});
+slDirect.addEventListener('mousedown',()=>{wrapDirect.classList.add('dragging');reposDirectTip()});
+slDirect.addEventListener('touchstart',()=>{wrapDirect.classList.add('dragging');reposDirectTip()});
 slDirect.addEventListener('mouseup',()=>wrapDirect.classList.remove('dragging'));
 slDirect.addEventListener('touchend',()=>wrapDirect.classList.remove('dragging'));
-inpDirect.addEventListener('input',()=>{
-  const raw=parseInt(inpDirect.value)||0;
-  const clamped=Math.min(100,Math.max(0,raw));
-  state.direct=clamped/100;
-  slDirect.value=clamped;
-  reposDirectTip();
-  updateAll();
-});
-inpDirect.addEventListener('blur',()=>{
-  const v=parseInt(inpDirect.value);
-  if(isNaN(v)||v<0) inpDirect.value=0;
-  if(v>100) inpDirect.value=100;
-});
+inpDirect.addEventListener('input',()=>{const r=parseInt(inpDirect.value)||0;const c=Math.min(100,Math.max(0,r));state.direct=c/100;slDirect.value=c;reposDirectTip();updateAll()});
+inpDirect.addEventListener('blur',()=>{const v=parseInt(inpDirect.value);if(isNaN(v)||v<0)inpDirect.value=0;if(v>100)inpDirect.value=100});
 window.addEventListener('resize',reposDirectTip);
 
-/* STICKY TICKER */
-const ticker = document.getElementById('sticky-ticker');
-const resultsAnchor = document.getElementById('results-anchor');
-const obs = new IntersectionObserver(([e])=>{
-  ticker.classList.toggle('visible',!e.isIntersecting);
-},{threshold:0.1});
-obs.observe(resultsAnchor);
+const ticker=document.getElementById('sticky-ticker'),resultsAnchor=document.getElementById('results-anchor');
+new IntersectionObserver(([e])=>{ticker.classList.toggle('visible',!e.isIntersecting)},{threshold:0.1}).observe(resultsAnchor);
 
-/* INIT */
-parseHash();
-updateAll();
-reposOccTip();
-reposDirectTip();
+parseHash();updateSparkline();updateAll();reposOccTip();reposDirectTip();
 </script>
 </body>
 </html>
