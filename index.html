@@ -597,6 +597,34 @@ footer a:hover{color:rgba(255,255,255,.7)}
           </div>
         </div>
 
+        <!-- OCCUPANCY RATE SLIDER -->
+        <div class="slider-group">
+          <div class="slider-top">
+            <div class="slider-label">
+              Estimated Occupancy Rate
+              <small>Annual average — percentage of nights booked</small>
+            </div>
+            <div class="slider-right">
+              <div class="custom-input-wrap">
+                <input type="number" id="inp-occ" class="custom-num-input" value="55" min="10" max="100" step="1" style="width:72px" aria-label="Occupancy rate percent">
+                <span class="custom-input-suffix">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="slider-wrapper" id="wrap-occ">
+            <div class="slider-tooltip" id="tip-occ">55%</div>
+            <input type="range" id="sl-occ" min="10" max="90" value="55" step="1">
+          </div>
+          <div class="slider-ticks">
+            <span class="slider-tick">10%</span>
+            <span class="slider-tick">30%</span>
+            <span class="slider-tick">55%</span>
+            <span class="slider-tick">75%</span>
+            <span class="slider-tick">90%</span>
+          </div>
+          <div class="occ-hint" id="occ-hint" style="font-size:.75rem;color:var(--content-muted);margin-top:4px;font-weight:500">US national average: ~55%. Adjust for your market and property tier.</div>
+        </div>
+
         <!-- DIRECT BOOKING SLIDER -->
         <div class="slider-group">
           <div class="slider-top">
@@ -851,10 +879,10 @@ const normFactor = 12/rawSum;
 const NORM_SEASONAL = {};
 MONTH_KEYS.forEach(k => { NORM_SEASONAL[k] = SEASONAL[k]*normFactor; });
 
-const DEFAULTS = {units:25, adr:250, direct:20};
+const DEFAULTS = {units:25, adr:250, occ:55, direct:20};
 
 /* STATE */
-let state = {units:25, adr:250, direct:0.20};
+let state = {units:25, adr:250, occ:55, direct:0.20};
 window._state = state;
 
 /* URL HASH */
@@ -867,12 +895,14 @@ function parseHash(){
     if(!isNaN(u)&&u>=1){ state.units=u; document.getElementById('sl-units').value=Math.min(u,500); document.getElementById('inp-units').value=u; }
     if(!isNaN(a)&&a>=1){ state.adr=a; document.getElementById('sl-adr').value=Math.min(a,1500); document.getElementById('inp-adr').value=a; }
     if(!isNaN(d)&&d>=0&&d<=100){ state.direct=d/100; document.getElementById('sl-direct').value=d; document.getElementById('inp-direct').value=d; }
+    const o = parseInt(p.get('o'));
+    if(!isNaN(o)&&o>=10&&o<=100){ state.occ=o; document.getElementById('sl-occ').value=Math.min(o,90); document.getElementById('inp-occ').value=o; }
   }catch(e){}
 }
 
 function copyShareLink(){
   const btn = document.getElementById('share-btn');
-  const hash = `u=${state.units}&a=${state.adr}&d=${Math.round(state.direct*100)}`;
+  const hash = `u=${state.units}&a=${state.adr}&o=${state.occ}&d=${Math.round(state.direct*100)}`;
   history.replaceState(null,'',location.pathname+'#'+hash);
   navigator.clipboard.writeText(location.href).then(()=>{
     btn.classList.add('copied');
@@ -885,11 +915,13 @@ function copyShareLink(){
 }
 
 function resetDefaults(){
-  state.units = DEFAULTS.units; state.adr = DEFAULTS.adr; state.direct = DEFAULTS.direct/100;
+  state.units = DEFAULTS.units; state.adr = DEFAULTS.adr; state.occ = DEFAULTS.occ; state.direct = DEFAULTS.direct/100;
   document.getElementById('sl-units').value = DEFAULTS.units;
   document.getElementById('inp-units').value = DEFAULTS.units;
   document.getElementById('sl-adr').value = DEFAULTS.adr;
   document.getElementById('inp-adr').value = DEFAULTS.adr;
+  document.getElementById('sl-occ').value = DEFAULTS.occ;
+  document.getElementById('inp-occ').value = DEFAULTS.occ;
   document.getElementById('sl-direct').value = DEFAULTS.direct;
   document.getElementById('inp-direct').value = DEFAULTS.direct;
   updateAll();
@@ -897,17 +929,13 @@ function resetDefaults(){
 
 /* CORRECTED CALCULATIONS - Realistic model */
 function calc(units, adr, directPct){
-  // Dynamic occupancy based on ADR tier
-  let occupancy;
-  if (adr <= 150) occupancy = 0.72;
-  else if (adr <= 400) occupancy = 0.72 - (adr - 150) * (0.07 / 250);
-  else if (adr <= 800) occupancy = 0.65 - (adr - 400) * (0.10 / 400);
-  else occupancy = Math.max(0.35, 0.55 - (adr - 800) * (0.10 / 1200));
+  // Occupancy from user input
+  const occupancy = state.occ / 100;
 
   const revenue = units * adr * 365 * occupancy;
 
-  // Blended OTA commission rate (host-side)
-  const otaRate = 0.08;
+  // Blended OTA commission rate (host-side): Airbnb 15.5%, VRBO 8%, Booking 15% → blended ~13%
+  const otaRate = 0.13;
   const otaCost = revenue * (1 - directPct) * otaRate;
 
   // Diminishing lift
@@ -1132,6 +1160,8 @@ function updateAll(){
   const {units,adr,direct} = state;
   window._state = state;
   const r = calc(units,adr,direct);
+  updateOccHint();
+  reposOccTip();
 
   const savingsEl = document.getElementById('m-savings');
   if(r.isNegativeROI){
@@ -1146,7 +1176,7 @@ function updateAll(){
   animateTo('m-revenue',r.revenue,fmtDollar);
 
   document.getElementById('m-savings-sub').textContent = `vs. $${Math.round(r.otaCost).toLocaleString()} current OTA spend`;
-  document.getElementById('m-revenue-sub').textContent = `${units.toLocaleString()} units at ${Math.round(r.occupancy*100)}% estimated occupancy`;
+  document.getElementById('m-revenue-sub').textContent = `${units.toLocaleString()} units at ${state.occ}% occupancy \u00b7 $${adr.toLocaleString()}/night \u00b7 13% blended OTA rate`;
   document.getElementById('bench-savings').textContent = r.savings>50000 ? 'Top 25% of WanderOS portfolios' : '400+ WanderOS operators avg savings';
 
   const callout = document.getElementById('negative-roi-callout');
@@ -1264,6 +1294,52 @@ wireSliderAndInput(
   v=>'$'+v.toLocaleString()+'/night', 50, 1500
 );
 
+// Occupancy: 10-90 slider, 10-100 input
+const slOcc = document.getElementById('sl-occ');
+const inpOcc = document.getElementById('inp-occ');
+const tipOcc = document.getElementById('tip-occ');
+const wrapOcc = document.getElementById('wrap-occ');
+const occHint = document.getElementById('occ-hint');
+function reposOccTip(){
+  const min=10,max=90,val=parseFloat(slOcc.value);
+  const pct=(val-min)/(max-min);
+  const trackW=slOcc.getBoundingClientRect().width||slOcc.offsetWidth||300;
+  tipOcc.style.left=(pct*(trackW-22)+11)+'px';
+  tipOcc.textContent=state.occ+'% occupancy';
+}
+function updateOccHint(){
+  const adr=state.adr;
+  if(adr<150) occHint.textContent='Budget tier — typical occupancy 55-62%. US avg ~55%.';
+  else if(adr<300) occHint.textContent='Mid-market — typical occupancy 50-56%. US avg ~55%.';
+  else if(adr<600) occHint.textContent='Premium tier — typical occupancy 42-50%.';
+  else occHint.textContent='Luxury tier — typical occupancy 35-45%. High ADR = lower occupancy.';
+}
+slOcc.addEventListener('input',()=>{
+  const v=parseInt(slOcc.value);
+  state.occ=v;
+  inpOcc.value=v;
+  reposOccTip();
+  updateAll();
+});
+slOcc.addEventListener('mousedown',()=>{ wrapOcc.classList.add('dragging'); reposOccTip(); });
+slOcc.addEventListener('touchstart',()=>{ wrapOcc.classList.add('dragging'); reposOccTip(); });
+slOcc.addEventListener('mouseup',()=>wrapOcc.classList.remove('dragging'));
+slOcc.addEventListener('touchend',()=>wrapOcc.classList.remove('dragging'));
+inpOcc.addEventListener('input',()=>{
+  const raw=parseInt(inpOcc.value)||0;
+  const clamped=Math.min(100,Math.max(10,raw));
+  state.occ=clamped;
+  slOcc.value=Math.min(clamped,90);
+  reposOccTip();
+  updateAll();
+});
+inpOcc.addEventListener('blur',()=>{
+  const v=parseInt(inpOcc.value);
+  if(isNaN(v)||v<10) inpOcc.value=10;
+  if(v>100) inpOcc.value=100;
+});
+window.addEventListener('resize',reposOccTip);
+
 // Direct booking: 0-100
 const slDirect = document.getElementById('sl-direct');
 const inpDirect = document.getElementById('inp-direct');
@@ -1313,6 +1389,7 @@ obs.observe(resultsAnchor);
 /* INIT */
 parseHash();
 updateAll();
+reposOccTip();
 reposDirectTip();
 </script>
 </body>
