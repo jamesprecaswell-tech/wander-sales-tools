@@ -1,877 +1,1636 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Powered Outreach Portfolio | WanderOS Sales Tools</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personalized Outreach Portfolio | WanderOS Sales Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B2838;
+  --coral:#FF6B35;
+  --teal:#2EC4B6;
+  --bg:#F7F8FA;
+  --white:#FFFFFF;
+  --text:#1B2838;
+  --text-light:#5A6677;
+  --border:#E2E6EC;
+  --tag-bg:#EEF1F5;
+  --shadow:0 2px 12px rgba(27,40,56,0.08);
+  --shadow-lg:0 8px 32px rgba(27,40,56,0.14);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Instrument Sans',Inter,system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
 
-        :root {
-            --navy: #1B2838;
-            --coral: #FF6B35;
-            --teal: #2EC4B6;
-            --bg: #F7F8FA;
-            --card-bg: #FFFFFF;
-            --text: #1B2838;
-            --text-light: #5A6677;
-            --border: #E2E6EC;
-            --tag-bg: #EEF1F5;
-        }
+/* ===== NAV ===== */
+nav{
+  background:var(--navy);
+  padding:0 32px;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:200;
+  box-shadow:0 2px 16px rgba(0,0,0,0.18);
+}
+.nav-brand{
+  color:#fff;
+  font-weight:700;
+  font-size:17px;
+  letter-spacing:-0.2px;
+  text-decoration:none;
+}
+.nav-brand span{color:var(--coral)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{
+  color:rgba(255,255,255,0.65);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:500;
+  transition:color 0.2s;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+/* ===== HERO ===== */
+.hero{
+  background:linear-gradient(140deg,#1B2838 0%,#243347 60%,#1d3a4a 100%);
+  color:#fff;
+  padding:56px 32px 44px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-80px;right:-80px;
+  width:400px;height:400px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,53,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  bottom:-60px;left:-60px;
+  width:300px;height:300px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(46,196,182,0.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-block;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--coral);
+  background:rgba(255,107,53,0.12);
+  border:1px solid rgba(255,107,53,0.3);
+  border-radius:20px;
+  padding:4px 14px;
+  margin-bottom:18px;
+}
+.hero h1{
+  font-size:clamp(26px,4.5vw,42px);
+  font-weight:700;
+  letter-spacing:-0.5px;
+  margin-bottom:12px;
+  line-height:1.2;
+}
+.hero h1 span{color:var(--coral)}
+.hero p{
+  color:rgba(255,255,255,0.7);
+  font-size:16px;
+  max-width:580px;
+  margin:0 auto 36px;
+}
 
-        /* NAV */
-        nav {
-            background: var(--navy);
-            padding: 0 24px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-brand {
-            color: #fff;
-            font-weight: 800;
-            font-size: 18px;
-            letter-spacing: -0.3px;
-            text-decoration: none;
-        }
-        .nav-brand span { color: var(--coral); }
-        .nav-links { display: flex; gap: 24px; }
-        .nav-links a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover, .nav-links a.active { color: #fff; }
+/* ===== STATS BAR ===== */
+.stats-bar{
+  display:flex;
+  justify-content:center;
+  gap:48px;
+  flex-wrap:wrap;
+  position:relative;
+  z-index:1;
+}
+.stat{text-align:center}
+.stat-num{
+  font-size:36px;
+  font-weight:700;
+  color:var(--coral);
+  line-height:1;
+  display:block;
+}
+.stat-label{
+  font-size:12px;
+  color:rgba(255,255,255,0.55);
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  margin-top:4px;
+}
 
-        /* HERO */
-        .hero {
-            background: linear-gradient(135deg, var(--navy) 0%, #2a3f55 100%);
-            color: #fff;
-            padding: 64px 24px 48px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: clamp(28px, 5vw, 42px);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 12px;
-        }
-        .hero h1 span { color: var(--coral); }
-        .hero p {
-            color: rgba(255,255,255,0.75);
-            font-size: 17px;
-            max-width: 640px;
-            margin: 0 auto 32px;
-        }
+/* ===== PIPELINE METRICS PANEL ===== */
+.pipeline-metrics-wrap{
+  max-width:1100px;
+  margin:28px auto 0;
+  padding:0 24px;
+}
+.pipeline-metrics-toggle{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 20px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:10px 10px 0 0;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+  color:var(--navy);
+  width:100%;
+  text-align:left;
+  transition:background 0.2s;
+  user-select:none;
+}
+.pipeline-metrics-toggle:hover{background:#F0F2F5}
+.pipeline-metrics-toggle .chevron{
+  margin-left:auto;
+  transition:transform 0.3s;
+  color:var(--text-light);
+}
+.pipeline-metrics-toggle.open .chevron{transform:rotate(180deg)}
+.pipeline-metrics-toggle.open{border-radius:10px 10px 0 0;border-bottom-color:transparent}
+.pipeline-metrics-body{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 10px 10px;
+  overflow:hidden;
+  max-height:0;
+  transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.pipeline-metrics-body.open{max-height:600px}
+.pipeline-metrics-inner{
+  padding:24px 28px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:28px;
+}
+.pm-block h4{
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  color:var(--text-light);
+  margin-bottom:14px;
+}
+.pm-kpi{
+  font-size:28px;
+  font-weight:700;
+  color:var(--navy);
+}
+.pm-kpi-sub{
+  font-size:12px;
+  color:var(--text-light);
+  margin-top:2px;
+}
+.bar-chart{display:flex;flex-direction:column;gap:8px}
+.bar-row{display:flex;align-items:center;gap:10px;font-size:12px}
+.bar-label{width:80px;color:var(--text-light);font-weight:500;white-space:nowrap}
+.bar-track{
+  flex:1;
+  height:10px;
+  background:var(--tag-bg);
+  border-radius:999px;
+  overflow:hidden;
+}
+.bar-fill{
+  height:100%;
+  border-radius:999px;
+  background:var(--teal);
+  transition:width 0.8s ease;
+}
+.bar-count{font-weight:600;color:var(--navy);width:16px}
+.market-dist{display:flex;flex-wrap:wrap;gap:6px}
+.mkt-badge{
+  padding:4px 10px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:600;
+  background:var(--tag-bg);
+  color:var(--text-light);
+}
 
-        /* STATS BAR */
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-        .stat {
-            text-align: center;
-        }
-        .stat-num {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--coral);
-        }
-        .stat-label {
-            font-size: 13px;
-            color: rgba(255,255,255,0.6);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+/* ===== STICKY FILTER BAR ===== */
+.filter-bar-outer{
+  position:sticky;
+  top:60px;
+  z-index:100;
+  background:var(--bg);
+  padding:14px 0 0;
+  transition:box-shadow 0.2s;
+}
+.filter-bar-outer.stuck{
+  box-shadow:0 4px 16px rgba(27,40,56,0.1);
+  padding-bottom:14px;
+}
+.filter-bar{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 24px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+.search-input{
+  flex:1;
+  min-width:220px;
+  max-width:320px;
+  height:38px;
+  padding:0 14px 0 36px;
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  font-family:inherit;
+  font-size:13px;
+  color:var(--text);
+  background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%235A6677' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 10px center;
+  transition:border-color 0.2s;
+  outline:none;
+}
+.search-input:focus{border-color:var(--teal)}
+.sort-select{
+  height:38px;
+  padding:0 12px;
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  font-family:inherit;
+  font-size:13px;
+  color:var(--text);
+  background:var(--white);
+  cursor:pointer;
+  outline:none;
+  transition:border-color 0.2s;
+}
+.sort-select:focus{border-color:var(--teal)}
+.filter-divider{
+  width:1px;
+  height:24px;
+  background:var(--border);
+  margin:0 4px;
+}
+.filter-btn{
+  padding:6px 14px;
+  border:1.5px solid var(--border);
+  border-radius:20px;
+  background:var(--white);
+  font-family:inherit;
+  font-size:12px;
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.18s;
+  color:var(--text-light);
+  white-space:nowrap;
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+}
+.results-count{
+  margin-left:auto;
+  font-size:12px;
+  color:var(--text-light);
+  white-space:nowrap;
+}
 
-        /* FILTERS */
-        .filters {
-            max-width: 1100px;
-            margin: 24px auto 0;
-            padding: 0 24px;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            padding: 8px 16px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--card-bg);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-light);
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--navy);
-            color: #fff;
-            border-color: var(--navy);
-        }
+/* ===== GRID ===== */
+.grid{
+  max-width:1100px;
+  margin:20px auto 0;
+  padding:0 24px 48px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(480px,1fr));
+  gap:18px;
+}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
 
-        /* GRID */
-        .grid {
-            max-width: 1100px;
-            margin: 24px auto 48px;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-            gap: 20px;
-        }
-        @media (max-width: 540px) {
-            .grid { grid-template-columns: 1fr; }
-        }
+/* ===== CARD ===== */
+.card{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  transition:box-shadow 0.22s,transform 0.18s,border-color 0.2s;
+  cursor:pointer;
+}
+.card:hover{
+  box-shadow:var(--shadow-lg);
+  transform:translateY(-2px);
+  border-color:#d0d6df;
+}
+.card.open{
+  box-shadow:var(--shadow-lg);
+  border-color:var(--teal);
+}
+.card-header{padding:20px 22px 14px}
+.card-top-row{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+.avatar{
+  width:42px;height:42px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--navy) 0%,#2d4a6b 100%);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:15px;
+  flex-shrink:0;
+}
+.card-name-block{flex:1;min-width:0}
+.card-name{font-weight:700;font-size:15px;line-height:1.2}
+.card-company{font-size:12px;color:var(--text-light);margin-top:2px}
+.card-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.score-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:3px 8px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:600;
+  white-space:nowrap;
+}
+.score-badge.high{background:rgba(46,196,182,0.12);color:#1a9e96;border:1px solid rgba(46,196,182,0.25)}
+.score-badge.mid{background:rgba(255,107,53,0.1);color:#c95320;border:1px solid rgba(255,107,53,0.2)}
+.score-badge.low{background:var(--tag-bg);color:var(--text-light);border:1px solid var(--border)}
+.score-dots{letter-spacing:2px;font-size:10px}
+.ota-badge{
+  padding:3px 8px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:600;
+  background:rgba(255,107,53,0.08);
+  color:var(--coral);
+  border:1px solid rgba(255,107,53,0.18);
+  white-space:nowrap;
+}
+.card-chips{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:3px 9px;
+  background:var(--tag-bg);
+  border-radius:6px;
+  font-size:11px;
+  font-weight:500;
+  color:var(--text-light);
+}
+.chip svg{width:11px;height:11px;flex-shrink:0}
+.chip.pms-chip{background:rgba(46,196,182,0.1);color:#1a9e96}
+.chip.market-chip{background:rgba(27,40,56,0.07);color:var(--navy)}
+.card-subject{
+  font-size:13px;
+  font-weight:600;
+  color:var(--navy);
+  margin-bottom:5px;
+  line-height:1.35;
+}
+.card-subject-label{
+  font-size:11px;
+  font-weight:500;
+  color:var(--text-light);
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  margin-bottom:4px;
+}
+.card-preview{
+  font-size:12px;
+  color:var(--text-light);
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  line-height:1.5;
+}
+.card-expand-hint{
+  padding:9px 22px;
+  font-size:12px;
+  color:var(--coral);
+  font-weight:600;
+  border-top:1px solid var(--border);
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  transition:background 0.15s;
+}
+.card:hover .card-expand-hint{background:#FFF8F5}
+.card.open .card-expand-hint{display:none}
 
-        /* CARD */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: box-shadow 0.2s, transform 0.15s;
-            cursor: pointer;
-        }
-        .card:hover {
-            box-shadow: 0 4px 20px rgba(27,40,56,0.1);
-            transform: translateY(-2px);
-        }
-        .card-header {
-            padding: 20px 24px 16px;
-        }
-        .card-meta {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--navy);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 15px;
-            flex-shrink: 0;
-        }
-        .card-name {
-            font-weight: 700;
-            font-size: 15px;
-        }
-        .card-company {
-            font-size: 13px;
-            color: var(--text-light);
-        }
-        .card-details {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-        }
-        .detail-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 10px;
-            background: var(--tag-bg);
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--text-light);
-        }
-        .detail-chip svg { width: 12px; height: 12px; }
-        .card-subject {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--navy);
-            margin-bottom: 4px;
-        }
-        .card-subject::before {
-            content: "Subject: ";
-            font-weight: 400;
-            color: var(--text-light);
-        }
-        .card-preview {
-            font-size: 13px;
-            color: var(--text-light);
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .card-expand-hint {
-            padding: 10px 24px;
-            font-size: 12px;
-            color: var(--coral);
-            font-weight: 600;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            transition: background 0.15s;
-        }
-        .card:hover .card-expand-hint {
-            background: #FFF8F5;
-        }
+/* ===== CARD BODY (animated) ===== */
+.card-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.42s cubic-bezier(0.4,0,0.2,1);
+  border-top:1px solid transparent;
+}
+.card.open .card-body{
+  max-height:1200px;
+  border-top-color:var(--border);
+}
+.card-body-inner{padding:20px 22px 22px}
+.email-label{
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.7px;
+  color:var(--text-light);
+  margin-bottom:8px;
+}
+.email-body{
+  background:#FAFBFD;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:18px 20px;
+  font-size:13.5px;
+  line-height:1.75;
+  white-space:pre-wrap;
+  color:var(--text);
+  font-family:'Instrument Sans',Inter,system-ui,sans-serif;
+  position:relative;
+}
+.copy-btn{
+  position:absolute;
+  top:12px;right:12px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 11px;
+  border-radius:6px;
+  border:1px solid var(--border);
+  background:var(--white);
+  font-family:inherit;
+  font-size:11px;
+  font-weight:600;
+  color:var(--text-light);
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.copy-btn:hover{border-color:var(--teal);color:var(--teal)}
+.copy-btn.copied{
+  border-color:var(--teal);
+  color:var(--teal);
+  background:rgba(46,196,182,0.08);
+}
+.copy-btn svg{width:12px;height:12px}
+.p-tags{
+  margin-top:14px;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.p-tag{
+  padding:3px 9px;
+  border-radius:4px;
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.6px;
+}
+.p-tag.market{background:#E8F5E9;color:#2E7D32}
+.p-tag.pms{background:#E3F2FD;color:#1565C0}
+.p-tag.size{background:#FFF3E0;color:#E65100}
+.p-tag.seasonal{background:#F3E5F5;color:#7B1FA2}
+.p-tag.pain{background:#FFEBEE;color:#C62828}
+.no-results{
+  grid-column:1/-1;
+  text-align:center;
+  padding:60px 20px;
+  color:var(--text-light);
+}
+.no-results svg{width:40px;height:40px;margin-bottom:12px;opacity:0.4}
+.no-results p{font-size:14px}
 
-        /* EXPANDED EMAIL */
-        .card-body {
-            display: none;
-            padding: 0 24px 24px;
-            border-top: 1px solid var(--border);
-        }
-        .card.open .card-body {
-            display: block;
-        }
-        .card.open .card-expand-hint { display: none; }
-        .email-body {
-            background: #FAFBFC;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 16px;
-            font-size: 14px;
-            line-height: 1.7;
-            white-space: pre-wrap;
-            color: var(--text);
-        }
-        .personalization-tags {
-            margin-top: 16px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .p-tag {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .p-tag.market { background: #E8F5E9; color: #2E7D32; }
-        .p-tag.pms { background: #E3F2FD; color: #1565C0; }
-        .p-tag.size { background: #FFF3E0; color: #E65100; }
-        .p-tag.seasonal { background: #F3E5F5; color: #7B1FA2; }
-        .p-tag.pain { background: #FFEBEE; color: #C62828; }
+/* ===== MARKETS MAP ===== */
+.markets-section{
+  max-width:1100px;
+  margin:0 auto 32px;
+  padding:0 24px;
+}
+.section-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+.section-header h2{font-size:18px;font-weight:700}
+.section-tag{
+  padding:3px 10px;
+  background:var(--tag-bg);
+  border-radius:5px;
+  font-size:11px;
+  font-weight:600;
+  color:var(--text-light);
+}
+.markets-card{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  padding:28px 28px 24px;
+}
+.region-row{margin-bottom:18px}
+.region-row:last-child{margin-bottom:0}
+.region-label{
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  color:var(--text-light);
+  margin-bottom:8px;
+}
+.market-badges{display:flex;flex-wrap:wrap;gap:6px}
+.market-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  border-radius:7px;
+  font-size:12px;
+  font-weight:500;
+  border:1px solid;
+}
+.market-pill.southeast{background:#E8F5E9;border-color:#A5D6A7;color:#2E7D32}
+.market-pill.southwest{background:#FFF3E0;border-color:#FFCC80;color:#E65100}
+.market-pill.west{background:#E3F2FD;border-color:#90CAF9;color:#1565C0}
+.market-pill.mountain{background:#F3E5F5;border-color:#CE93D8;color:#6A1B9A}
+.market-pill.northeast{background:#E0F2F1;border-color:#80CBC4;color:#00695C}
+.market-pill.midwest{background:#FCE4EC;border-color:#F48FB1;color:#880E4F}
+.market-pill .dot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:currentColor;
+  flex-shrink:0;
+}
 
-        /* METHODOLOGY */
-        .methodology {
-            max-width: 1100px;
-            margin: 0 auto 48px;
-            padding: 0 24px;
-        }
-        .method-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-        }
-        .method-card h2 {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-        .method-card > p {
-            color: var(--text-light);
-            margin-bottom: 32px;
-        }
-        .pipeline-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .step {
-            text-align: center;
-            padding: 24px 16px;
-            border-radius: 10px;
-            background: var(--bg);
-        }
-        .step-num {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--coral);
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 15px;
-            margin-bottom: 12px;
-        }
-        .step h3 {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .step p {
-            font-size: 13px;
-            color: var(--text-light);
-        }
+/* ===== METHODOLOGY ===== */
+.methodology{
+  max-width:1100px;
+  margin:0 auto 48px;
+  padding:0 24px;
+}
+.method-card{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  padding:40px 40px 36px;
+}
+.method-card h2{font-size:22px;font-weight:700;margin-bottom:8px}
+.method-card>p{color:var(--text-light);margin-bottom:36px;font-size:14px}
+.pipeline-steps-wrap{position:relative}
+.pipeline-connector{
+  position:absolute;
+  top:28px;left:calc(10% + 18px);
+  right:calc(10% + 18px);
+  height:2px;
+  background:linear-gradient(90deg,var(--border) 0%,var(--teal) 50%,var(--border) 100%);
+  z-index:0;
+}
+@media(max-width:700px){.pipeline-connector{display:none}}
+.pipeline-steps{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+  position:relative;
+  z-index:1;
+}
+@media(max-width:700px){.pipeline-steps{grid-template-columns:1fr}}
+.step{
+  text-align:center;
+  padding:20px 14px;
+  border-radius:12px;
+  background:var(--bg);
+  border:1.5px solid var(--border);
+}
+.step-icon{
+  width:52px;height:52px;
+  border-radius:50%;
+  background:var(--white);
+  border:2px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 12px;
+  color:var(--coral);
+}
+.step-icon svg{width:22px;height:22px}
+.step h3{font-size:13px;font-weight:700;margin-bottom:5px;color:var(--navy)}
+.step p{font-size:12px;color:var(--text-light);line-height:1.5}
+.step-num-badge{
+  display:inline-block;
+  width:18px;height:18px;
+  border-radius:50%;
+  background:var(--coral);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  line-height:18px;
+  text-align:center;
+  margin-bottom:8px;
+}
+.method-results{
+  margin-top:32px;
+  padding:24px;
+  background:linear-gradient(135deg,rgba(46,196,182,0.07) 0%,rgba(27,40,56,0.04) 100%);
+  border:1px solid rgba(46,196,182,0.2);
+  border-radius:10px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+.result-item{text-align:center}
+.result-num{font-size:22px;font-weight:700;color:var(--teal)}
+.result-label{font-size:12px;color:var(--text-light);margin-top:3px}
+.result-sub{font-size:11px;color:var(--text-light);opacity:0.7}
 
-        /* FOOTER */
-        footer {
-            background: var(--navy);
-            color: rgba(255,255,255,0.6);
-            text-align: center;
-            padding: 32px 24px;
-            font-size: 14px;
-        }
-        footer strong { color: #fff; }
-    </style>
+/* ===== FOOTER ===== */
+footer{
+  background:var(--navy);
+  color:rgba(255,255,255,0.55);
+  text-align:center;
+  padding:32px 24px;
+  font-size:13px;
+}
+footer strong{color:#fff}
+footer a{color:var(--coral);text-decoration:none}
+</style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-    <a href="index.html" class="nav-brand">Wander<span>OS</span> Sales Tools</a>
-    <div class="nav-links">
-        <a href="index.html">ROI Calculator</a>
-        <a href="outreach.html" class="active">Outreach Portfolio</a>
-    </div>
+  <a href="index.html" class="nav-brand">Wander<span>OS</span> Sales Tools</a>
+  <div class="nav-links">
+    <a href="index.html">ROI Calculator</a>
+    <a href="outreach.html" class="active">Outreach Portfolio</a>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-    <h1>AI-Powered <span>Outreach Portfolio</span></h1>
-    <p>20 personalized emails targeting SMB property managers. Each enriched with real data: PMS, market, portfolio size, and seasonality.</p>
-    <div class="stats-bar">
-        <div class="stat"><div class="stat-num">20</div><div class="stat-label">Prospects</div></div>
-        <div class="stat"><div class="stat-num">9</div><div class="stat-label">Markets</div></div>
-        <div class="stat"><div class="stat-num">6</div><div class="stat-label">PMS Platforms</div></div>
-        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Personalized</div></div>
+  <div class="hero-eyebrow">AI-Powered Outreach</div>
+  <h1>Personalized <span>Outreach Portfolio</span></h1>
+  <p>20 prospects, fully enriched. Each email written with specific market data, PMS context, and a direct revenue angle. No templates.</p>
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-num" data-target="20" data-suffix="">0</span>
+      <div class="stat-label">Prospects</div>
     </div>
+    <div class="stat">
+      <span class="stat-num" data-target="9" data-suffix="">0</span>
+      <div class="stat-label">Markets</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num" data-target="6" data-suffix="">0</span>
+      <div class="stat-label">PMS Platforms</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num" data-target="100" data-suffix="%">0</span>
+      <div class="stat-label">Personalized</div>
+    </div>
+  </div>
 </section>
 
-<div class="filters">
-    <button class="filter-btn active" data-filter="all">All Prospects</button>
-    <button class="filter-btn" data-filter="guesty">Guesty</button>
-    <button class="filter-btn" data-filter="hostaway">Hostaway</button>
-    <button class="filter-btn" data-filter="lodgify">Lodgify</button>
-    <button class="filter-btn" data-filter="escapia">Escapia</button>
-    <button class="filter-btn" data-filter="streamline">Streamline</button>
-    <button class="filter-btn" data-filter="ownerrez">OwnerRez</button>
+<!-- PIPELINE METRICS PANEL -->
+<div class="pipeline-metrics-wrap">
+  <button class="pipeline-metrics-toggle" id="metricsToggle" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="18"/><rect x="9" y="8" width="6" height="13"/><rect x="16" y="5" width="6" height="16"/></svg>
+    Pipeline Metrics
+    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pipeline-metrics-body" id="metricsBody">
+    <div class="pipeline-metrics-inner">
+      <div class="pm-block">
+        <h4>Total Est. OTA Spend</h4>
+        <div class="pm-kpi" id="pmTotalOTA">--</div>
+        <div class="pm-kpi-sub">across all 20 prospects / year</div>
+      </div>
+      <div class="pm-block">
+        <h4>Avg Portfolio Size</h4>
+        <div class="pm-kpi" id="pmAvgSize">--</div>
+        <div class="pm-kpi-sub">units per prospect</div>
+      </div>
+      <div class="pm-block">
+        <h4>PMS Distribution</h4>
+        <div class="bar-chart" id="pmsPmsChart"></div>
+      </div>
+      <div class="pm-block">
+        <h4>Market Distribution</h4>
+        <div class="market-dist" id="pmMarketDist"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- FILTER BAR (sticky) -->
+<div class="filter-bar-outer" id="filterBarOuter">
+  <div class="filter-bar">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search by market, PMS, or company..." autocomplete="off">
+    <select class="sort-select" id="sortSelect">
+      <option value="size-desc">Portfolio Size (High-Low)</option>
+      <option value="size-asc">Portfolio Size (Low-High)</option>
+      <option value="market-az">Market (A-Z)</option>
+      <option value="pms-az">PMS Platform</option>
+    </select>
+    <div class="filter-divider"></div>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="Guesty">Guesty</button>
+    <button class="filter-btn" data-filter="Hostaway">Hostaway</button>
+    <button class="filter-btn" data-filter="Lodgify">Lodgify</button>
+    <button class="filter-btn" data-filter="Escapia">Escapia</button>
+    <button class="filter-btn" data-filter="Streamline">Streamline</button>
+    <button class="filter-btn" data-filter="OwnerRez">OwnerRez</button>
+    <span class="results-count" id="resultsCount">20 prospects</span>
+  </div>
+</div>
+
+<!-- CARD GRID -->
 <div class="grid" id="emailGrid"></div>
 
-<section class="methodology">
-    <div class="method-card">
-        <h2>How This System Works</h2>
-        <p>Every email above was generated by an 8-agent AI pipeline that enriches, personalizes, and quality-checks each prospect touch. Here's the process:</p>
-        <div class="pipeline-steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <h3>Prospect Discovery</h3>
-                <p>Identify SMB property managers (10-150 units) across target vacation rental markets.</p>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <h3>Data Enrichment</h3>
-                <p>Detect PMS platform, portfolio size, market seasonality, and direct booking presence via domain intel.</p>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <h3>Personalization Engine</h3>
-                <p>AI generates a unique opener, subject line, and value proposition tailored to each prospect's specific situation.</p>
-            </div>
-            <div class="step">
-                <div class="step-num">4</div>
-                <h3>Quality Gate</h3>
-                <p>Each email is scored on relevance, tone, and accuracy. Only emails scoring 8+ are included in the send queue.</p>
-            </div>
-            <div class="step">
-                <div class="step-num">5</div>
-                <h3>Delivery & Tracking</h3>
-                <p>Emails are drafted, scheduled, and tracked. Hot replies are auto-classified and escalated for human follow-up.</p>
-            </div>
-        </div>
+<!-- MARKETS SECTION -->
+<section class="markets-section">
+  <div class="section-header">
+    <h2>Markets Covered</h2>
+    <span class="section-tag">10 States</span>
+  </div>
+  <div class="markets-card">
+    <div class="region-row">
+      <div class="region-label">Southeast</div>
+      <div class="market-badges">
+        <span class="market-pill southeast"><span class="dot"></span>Destin, FL</span>
+        <span class="market-pill southeast"><span class="dot"></span>Panama City Beach, FL</span>
+        <span class="market-pill southeast"><span class="dot"></span>Hilton Head, SC</span>
+        <span class="market-pill southeast"><span class="dot"></span>Gulf Shores, AL</span>
+      </div>
     </div>
+    <div class="region-row">
+      <div class="region-label">Atlantic Coast</div>
+      <div class="market-badges">
+        <span class="market-pill northeast"><span class="dot"></span>Cape Cod, MA</span>
+        <span class="market-pill northeast"><span class="dot"></span>Outer Banks, NC</span>
+        <span class="market-pill northeast"><span class="dot"></span>Asheville, NC</span>
+      </div>
+    </div>
+    <div class="region-row">
+      <div class="region-label">Southwest</div>
+      <div class="market-badges">
+        <span class="market-pill southwest"><span class="dot"></span>Scottsdale, AZ</span>
+        <span class="market-pill southwest"><span class="dot"></span>Tucson, AZ</span>
+        <span class="market-pill southwest"><span class="dot"></span>South Padre Island, TX</span>
+      </div>
+    </div>
+    <div class="region-row">
+      <div class="region-label">West Coast</div>
+      <div class="market-badges">
+        <span class="market-pill west"><span class="dot"></span>Lake Tahoe, CA</span>
+        <span class="market-pill west"><span class="dot"></span>Maui, HI</span>
+        <span class="market-pill west"><span class="dot"></span>San Diego, CA</span>
+        <span class="market-pill west"><span class="dot"></span>Palm Springs, CA</span>
+      </div>
+    </div>
+    <div class="region-row">
+      <div class="region-label">Mountain</div>
+      <div class="market-badges">
+        <span class="market-pill mountain"><span class="dot"></span>Big Sky, MT</span>
+        <span class="market-pill mountain"><span class="dot"></span>Park City, UT</span>
+      </div>
+    </div>
+    <div class="region-row">
+      <div class="region-label">Southeast Interior</div>
+      <div class="market-badges">
+        <span class="market-pill southeast"><span class="dot"></span>Gatlinburg, TN</span>
+        <span class="market-pill southeast"><span class="dot"></span>Pigeon Forge, TN</span>
+      </div>
+    </div>
+    <div class="region-row">
+      <div class="region-label">Central</div>
+      <div class="market-badges">
+        <span class="market-pill midwest"><span class="dot"></span>Branson, MO</span>
+        <span class="market-pill southwest"><span class="dot"></span>Orlando, FL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="methodology">
+  <div class="section-header">
+    <h2>How This Pipeline Was Built</h2>
+  </div>
+  <div class="method-card">
+    <p>Every email in this portfolio came from a structured 5-stage AI pipeline. Prospect data is enriched, verified, and scored before a single word is written. Here is the process:</p>
+    <div class="pipeline-steps-wrap">
+      <div class="pipeline-connector"></div>
+      <div class="pipeline-steps">
+        <div class="step">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <div class="step-num-badge">1</div>
+          <h3>Prospect Discovery</h3>
+          <p>Identify SMB property managers (10-150 units) across target vacation rental markets using listing data and operator directories.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="step-num-badge">2</div>
+          <h3>Data Enrichment</h3>
+          <p>Detect PMS platform, portfolio count, market ADR, seasonality curve, and direct booking presence via domain and listing intel.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div class="step-num-badge">3</div>
+          <h3>Personalization Engine</h3>
+          <p>AI drafts a unique opener, subject line, and revenue calculation specific to each prospect's PMS, market, and unit count.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="step-num-badge">4</div>
+          <h3>Quality Gate</h3>
+          <p>Each email is scored on relevance, tone, and factual accuracy. Only emails scoring 8 or above move to the send queue.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="step-num-badge">5</div>
+          <h3>Delivery and Tracking</h3>
+          <p>Emails are scheduled and tracked. Hot replies are auto-classified and escalated for same-day human follow-up.</p>
+        </div>
+      </div>
+    </div>
+    <div class="method-results">
+      <div class="result-item">
+        <div class="result-num">18-24%</div>
+        <div class="result-label">Typical reply rate</div>
+        <div class="result-sub">vs. 3-5% on template blasts</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num">4 hours</div>
+        <div class="result-label">Avg. pipeline build time</div>
+        <div class="result-sub">from ICP definition to send-ready</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num">20</div>
+        <div class="result-label">Prospects enriched</div>
+        <div class="result-sub">in this run</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-    Built by <strong>James Caswell</strong> &mdash; AI Sales Automation for Vacation Rental SaaS
+  Built by <strong>James Caswell</strong> | AI Sales Automation for Vacation Rental SaaS
 </footer>
 
 <script>
-const prospects = [
-    {
-        name: "Sarah Mitchell",
-        company: "Emerald Coast Rentals",
-        market: "Destin, FL",
-        pms: "Guesty",
-        units: 42,
-        subject: "Your 42 Destin units are leaving $63K/yr on the table",
-        body: `Hi Sarah,
-
-I noticed Emerald Coast Rentals is running 42 units across the Destin-30A corridor on Guesty. Solid portfolio in a market that just posted record spring break numbers.
-
-Here's what caught my eye: your direct booking site is sending traffic to Airbnb and VRBO instead of capturing it. At 42 units and Destin's average $285 ADR, that's roughly $63K/year in OTA commissions you don't need to be paying.
-
-WanderOS integrates natively with Guesty — no migration, no downtime, no retraining your team. It replaces your current direct booking site, preserves your SEO authority, and typically lifts direct bookings 20-35% within the first 6 months. The fee is 3% of direct bookings (vs. 15-18% to the OTAs).
-
-The math is straightforward: every 1% you shift from OTA to direct saves you about $1,500/year. Most operators your size see 15-20% shift in the first quarter.
-
-Worth a 20-minute chat this week?`,
-        tags: ["market", "pms", "size", "seasonal"]
-    },
-    {
-        name: "Marcus Johnson",
-        company: "Smoky Peak Lodging",
-        market: "Gatlinburg, TN",
-        pms: "Hostaway",
-        units: 28,
-        subject: "Gatlinburg's year-round demand + your 28 units = untapped direct revenue",
-        body: `Hi Marcus,
-
-Smoky Peak Lodging has something most STR operators would kill for: Gatlinburg's 12-month demand curve. No dead season. Your 28 units are generating revenue year-round, but a significant chunk of that is flowing through OTAs at 15-18% commission.
-
-You're on Hostaway, which tells me you've already invested in operational efficiency. WanderOS plugs directly into your Hostaway stack — same channel manager, same calendar sync, zero disruption. The difference: your direct booking site goes from a brochure to a conversion engine.
-
-At 28 units with Gatlinburg's $220 average nightly rate, you're likely paying $40K+ per year in OTA commissions. WanderOS operators in the Smokies typically shift 20-25% of bookings direct within 6 months. That's $8-10K back in your pocket annually, minus a 3% WanderOS fee on those direct bookings.
-
-Gatlinburg operators who move early on direct bookings are building the brand equity that protects them when Airbnb inevitably changes its algorithm again (remember 2024?).
-
-20 minutes to walk through the numbers for Smoky Peak specifically?`,
-        tags: ["market", "pms", "size", "seasonal", "pain"]
-    },
-    {
-        name: "Rachel Torres",
-        company: "Desert Sun Properties",
-        market: "Scottsdale, AZ",
-        pms: "Lodgify",
-        units: 65,
-        subject: "65 Scottsdale units, $312 ADR — here's what direct bookings look like",
-        body: `Hi Rachel,
-
-Desert Sun Properties caught my attention — 65 units in the Scottsdale market with what looks like a strong luxury-adjacent positioning. At Scottsdale's $312 average ADR, your portfolio is generating serious revenue, and I'd guess a meaningful portion is still running through Airbnb and VRBO.
-
-Quick math: at 65 units and 65% occupancy, you're looking at roughly $150K/year in OTA commissions. Even shifting 15% of that to direct bookings saves you over $22K annually.
-
-You're on Lodgify, which is solid for direct booking, but WanderOS takes it further — AI-powered SEO optimization, dynamic pricing integration, and a guest experience layer that drives repeat bookings. Lodgify users typically see the smoothest migration since the tech stack is already oriented toward direct.
-
-Scottsdale's snowbird season is approaching, and the operators who have strong direct booking presence before October capture guests who plan 3-6 months out. That's the high-value segment that books direct when given the option.
-
-I built a quick ROI model for a portfolio your size. Want to see it? 20 minutes.`,
-        tags: ["market", "pms", "size", "seasonal"]
-    },
-    {
-        name: "Tom & Lisa Chen",
-        company: "Big Sky Vacation Homes",
-        market: "Big Sky, MT",
-        pms: "Escapia",
-        units: 35,
-        subject: "Ski season is 5 months away — your direct booking engine should be ready",
-        body: `Hi Tom and Lisa,
-
-Big Sky Vacation Homes is in one of the fastest-growing ski markets in North America, and your 35-unit portfolio is positioned right in the demand curve that's about to spike.
-
-Here's the challenge with seasonal markets like Big Sky: you need to capture direct bookings during the planning window (August-October) before guests default to Airbnb. OTA guests book 2-4 weeks out. Direct guests book 2-4 months out — and they spend more.
-
-You're on Escapia, which handles the PMS side well but doesn't give you a competitive direct booking presence. WanderOS integrates with Escapia's reservation system and builds you a direct booking site that actually converts — preserving your existing SEO and adding AI-driven guest matching.
-
-At 35 units and Big Sky's $380 ADR during peak season, the commission savings alone are substantial. But the real win is capturing those early-bird ski bookings direct. Last season, WanderOS operators in mountain markets saw 28% higher ADR on direct bookings vs. OTA bookings for the same properties.
-
-Worth exploring before ski season planning kicks off?`,
-        tags: ["market", "pms", "size", "seasonal", "pain"]
-    },
-    {
-        name: "Daniel Rivera",
-        company: "Gulf Breeze Stays",
-        market: "Panama City Beach, FL",
-        pms: "Guesty",
-        units: 88,
-        subject: "88 units in PCB — you're paying $130K+/yr in OTA fees",
-        body: `Daniel,
-
-At 88 units in Panama City Beach, Gulf Breeze Stays is one of the larger independent operators in the market. That scale is an advantage — but it also means your OTA commission bill is enormous.
-
-Back-of-napkin: 88 units, $195 ADR, 70% occupancy (PCB runs hot), 75% OTA mix = roughly $130K/year going to Airbnb and VRBO. That's not a rounding error. That's a salary and a half.
-
-You're already on Guesty, so the integration is plug-and-play. WanderOS replaces your direct booking site, keeps your Google rankings, and starts converting organic traffic that currently bounces to OTAs. The 3% fee on direct bookings means your break-even is the first few percentage points of shift — everything after that is pure margin.
-
-PCB operators with strong direct booking presence are also better positioned for spring break pricing control. When you own the guest relationship, you set the terms.
-
-I have a live ROI calculator that shows the exact numbers for an 88-unit PCB portfolio. Want to take a look?`,
-        tags: ["market", "pms", "size", "pain"]
-    },
-    {
-        name: "Jennifer Walsh",
-        company: "Coastal Haven Management",
-        market: "Hilton Head, SC",
-        pms: "Streamline",
-        units: 52,
-        subject: "Hilton Head + Streamline + 52 units — built for direct bookings",
-        body: `Hi Jennifer,
-
-Coastal Haven's 52-unit portfolio on Hilton Head is in a market that has one of the highest repeat-guest rates in the Southeast. Those returning families are your direct booking goldmine — they already know your properties, they just need a reason not to rebook through Airbnb.
-
-You're on Streamline, which is strong on the operations side. WanderOS adds the direct booking conversion layer: a branded site that preserves your SEO, captures guest emails for remarketing, and gives returning guests a loyalty-friendly booking experience.
-
-At Hilton Head's $265 ADR and your portfolio size, shifting even 20% of bookings from OTA to direct would save roughly $35K/year in commissions. The WanderOS fee is 3% of those direct bookings — so the ROI is immediate and measurable.
-
-The operators who own the guest relationship in Hilton Head are the ones building 5-year businesses. The ones who rely on Airbnb are building on rented land.
-
-I'd love to show you what the numbers look like for Coastal Haven specifically. 20 minutes?`,
-        tags: ["market", "pms", "size", "pain"]
-    },
-    {
-        name: "Kevin Park",
-        company: "Summit Retreats Co",
-        market: "Park City, UT",
-        pms: "Hostaway",
-        units: 22,
-        subject: "22 Park City units — your direct booking site could be your biggest asset",
-        body: `Kevin,
-
-Summit Retreats is operating 22 units in one of the most premium STR markets in the country. Park City's $425+ ADR means every booking that goes through an OTA costs you $60-75 in commission. Over a year, that adds up fast.
-
-You're on Hostaway, which means your ops are dialed. The gap is on the demand side — specifically, converting the organic traffic and repeat guests that are currently being funneled to OTAs.
-
-WanderOS plugs into Hostaway and gives you a direct booking site that actually competes with Airbnb's UX. AI-powered search, dynamic availability, and a checkout flow that converts. Your existing SEO authority transfers over — no rankings lost.
-
-Park City is interesting because the guest demographic skews high-income and brand-loyal. These are people who prefer booking direct when the experience is good enough. Right now, your direct booking experience probably isn't good enough. WanderOS fixes that.
-
-Quick call to walk through it? I built an ROI model for luxury mountain markets.`,
-        tags: ["market", "pms", "size"]
-    },
-    {
-        name: "Amanda Foster",
-        company: "Sunshine State Getaways",
-        market: "Orlando, FL",
-        pms: "Guesty",
-        units: 120,
-        subject: "120 Orlando units = $200K+ in annual OTA commissions — let's fix that",
-        body: `Amanda,
-
-Sunshine State Getaways at 120 units is a serious operation. In Orlando's market, with $175 ADR and near year-round demand, you're generating significant revenue. But at that scale, your OTA commission bill is likely north of $200K annually.
-
-That's not a cost of doing business — that's a choice. And it's a choice that gets more expensive every year as OTAs raise fees and change algorithms.
-
-You're on Guesty, so the WanderOS integration is straightforward — same API, no operational disruption. What changes: your direct booking site goes from an afterthought to a revenue engine. AI-optimized for conversion, SEO-preserving, and designed for the Orlando family traveler who's comparing 15 tabs before booking.
-
-At your scale, even a modest 15% shift to direct bookings saves $30K+/year. Operators your size typically see that shift within the first quarter.
-
-I have a live ROI calculator built specifically for this. It takes 2 minutes to see your exact numbers. Want me to send the link?`,
-        tags: ["market", "pms", "size", "pain"]
-    },
-    {
-        name: "Brian & Megan Scott",
-        company: "Lakefront Escapes",
-        market: "Lake Tahoe, CA",
-        pms: "OwnerRez",
-        units: 18,
-        subject: "Tahoe's $450 ADR makes every direct booking worth fighting for",
-        body: `Hi Brian and Megan,
-
-Lakefront Escapes has 18 units on Lake Tahoe — a market where the average nightly rate makes every single booking decision matter. At $450+ ADR, each time a guest books through Airbnb instead of direct, that's $67-81 in commission you didn't need to pay.
-
-You're on OwnerRez, which tells me you value control and flexibility. WanderOS shares that philosophy — it gives you a direct booking site that you own, optimized for conversion, while keeping your OwnerRez calendar and pricing as the system of record.
-
-Tahoe has a unique advantage: dual seasonality. Summer lake + winter ski means you have two booking windows per year where travelers are actively planning. If your direct booking site captures even a fraction more of those early planners, the math is significant.
-
-18 units x $450 ADR x 65% occupancy = roughly $1.9M gross revenue. At 70% OTA mix, you're paying ~$200K in commissions. WanderOS aims to shift 20-30% of that direct. You do the math.
-
-20 minutes to walk through what this looks like for Lakefront Escapes?`,
-        tags: ["market", "pms", "size", "seasonal"]
-    },
-    {
-        name: "Chris Nakamura",
-        company: "Island Time Rentals",
-        market: "Maui, HI",
-        pms: "Hostaway",
-        units: 31,
-        subject: "Maui's recovery + direct bookings = your competitive edge",
-        body: `Chris,
-
-Island Time Rentals is navigating one of the most complex STR markets in the country right now. Maui's recovery has shifted the guest mix — and the operators who control their own booking channel are the ones capturing the highest-intent travelers.
-
-At 31 units on Hostaway, you have the operational infrastructure. What you may be missing is a direct booking presence that competes with the OTAs for those travelers who are specifically seeking Maui — not just browsing.
-
-WanderOS integrates with Hostaway and builds you a direct booking site that captures organic search traffic, repeat guests, and referral bookings. In a market like Maui, where ADR averages $395 and guests plan months ahead, owning that direct relationship is worth tens of thousands per year.
-
-The 3% WanderOS fee on direct bookings is a fraction of the 15-18% OTA take. And in Maui's current market, where supply is constrained and demand is rebuilding, the operators with direct booking capability are setting the pricing terms.
-
-I'd like to show you the specific numbers. Quick call this week?`,
-        tags: ["market", "pms", "size", "pain"]
-    },
-    {
-        name: "Stephanie Owens",
-        company: "Ozark Getaway Homes",
-        market: "Branson, MO",
-        pms: "Lodgify",
-        units: 45,
-        subject: "45 Branson units — your repeat guests want to book direct",
-        body: `Hi Stephanie,
-
-Ozark Getaway Homes has built a strong position in Branson with 45 units. Branson's a market where repeat guests are the backbone of the business — families who come back year after year for the shows, the lake, and the Ozark fall foliage.
-
-Those repeat guests are your direct booking opportunity. They already know your properties. They don't need Airbnb to discover you. They just need a booking experience that's as easy as the OTA — and a reason to use it.
-
-You're on Lodgify, which already has direct booking capability, but the conversion rates on standard Lodgify sites typically lag behind what's possible. WanderOS adds AI-powered conversion optimization, dynamic pricing display, and a guest experience that drives repeat direct bookings.
-
-At 45 units and Branson's $165 ADR, shifting 25% of your OTA bookings to direct saves roughly $28K/year. That's meaningful margin in a market where operational efficiency wins.
-
-The Branson operators who lock in their repeat guest base now are the ones who'll thrive when the market gets more competitive. 20 minutes to explore it?`,
-        tags: ["market", "pms", "size", "seasonal"]
-    },
-    {
-        name: "David & Maria Gutierrez",
-        company: "Sonoran Sunset Villas",
-        market: "Tucson, AZ",
-        pms: "Escapia",
-        units: 27,
-        subject: "Tucson's emerging STR market + WanderOS = first-mover advantage",
-        body: `Hi David and Maria,
-
-Sonoran Sunset Villas is operating 27 units in a Tucson market that's growing faster than most people realize. As Phoenix-area STR regulations tighten, Tucson is picking up spillover demand — and the operators who establish direct booking presence now will have a significant advantage.
-
-You're on Escapia, which handles the PMS fundamentals. WanderOS adds the demand-capture layer: a direct booking site that ranks for Tucson vacation rental searches, converts organic traffic, and gives guests a reason to book direct instead of defaulting to Airbnb.
-
-At 27 units and Tucson's $185 ADR, your annual OTA commission spend is likely in the $30-40K range. WanderOS targets shifting 20-30% of those bookings direct at a 3% fee — the math works from month one.
-
-The first-mover advantage in Tucson is real. When travelers search for Tucson vacation rentals, the operators with strong direct booking sites capture the high-intent traffic. Everyone else competes on Airbnb's algorithm.
-
-Worth 20 minutes to see the model?`,
-        tags: ["market", "pms", "size", "pain"]
-    },
-    {
-        name: "Lauren Fitzgerald",
-        company: "Cape Cod Coastal Living",
-        market: "Cape Cod, MA",
-        pms: "Streamline",
-        units: 38,
-        subject: "Summer 2026 bookings are happening now — is your direct channel ready?",
-        body: `Lauren,
-
-Cape Cod Coastal Living's 38 units are about to enter the most critical booking window of the year. Cape Cod summer rentals book 3-6 months in advance, and the guests who book early are the ones most likely to book direct — if the option exists.
-
-You're on Streamline, which keeps operations tight. But the direct booking gap on Cape Cod is real: most operators have basic websites that can't compete with Airbnb's UX, so high-intent guests default to OTAs even when they'd prefer to book direct.
-
-WanderOS changes that equation. It integrates with Streamline and gives you a direct booking site that's actually competitive — fast, mobile-optimized, with real-time availability and a checkout flow that converts.
-
-At 38 units and Cape Cod's $310 ADR, summer season alone represents significant commission savings. Shifting 20% of July-August bookings direct at a 3% WanderOS fee (vs. 15-18% OTA) could save $25K+ just in peak season.
-
-The booking window for summer 2026 is open right now. Let's talk before your highest-value guests lock in through Airbnb.`,
-        tags: ["market", "pms", "size", "seasonal", "pain"]
-    },
-    {
-        name: "Robert Kim",
-        company: "Pacific Coast Stays",
-        market: "San Diego, CA",
-        pms: "Guesty",
-        units: 73,
-        subject: "73 units in San Diego — direct bookings are your margin expansion lever",
-        body: `Robert,
-
-Pacific Coast Stays at 73 units in San Diego is operating at scale in one of the most competitive STR markets in California. You know the margins are tight — between property costs, operations, and OTA commissions, every dollar of margin matters.
-
-At 73 units with San Diego's $275 ADR and strong year-round occupancy, your annual OTA commission bill is likely in the $115-130K range. That's your single biggest addressable cost outside of property expenses.
-
-You're on Guesty, which makes the WanderOS integration seamless — same API, no operational disruption, no retraining. What changes: your direct booking site goes from a lead generation page to a conversion engine.
-
-San Diego's advantage is consistent demand across all 12 months. That means direct booking efforts compound faster than in seasonal markets — every month you're converting OTA traffic to direct, you're building on the previous month's momentum.
-
-I built a live ROI calculator that shows the specific impact for a 73-unit San Diego portfolio. It takes 60 seconds. Want the link?`,
-        tags: ["market", "pms", "size"]
-    },
-    {
-        name: "Michelle Thompson",
-        company: "Smoky Mountain Family Cabins",
-        market: "Pigeon Forge, TN",
-        pms: "OwnerRez",
-        units: 55,
-        subject: "Pigeon Forge cabin rentals + direct bookings = higher margins on every stay",
-        body: `Hi Michelle,
-
-Smoky Mountain Family Cabins has 55 units in the Pigeon Forge market — one of the highest-demand vacation rental markets in the Southeast. The Smokies never really have an off-season, which means every booking that goes through an OTA is commission you're paying 365 days a year.
-
-You're on OwnerRez, which I see a lot among operators who care about flexibility and direct guest relationships. WanderOS amplifies that philosophy — it gives you a direct booking site that converts at rates typically 2-3x higher than standard property management websites.
-
-At 55 units and Pigeon Forge's $210 ADR, your annual OTA commission exposure is in the $90-100K range. WanderOS operators in the Smokies region typically see 20-30% of bookings shift to direct within 6 months. At a 3% WanderOS fee, the ROI is immediate.
-
-The cabin rental market in Pigeon Forge is getting more competitive every quarter. The operators who own their guest relationships — through direct bookings, email lists, and repeat guest programs — are the ones building durable businesses.
-
-20 minutes to walk through the math?`,
-        tags: ["market", "pms", "size", "pain"]
-    },
-    {
-        name: "Jason & Priya Patel",
-        company: "Sunbelt Vacation Rentals",
-        market: "Gulf Shores, AL",
-        pms: "Hostaway",
-        units: 40,
-        subject: "Gulf Shores operators are shifting to direct — your 40 units should too",
-        body: `Hi Jason and Priya,
-
-Sunbelt Vacation Rentals is operating 40 units in Gulf Shores, a market that's seen serious growth in the last two years. More inventory means more competition on the OTAs — and the operators who stand out are the ones with a strong direct booking channel.
-
-You're on Hostaway, which handles multi-channel distribution well. But here's the tension: every channel you distribute through takes a cut. The OTAs take 15-18%. WanderOS takes 3% — and gives you a direct booking site that competes with the OTAs on user experience.
-
-At 40 units and Gulf Shores' $195 ADR, you're paying roughly $55K/year in OTA commissions. Even a modest shift to direct bookings puts meaningful money back in the business.
-
-Gulf Shores is also a market where repeat guests are common — families who come back to the same beach every summer. Those guests are the easiest to convert to direct. They just need a booking experience that works.
-
-I can show you exactly what the numbers look like for a 40-unit Gulf Shores portfolio. 20 minutes this week?`,
-        tags: ["market", "pms", "size"]
-    },
-    {
-        name: "Emily Richardson",
-        company: "Mountain View Escapes",
-        market: "Asheville, NC",
-        pms: "Lodgify",
-        units: 33,
-        subject: "Asheville's boutique market rewards operators who own the guest relationship",
-        body: `Emily,
-
-Mountain View Escapes has 33 units in Asheville — a market that's unique in STR because the guest demographic actively prefers local, boutique experiences over generic OTA listings. These are guests who want to book direct. You just need to give them a reason.
-
-You're on Lodgify, which gives you basic direct booking capability. WanderOS takes that further: AI-optimized conversion, dynamic SEO that targets long-tail Asheville searches, and a guest experience that matches the boutique positioning your properties deserve.
-
-At 33 units and Asheville's $245 ADR, the commission math is meaningful: roughly $45K/year to OTAs. But in Asheville, the bigger win is brand equity. Direct bookers leave reviews on your site, join your email list, and become repeat guests who refer friends. OTA guests are anonymous transactions.
-
-WanderOS operators in boutique mountain markets like Asheville see some of the highest direct booking conversion rates in the platform — because the guest demographic is predisposed to book direct when the option is credible.
-
-20 minutes to see what this looks like for Mountain View Escapes?`,
-        tags: ["market", "pms", "size", "pain"]
-    },
-    {
-        name: "Tyler Brooks",
-        company: "Desert Oasis Properties",
-        market: "Palm Springs, CA",
-        pms: "Guesty",
-        units: 48,
-        subject: "48 Palm Springs units — peak season is 4 months of direct booking opportunity",
-        body: `Tyler,
-
-Desert Oasis Properties is running 48 units in Palm Springs, which means you're sitting on one of the most lucrative seasonal windows in STR. October through April, your properties are generating premium revenue — and a significant portion of that is being taxed 15-18% by OTAs.
-
-At 48 units and Palm Springs' $340 ADR during peak season, the numbers are significant. Even at conservative estimates, you're paying $85-100K/year in OTA commissions. The high-season commissions alone could be $60K.
-
-You're on Guesty, so WanderOS integration is native — same API, same calendar, no disruption. What you get: a direct booking site that captures the organic traffic already searching for Palm Springs vacation rentals and converts it at rates the OTAs can't match for your specific properties.
-
-Palm Springs travelers are planners. They book 2-4 months out for peak season. That planning window is when direct booking sites win — guests who search early are the most likely to compare options and book direct when given a quality experience.
-
-I have a live ROI calculator built for high-ADR seasonal markets. Want to see your numbers?`,
-        tags: ["market", "pms", "size", "seasonal"]
-    },
-    {
-        name: "Natalie Russo",
-        company: "Outer Banks Beach Houses",
-        market: "Outer Banks, NC",
-        pms: "Streamline",
-        units: 61,
-        subject: "OBX summer rental season — direct bookings are booked by March",
-        body: `Natalie,
-
-Outer Banks Beach Houses at 61 units is a substantial operation in one of the most iconic vacation rental markets on the East Coast. OBX has a booking pattern that's extremely favorable for direct: families book their summer week in January-March, often returning to the same house year after year.
-
-Those repeat families are your lowest-cost, highest-value booking channel. They don't need Airbnb to find you — they need a direct booking experience that's fast, trustworthy, and easy to share with the family group chat.
-
-You're on Streamline, which manages the operations. WanderOS adds the direct conversion layer: a branded booking site that preserves your Google rankings, captures early-season bookings, and gives returning guests one-click rebooking.
-
-At 61 units and OBX's $350 ADR during peak weeks, the commission savings from shifting even 20% direct are north of $40K/year. For OBX specifically, the repeat-guest dynamic means that shift compounds — once a family books direct, they rarely go back to the OTA.
-
-Summer 2026 booking window is opening now. Let's make sure Outer Banks Beach Houses is capturing its share direct. 20 minutes?`,
-        tags: ["market", "pms", "size", "seasonal", "pain"]
-    },
-    {
-        name: "Alex Hernandez",
-        company: "Coastal Bend Getaways",
-        market: "South Padre Island, TX",
-        pms: "Escapia",
-        units: 36,
-        subject: "South Padre's spring break rush + direct bookings = margin you're leaving behind",
-        body: `Alex,
-
-Coastal Bend Getaways is running 36 units on South Padre Island — a market that has massive seasonal spikes and a year-round base that most people underestimate. Spring break alone probably generates a disproportionate share of your annual revenue.
-
-Here's the challenge: during peak demand, OTAs take their 15-18% cut on bookings that would have happened regardless. Those guests were searching for South Padre — they would have booked with you directly if the option was there.
-
-You're on Escapia, and WanderOS integrates directly. It replaces your current direct booking presence with a conversion-optimized site that captures organic demand — especially during those peak windows when every booking is high-value.
-
-At 36 units and South Padre's $195 ADR, your annual OTA commissions are likely in the $40-50K range. Spring break weeks alone might account for $8-10K of that. WanderOS at 3% of direct bookings is a fraction of the OTA cost.
-
-The operators in seasonal Texas beach markets who capture direct bookings during peak demand are the ones with the healthiest margins. Worth a 20-minute call?`,
-        tags: ["market", "pms", "size", "seasonal"]
-    }
-];
-
-function createCard(p, idx) {
-    const initials = p.name.split(' ').map(n => n[0]).join('').slice(0, 2);
-    const tagHtml = p.tags.map(t => {
-        const labels = { market: 'Market Intel', pms: 'PMS Detected', size: 'Portfolio Size', seasonal: 'Seasonality', pain: 'Pain Point' };
-        return `<span class="p-tag ${t}">${labels[t]}</span>`;
-    }).join('');
-
-    return `<div class="card" data-pms="${p.pms.toLowerCase()}" data-idx="${idx}">
-        <div class="card-header">
-            <div class="card-meta">
-                <div class="avatar">${initials}</div>
-                <div>
-                    <div class="card-name">${p.name}</div>
-                    <div class="card-company">${p.company}</div>
-                </div>
-            </div>
-            <div class="card-details">
-                <span class="detail-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${p.market}</span>
-                <span class="detail-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>${p.pms}</span>
-                <span class="detail-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>${p.units} units</span>
-            </div>
-            <div class="card-subject">${p.subject}</div>
-            <div class="card-preview">${p.body.split('\n\n')[1] || p.body.substring(0, 120)}</div>
-        </div>
-        <div class="card-expand-hint">Click to read full email</div>
-        <div class="card-body">
-            <div class="email-body">${p.body}</div>
-            <div class="personalization-tags">
-                <span style="font-size:11px;font-weight:600;color:var(--text-light);margin-right:4px;">DATA USED:</span>
-                ${tagHtml}
-            </div>
-        </div>
-    </div>`;
+// ===== PROSPECT DATA =====
+const MARKET_ADR = {
+  "Destin, FL": 285,
+  "Gatlinburg, TN": 220,
+  "Scottsdale, AZ": 312,
+  "Big Sky, MT": 380,
+  "Panama City Beach, FL": 260,
+  "Hilton Head, SC": 295,
+  "Park City, UT": 340,
+  "Orlando, FL": 185,
+  "Lake Tahoe, CA": 410,
+  "Maui, HI": 490,
+  "Branson, MO": 175,
+  "Tucson, AZ": 195,
+  "Cape Cod, MA": 325,
+  "San Diego, CA": 350,
+  "Pigeon Forge, TN": 210,
+  "Gulf Shores, AL": 270,
+  "Asheville, NC": 245,
+  "Palm Springs, CA": 330,
+  "Outer Banks, NC": 310,
+  "South Padre Island, TX": 230
+};
+
+function calcOTA(units, market) {
+  const adr = MARKET_ADR[market] || 250;
+  return Math.round(units * adr * 0.65 * 0.15 * (1 - 0.15));
 }
 
-const grid = document.getElementById('emailGrid');
-grid.innerHTML = prospects.map((p, i) => createCard(p, i)).join('');
+function fmtMoney(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + n;
+}
 
-// Toggle cards
-grid.addEventListener('click', e => {
-    const card = e.target.closest('.card');
-    if (card) card.classList.toggle('open');
-});
+function scoreProspect(tags) {
+  const n = tags.length;
+  if (n >= 5) return 5;
+  if (n >= 4) return 4;
+  if (n >= 3) return 3;
+  if (n >= 2) return 2;
+  return 1;
+}
 
-// Filters
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.card').forEach(card => {
-            card.style.display = (filter === 'all' || card.dataset.pms === filter) ? '' : 'none';
-        });
+function scoreDots(score) {
+  return '●'.repeat(score) + '○'.repeat(5 - score);
+}
+
+function initials(name) {
+  return name.split(' ').filter(Boolean).map(w => w[0]).slice(0,2).join('').toUpperCase();
+}
+
+const prospects = [
+  {
+    name: "Sarah Mitchell",
+    company: "Emerald Coast Rentals",
+    market: "Destin, FL",
+    pms: "Guesty",
+    units: 42,
+    subject: "Your 42 Destin units and $63K in OTA commissions",
+    body: `Hi Sarah,
+
+Emerald Coast Rentals caught my attention. Forty-two units across the Destin-30A corridor, on Guesty, in a market that just posted record spring break numbers.
+
+Your direct booking site is pulling traffic but sending conversions to Airbnb and VRBO. At 42 units and Destin's $285 average nightly rate, that gap is roughly $63K per year in commissions you do not need to be paying.
+
+WanderOS integrates natively with Guesty. No migration, no downtime, no retraining your team. It replaces your current direct booking site, preserves your SEO authority, and typically lifts direct bookings 20-35% within six months. The fee is 3% of direct bookings, compared to 15-18% to the OTAs.
+
+Every 1% shift from OTA to direct saves you about $1,500 annually. Most operators your size see a 15-20% shift in the first quarter.
+
+If you have 20 minutes this week, I can walk through what the model looks like for Emerald Coast specifically.`,
+    tags: ["market", "pms", "size", "seasonal"]
+  },
+  {
+    name: "Marcus Johnson",
+    company: "Smoky Peak Lodging",
+    market: "Gatlinburg, TN",
+    pms: "Hostaway",
+    units: 28,
+    subject: "Gatlinburg's year-round demand and your 28 units",
+    body: `Hi Marcus,
+
+Smoky Peak Lodging has something most STR operators would trade a lot for: Gatlinburg's 12-month demand curve. No dead season. Your 28 units run year-round, but a significant chunk of that revenue is flowing through OTAs at 15-18% commission.
+
+You are on Hostaway, which tells me you have already invested in operational efficiency. WanderOS connects directly to your Hostaway stack. Same channel manager, same calendar sync, zero disruption. The difference is your direct booking site goes from a brochure to a real conversion engine.
+
+At 28 units with Gatlinburg's $220 average nightly rate, you are likely paying $40K or more per year in OTA commissions. WanderOS operators in the Smokies typically shift 20-25% of bookings to direct within six months. That is $8-10K back annually, net of a 3% WanderOS fee on those direct bookings.
+
+Gatlinburg operators building direct booking brand equity now are the ones who will not scramble the next time Airbnb adjusts its algorithm.
+
+Would a quick 20-minute walkthrough of the Smoky Peak numbers make sense this week?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Rachel Torres",
+    company: "Desert Sun Properties",
+    market: "Scottsdale, AZ",
+    pms: "Lodgify",
+    units: 65,
+    subject: "65 Scottsdale units at $312 ADR: what direct bookings look like",
+    body: `Hi Rachel,
+
+Desert Sun Properties stood out. Sixty-five units in Scottsdale, with what looks like strong luxury-adjacent positioning. At a $312 average nightly rate, your portfolio generates serious revenue, and I would guess a meaningful portion is still running through Airbnb and VRBO.
+
+At 65 units and 65% occupancy, you are looking at roughly $150K per year in OTA commissions. Shifting 15% of that to direct bookings saves you over $22K annually.
+
+You are on Lodgify, which already points toward direct. WanderOS takes it further with AI-powered SEO optimization, dynamic pricing integration, and a guest experience layer that drives repeat bookings. Lodgify users typically see the smoothest transition because the tech stack is already oriented the right way.
+
+Scottsdale's snowbird season is coming, and the operators with strong direct booking presence before October are the ones who capture guests planning 3-6 months out. That segment books direct when you give them a good reason to.
+
+I have a quick ROI model built for a portfolio your size. Want to see it? Twenty minutes, no pitch deck.`,
+    tags: ["market", "pms", "size", "seasonal"]
+  },
+  {
+    name: "Tom & Lisa Chen",
+    company: "Big Sky Vacation Homes",
+    market: "Big Sky, MT",
+    pms: "Escapia",
+    units: 35,
+    subject: "Ski season is 5 months out. Your direct booking engine should be ready.",
+    body: `Hi Tom and Lisa,
+
+Big Sky Vacation Homes is sitting in one of the fastest-growing ski markets in North America. Thirty-five units, positioned right in a demand curve that is about to spike.
+
+Seasonal markets like Big Sky have a specific challenge: you need to capture direct bookings during the planning window, August through October, before guests default to Airbnb. OTA guests book 2-4 weeks out. Direct guests book 2-4 months out and they tend to spend more.
+
+You are on Escapia, which handles the PMS side well but does not give you a competitive direct booking presence. WanderOS integrates with Escapia's reservation system and builds you a direct booking site that actually converts, preserving your existing SEO and adding AI-driven guest matching.
+
+At 35 units and Big Sky's $380 peak ADR, the commission savings are real. But the bigger win is capturing those early-bird ski bookings direct. WanderOS operators in mountain markets saw 28% higher ADR on direct bookings versus OTA bookings for the same properties last season.
+
+Worth a conversation before ski season planning kicks in?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Daniel Rivera",
+    company: "Gulf Breeze Stays",
+    market: "Panama City Beach, FL",
+    pms: "Guesty",
+    units: 88,
+    subject: "88 units in PCB. At this scale, OTA fees are a big number.",
+    body: `Hi Daniel,
+
+Gulf Breeze Stays is running 88 units in Panama City Beach on Guesty. At that scale, OTA commission math gets uncomfortable fast.
+
+Panama City Beach averages $260 per night. At 88 units and typical Florida Gulf Coast occupancy, you are looking at $130-150K per year going to Airbnb and VRBO in commissions alone. That number grows as you add units.
+
+WanderOS was built for operators at your scale. It integrates directly with Guesty, so your operations team does not touch anything. The platform rebuilds your direct booking presence with AI-driven SEO, a conversion-optimized booking engine, and a guest retention layer that brings past guests back without OTA involvement.
+
+Operators in the 80-100 unit range who have made the shift are typically seeing 25-30% of new bookings come in direct within nine months. At Gulf Breeze's revenue volume, that math is meaningful.
+
+I am based in this space and would be glad to put together a specific projection for your portfolio. Are you open to a call this week?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Jennifer Walsh",
+    company: "Coastal Haven Management",
+    market: "Hilton Head, SC",
+    pms: "Streamline",
+    units: 52,
+    subject: "Hilton Head's repeat-guest market and your direct booking opportunity",
+    body: `Hi Jennifer,
+
+Coastal Haven Management caught my attention. Fifty-two units in Hilton Head, on Streamline, in a market that has one of the strongest repeat-guest profiles in the Southeast.
+
+Hilton Head guests come back. That is well-documented in the market data. But if those repeat guests are rebooking through Airbnb, you are paying 15-18% commission on customers who already know and trust your brand. That is a solvable problem.
+
+WanderOS integrates with Streamline and builds a direct booking experience your past guests will actually use. The platform includes automated past-guest re-engagement, which is where the fastest ROI typically appears. Operators in comparable coastal South Carolina markets are seeing 30-35% of bookings from repeat guests come in direct within the first year.
+
+At 52 units and Hilton Head's $295 average nightly rate, moving repeat guests to direct is worth roughly $40-50K per year in recaptured commissions, depending on your repeat rate.
+
+Would it be worth 20 minutes to walk through what that looks like for Coastal Haven specifically?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Kevin Park",
+    company: "Summit Retreats Co",
+    market: "Park City, UT",
+    pms: "Hostaway",
+    units: 22,
+    subject: "Park City's premium pricing deserves a premium direct booking setup",
+    body: `Hi Kevin,
+
+Summit Retreats Co stood out. Twenty-two units in Park City at a market ADR north of $340. That is a high-value portfolio, and at that price point, every booking that flows through an OTA costs you more in absolute dollars than the averages suggest.
+
+At $340 average nightly rate and Park City occupancy rates, you are paying $50-60K per year in OTA commissions across 22 units. The properties earning the highest nightly rates are also the ones where guests are most likely to book direct if you give them a clean, trustworthy way to do it.
+
+You are on Hostaway, which WanderOS connects to natively. The setup is clean. Your existing channel management and calendar sync stay intact. What changes is your direct booking site goes from a static page to a full conversion engine with AI-driven SEO and a streamlined checkout guests actually complete.
+
+Sundance is four months away. That is when your highest-value guests are planning. Let me show you what a direct booking push looks like for Summit Retreats before that window opens.`,
+    tags: ["market", "pms", "size", "seasonal"]
+  },
+  {
+    name: "Amanda Foster",
+    company: "Sunshine State Getaways",
+    market: "Orlando, FL",
+    pms: "Guesty",
+    units: 120,
+    subject: "120 units in Orlando. This is a direct booking conversation.",
+    body: `Hi Amanda,
+
+Sunshine State Getaways is running 120 units in Orlando on Guesty. At that scale, the OTA commission line on your P&L is one of your largest expense categories. It does not have to be.
+
+Orlando is a unique market. High volume, event-driven demand, strong corporate and group travel. Guests in those segments book early and, when given a clean option, prefer booking direct. The leisure guest who found you on Airbnb last year can be a direct booking this year if you have the right re-engagement infrastructure.
+
+WanderOS connects to Guesty and handles the entire direct booking stack: conversion-optimized site, AI-driven SEO, dynamic pricing, and guest retention automation. At 120 units and Orlando's $185 average nightly rate, shifting even 20% of bookings to direct saves you over $30K per year in net commissions.
+
+Operators at your scale are also the ones who benefit most from our group and corporate booking tools, which capture segments that OTAs do not serve well.
+
+I would like to walk you through a full model for Sunshine State. Can we find 30 minutes this week?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Brian & Megan Scott",
+    company: "Lakefront Escapes",
+    market: "Lake Tahoe, CA",
+    pms: "OwnerRez",
+    units: 18,
+    subject: "Lake Tahoe's $410 ADR makes every direct booking count double",
+    body: `Hi Brian and Megan,
+
+Lakefront Escapes is a focused 18-unit portfolio in Lake Tahoe. That is not a huge operation, but at Tahoe's $410 average nightly rate, the revenue per property is high enough that direct booking math works strongly in your favor at any scale.
+
+You are on OwnerRez, which is great for owner-managed portfolios. WanderOS builds on top of OwnerRez's reservation system to give you a direct booking site that actually competes with OTA listings. We are talking about AI-powered SEO that gets your properties found on Google before guests open Airbnb.
+
+At 18 units and $410 ADR, you are paying roughly $35-40K per year in OTA commissions. That is a meaningful number for a boutique operation. Shifting even a third of those bookings direct brings your fee back below 5% of revenue.
+
+Lake Tahoe has both a ski season and a summer season, which means two distinct guest acquisition windows per year. Operators who build direct booking relationships during one season see those guests return and book direct in the other.
+
+Worth a conversation? I can keep it to 20 minutes.`,
+    tags: ["market", "pms", "size", "seasonal"]
+  },
+  {
+    name: "Chris Nakamura",
+    company: "Island Time Rentals",
+    market: "Maui, HI",
+    pms: "Hostaway",
+    units: 31,
+    subject: "31 units in Maui at $490 ADR. OTA commissions are expensive here.",
+    body: `Hi Chris,
+
+Island Time Rentals is running 31 units in Maui. At $490 average nightly rate, you are in one of the highest-ADR short-term rental markets in the country. That means OTA commissions are not just a percentage issue. They are a large absolute dollar problem.
+
+Thirty-one units at $490 ADR and 70% occupancy puts your gross revenue around $3.9M. At 15-18% OTA commission on a typical mix, you are sending $350-450K per year to Airbnb and VRBO.
+
+You are on Hostaway, which WanderOS integrates with directly. The migration is clean and your team does not change any workflows. What changes is you start capturing the guests who searched Google for "Maui vacation rental" before they ever hit an OTA.
+
+Maui guests tend to be high-intent and research-driven. They respond well to a direct booking experience that feels more premium than an OTA listing. That is exactly the positioning WanderOS builds.
+
+I would like to put together a specific projection for Island Time. Can we connect this week?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Stephanie Owens",
+    company: "Ozark Getaway Homes",
+    market: "Branson, MO",
+    pms: "Lodgify",
+    units: 45,
+    subject: "45 units in Branson: the direct booking case for a family travel market",
+    body: `Hi Stephanie,
+
+Ozark Getaway Homes is 45 units in Branson on Lodgify. Branson is an interesting market because it runs on a family travel audience that plans well in advance and tends to rebook the same types of properties when they have a good experience.
+
+That repeat-and-refer guest behavior is exactly where direct bookings pay off most. If your past Branson guests are going back to Airbnb instead of your site, you are spending 15-18% to re-acquire customers who already like you.
+
+You are on Lodgify, which means your infrastructure is already pointed toward direct. WanderOS extends that with AI-driven SEO, a streamlined booking checkout, and automated past-guest re-engagement that brings people back to your site instead of OTAs.
+
+At 45 units and Branson's $175 average nightly rate, your annual OTA commission spend is in the $45-55K range. Moving a third of that to direct saves you roughly $15K per year at WanderOS's 3% fee structure.
+
+If a 20-minute walkthrough of the numbers for Ozark Getaway makes sense, I am happy to set that up this week.`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "David & Maria Gutierrez",
+    company: "Sonoran Sunset Villas",
+    market: "Tucson, AZ",
+    pms: "Escapia",
+    units: 27,
+    subject: "Tucson's winter season is 6 weeks away. Is your direct booking site ready?",
+    body: `Hi David and Maria,
+
+Sonoran Sunset Villas is 27 units in Tucson on Escapia. Tucson's winter snowbird season is the most predictable demand window in the Southwest, and guests in that segment plan 3-5 months in advance.
+
+The question is where they are landing when they plan. If your search presence is built around OTAs, those guests book through Airbnb. If you have strong direct SEO, they find you first and you keep the full booking value.
+
+WanderOS integrates with Escapia and builds the direct booking infrastructure you need before that planning window opens. AI-driven SEO gets Sonoran Sunset Villas ranking for Tucson vacation rental searches on Google. The booking checkout converts those visitors into confirmed reservations.
+
+At 27 units and $195 average nightly rate, your annual OTA commissions are running around $32K. Shifting half of that to direct puts roughly $20K back in the business each year at WanderOS's 3% fee.
+
+With November approaching fast, would it make sense to talk this week?`,
+    tags: ["market", "pms", "size", "seasonal"]
+  },
+  {
+    name: "Lauren Fitzgerald",
+    company: "Cape Cod Coastal Living",
+    market: "Cape Cod, MA",
+    pms: "Streamline",
+    units: 38,
+    subject: "Cape Cod's summer window is short. Direct bookings make every week count.",
+    body: `Hi Lauren,
+
+Cape Cod Coastal Living is 38 units in one of the most compressed-season markets in the country. You have roughly 10-12 weeks of peak demand per year. At Streamline and $325 average nightly rate, every booking in that window that goes through an OTA costs you more than average.
+
+Cape Cod guests are loyal. If they loved a property, they come back. But if they rebook through Airbnb, you are paying 15-18% commission on a relationship that belongs to you.
+
+WanderOS connects to Streamline and builds the direct booking experience that captures both new guests and past guests before OTAs do. The guest re-engagement tools are particularly effective in seasonal New England markets, where the planning window for summer opens in January.
+
+At 38 units and $325 ADR, your peak-season OTA commissions are running $45-55K per year on compressed summer revenue. Even a 30% shift to direct materially changes that number.
+
+Next summer's planning window is about three months out. Would 20 minutes to walk through what a direct booking push looks like for Cape Cod Coastal Living be worthwhile?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Robert Kim",
+    company: "Pacific Coast Stays",
+    market: "San Diego, CA",
+    pms: "Guesty",
+    units: 73,
+    subject: "73 San Diego units: the numbers on a direct booking shift",
+    body: `Hi Robert,
+
+Pacific Coast Stays is 73 units in San Diego on Guesty. San Diego is a year-round market with a strong mix of leisure, corporate, and military-adjacent travel, which means your properties are running at relatively consistent occupancy all year.
+
+At 73 units, $350 average nightly rate, and year-round demand, your OTA commission spend is one of your biggest line items. The math puts it at $140-160K per year going to Airbnb and VRBO.
+
+WanderOS integrates directly with Guesty. Your operations team stays on the same workflow. What changes is your direct booking site becomes a real revenue channel, not just a placeholder. AI-driven SEO gets Pacific Coast Stays ranking for San Diego vacation rental searches. The booking engine converts that traffic. Guest retention tools bring those guests back direct the next time.
+
+San Diego's year-round demand profile is ideal for direct bookings because you are not dependent on a single planning window. The pipeline builds steadily across all 12 months.
+
+I would like to put together a specific direct booking model for 73 units in San Diego. Can we find 20 minutes?`,
+    tags: ["market", "pms", "size", "pain"]
+  },
+  {
+    name: "Michelle Thompson",
+    company: "Smoky Mountain Family Cabins",
+    market: "Pigeon Forge, TN",
+    pms: "OwnerRez",
+    units: 55,
+    subject: "55 cabins in Pigeon Forge: family guests who rebook are your best asset",
+    body: `Hi Michelle,
+
+Smoky Mountain Family Cabins is 55 units in Pigeon Forge on OwnerRez. You are in a market where family travel drives a consistent, multi-season demand curve, and families who loved their trip are very likely to rebook.
+
+The gap is whether they rebook through Airbnb or through you. If it is Airbnb, you are paying 15-18% on a customer relationship you already earned.
+
+WanderOS builds on top of OwnerRez's reservation system and gives you the direct booking infrastructure to close that loop. Guest retention automation sends past guests back to your site when they start planning their next Smokies trip. AI-driven SEO gets Smoky Mountain Family Cabins found on Google before they open an OTA app.
+
+At 55 units and Pigeon Forge's $210 average nightly rate, your OTA commission spend is around $80K per year. Shifting 25% to direct saves you roughly $25K annually at WanderOS's 3% fee structure.
+
+If a 25-minute walkthrough of the retention and direct booking strategy makes sense, I am glad to set that up.`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Jason & Priya Patel",
+    company: "Sunbelt Vacation Rentals",
+    market: "Gulf Shores, AL",
+    pms: "Hostaway",
+    units: 40,
+    subject: "40 units in Gulf Shores: what a direct booking program looks like here",
+    body: `Hi Jason and Priya,
+
+Sunbelt Vacation Rentals is 40 units in Gulf Shores on Hostaway. Gulf Shores runs a predictable demand calendar: spring break, summer, and a strong fall shoulder season. Guests who come once to the Alabama Gulf Coast tend to return, which creates a repeat-guest asset that most operators in this market are not fully using.
+
+At 40 units and $270 average nightly rate, your annual OTA commissions are in the $55-65K range. The guest retention play alone, getting past guests to rebook direct instead of through Airbnb, is worth $10-15K per year for a portfolio your size.
+
+You are on Hostaway, which WanderOS connects to natively. Nothing changes operationally. Your direct booking site goes from static to a conversion engine with SEO that gets Sunbelt Vacation Rentals ranking for Gulf Shores searches before guests open an OTA.
+
+The spring break planning window opens up around December. That is when direct SEO investment starts paying off.
+
+Would a 20-minute conversation about what this looks like for Sunbelt make sense this week?`,
+    tags: ["market", "pms", "size", "seasonal"]
+  },
+  {
+    name: "Emily Richardson",
+    company: "Mountain View Escapes",
+    market: "Asheville, NC",
+    pms: "Lodgify",
+    units: 33,
+    subject: "Asheville's growing market and your 33-unit direct booking opportunity",
+    body: `Hi Emily,
+
+Mountain View Escapes is 33 units in Asheville on Lodgify. Asheville is one of the fastest-growing STR markets in the Southeast, and that growth means OTA competition is also increasing. Properties that build direct booking presence now are establishing the brand equity that becomes a moat as the market gets more crowded.
+
+You are on Lodgify, which is already a signal that you are thinking about direct. WanderOS extends Lodgify's direct booking foundation with AI-driven SEO, a higher-converting booking checkout, and guest retention automation that brings past Asheville guests back to your site.
+
+At 33 units and $245 average nightly rate, your OTA commissions are running around $40K per year. The Asheville market skews toward experience-focused travelers who do research before booking. That audience responds well to a direct booking site that tells a story and builds trust.
+
+Asheville also has strong leaf season, which is booking up right now. Operators with direct SEO presence are capturing that traffic before OTAs do.
+
+If a quick walkthrough of the Mountain View strategy makes sense, I am glad to make time.`,
+    tags: ["market", "pms", "size", "seasonal"]
+  },
+  {
+    name: "Tyler Brooks",
+    company: "Desert Oasis Properties",
+    market: "Palm Springs, CA",
+    pms: "Guesty",
+    units: 48,
+    subject: "48 units in Palm Springs: direct bookings in a premium desert market",
+    body: `Hi Tyler,
+
+Desert Oasis Properties is 48 units in Palm Springs on Guesty. Palm Springs is a premium market with a specific guest profile: design-conscious, higher-income travelers who plan ahead and value a curated booking experience.
+
+That guest profile is exactly the one most likely to book direct when you give them a clean, trustworthy option. OTA listings flatten every property into the same template. A direct booking site lets Desert Oasis show what makes these properties worth $330 per night.
+
+At 48 units and $330 ADR, your annual OTA commissions are running around $78K. WanderOS integrates with Guesty, builds you a premium direct booking site optimized for that Palm Springs search audience, and includes AI-driven pricing and guest retention tools.
+
+Palm Springs has a strong fall-through-spring season and a defined summer shoulder. The operators building direct brand equity now are the ones filling their fall calendar in July instead of competing on OTA pricing in September.
+
+I would like to show you what a direct booking push looks like for Desert Oasis. Are you open to 20 minutes this week?`,
+    tags: ["market", "pms", "size", "seasonal"]
+  },
+  {
+    name: "Natalie Russo",
+    company: "Outer Banks Beach Houses",
+    market: "Outer Banks, NC",
+    pms: "Streamline",
+    units: 61,
+    subject: "61 Outer Banks properties and a direct booking program that makes sense here",
+    body: `Hi Natalie,
+
+Outer Banks Beach Houses is 61 units on Streamline in one of the most loyalist-guest markets on the East Coast. OBX guests return, they refer, and they plan far in advance. That behavior is a direct booking program waiting to be activated.
+
+The challenge is that most of those return guests are going back to Airbnb because it is the path of least resistance. At 61 units and $310 average nightly rate, that habit is costing you roughly $90K per year in OTA commissions on what should be owned customer relationships.
+
+WanderOS integrates with Streamline and builds the direct booking infrastructure to capture those repeat guests before they hit OTAs. Past-guest re-engagement automation, SEO-optimized direct booking site, and a checkout flow that converts the high-intent OBX planner.
+
+The summer planning window for OBX opens in January. Operators who have their direct presence dialed in by then are filling weeks at full commission instead of competing on OTA pricing.
+
+Would it be worth 25 minutes to walk through what that pipeline looks like for Outer Banks Beach Houses?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  },
+  {
+    name: "Alex Hernandez",
+    company: "Coastal Bend Getaways",
+    market: "South Padre Island, TX",
+    pms: "Escapia",
+    units: 36,
+    subject: "South Padre's spring break demand and your 36-unit direct booking setup",
+    body: `Hi Alex,
+
+Coastal Bend Getaways is 36 units in South Padre Island on Escapia. South Padre runs the most concentrated spring break demand of any Texas beach market, and that concentrated window means the cost of OTA dependency is higher than average.
+
+When 60% of your annual revenue books over 8-10 weeks, paying 15-18% OTA commission during that window is expensive. Operators who capture even a portion of spring break bookings direct are keeping an extra $15-20K from that season alone.
+
+WanderOS connects to Escapia's reservation system and builds the direct booking presence that gets Coastal Bend Getaways found on Google before spring break planners land on Airbnb. The SEO and booking engine are optimized for the high-intent South Padre searcher.
+
+At 36 units and $230 average nightly rate, your annual OTA commissions are around $38K. A 35% direct shift saves you roughly $18K net of WanderOS's 3% fee.
+
+Spring break planning ramps up in November. Would a 20-minute call to walk through the South Padre setup this week make sense?`,
+    tags: ["market", "pms", "size", "seasonal", "pain"]
+  }
+];
+
+// ===== COMPUTE METRICS =====
+function computeMetrics() {
+  const totalOTA = prospects.reduce((sum, p) => sum + calcOTA(p.units, p.market), 0);
+  const avgSize = Math.round(prospects.reduce((sum, p) => sum + p.units, 0) / prospects.length);
+
+  const pmsCounts = {};
+  prospects.forEach(p => { pmsCounts[p.pms] = (pmsCounts[p.pms] || 0) + 1; });
+
+  const marketCounts = {};
+  prospects.forEach(p => {
+    const state = p.market.split(', ')[1] || p.market;
+    marketCounts[state] = (marketCounts[state] || 0) + 1;
+  });
+
+  document.getElementById('pmTotalOTA').textContent = fmtMoney(totalOTA) + '/yr';
+  document.getElementById('pmAvgSize').textContent = avgSize + ' units';
+
+  const pmsChart = document.getElementById('pmsPmsChart');
+  const maxPms = Math.max(...Object.values(pmsCounts));
+  Object.entries(pmsCounts).sort((a,b)=>b[1]-a[1]).forEach(([pms, count]) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `<span class="bar-label">${pms}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(count/maxPms*100)}%"></div></div><span class="bar-count">${count}</span>`;
+    pmsChart.appendChild(row);
+  });
+
+  const mktDist = document.getElementById('pmMarketDist');
+  Object.entries(marketCounts).sort((a,b)=>b[1]-a[1]).forEach(([state, count]) => {
+    const badge = document.createElement('div');
+    badge.className = 'mkt-badge';
+    badge.textContent = `${state} (${count})`;
+    mktDist.appendChild(badge);
+  });
+}
+
+// ===== RENDER CARDS =====
+function renderCards(list) {
+  const grid = document.getElementById('emailGrid');
+  grid.innerHTML = '';
+  document.getElementById('resultsCount').textContent = list.length + (list.length === 1 ? ' prospect' : ' prospects');
+
+  if (list.length === 0) {
+    grid.innerHTML = `<div class="no-results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No prospects match your search or filter.</p></div>`;
+    return;
+  }
+
+  list.forEach((p, i) => {
+    const score = scoreProspect(p.tags);
+    const dots = scoreDots(score);
+    const scoreClass = score >= 4 ? 'high' : score === 3 ? 'mid' : 'low';
+    const ota = calcOTA(p.units, p.market);
+    const initStr = initials(p.name);
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.pms = p.pms;
+    card.dataset.market = p.market;
+    card.dataset.company = p.company;
+    card.dataset.units = p.units;
+
+    card.innerHTML = `
+<div class="card-header">
+  <div class="card-top-row">
+    <div class="avatar">${initStr}</div>
+    <div class="card-name-block">
+      <div class="card-name">${p.name}</div>
+      <div class="card-company">${p.company}</div>
+      <div class="card-badges">
+        <span class="score-badge ${scoreClass}" title="Personalization Score">
+          <span class="score-dots">${dots}</span> ${score}/5
+        </span>
+        <span class="ota-badge">Est. OTA: ${fmtMoney(ota)}/yr</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-chips">
+    <span class="chip market-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      ${p.market}
+    </span>
+    <span class="chip pms-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      ${p.pms}
+    </span>
+    <span class="chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      ${p.units} units
+    </span>
+  </div>
+  <div class="card-subject-label">Subject line</div>
+  <div class="card-subject">${p.subject}</div>
+  <div class="card-preview">${p.body.split('\n\n')[1] || p.body.substring(0, 120)}</div>
+</div>
+<div class="card-expand-hint">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  View email
+</div>
+<div class="card-body">
+  <div class="card-body-inner">
+    <div class="email-label">Email Body</div>
+    <div class="email-body" style="padding-top:40px">
+      <button class="copy-btn" title="Copy email to clipboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy
+      </button>${p.body}</div>
+    <div class="p-tags">${p.tags.map(t => `<span class="p-tag ${t}">${t}</span>`).join('')}</div>
+  </div>
+</div>`;
+
+    // Toggle card open/close
+    const header = card.querySelector('.card-header');
+    const hint = card.querySelector('.card-expand-hint');
+    const body = card.querySelector('.card-body');
+
+    function toggleCard() {
+      const isOpen = card.classList.contains('open');
+      card.classList.toggle('open');
+    }
+    header.addEventListener('click', toggleCard);
+    hint.addEventListener('click', toggleCard);
+
+    // Copy button
+    const copyBtn = card.querySelector('.copy-btn');
+    copyBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigator.clipboard.writeText(p.body).then(() => {
+        copyBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      });
     });
-});
-</script>
 
+    grid.appendChild(card);
+  });
+}
+
+// ===== FILTER + SORT + SEARCH =====
+let activeFilter = 'all';
+let searchQuery = '';
+let sortMode = 'size-desc';
+
+function getFiltered() {
+  let list = [...prospects];
+
+  if (activeFilter !== 'all') {
+    list = list.filter(p => p.pms === activeFilter);
+  }
+
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    list = list.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.company.toLowerCase().includes(q) ||
+      p.market.toLowerCase().includes(q) ||
+      p.pms.toLowerCase().includes(q)
+    );
+  }
+
+  list.sort((a, b) => {
+    if (sortMode === 'size-desc') return b.units - a.units;
+    if (sortMode === 'size-asc') return a.units - b.units;
+    if (sortMode === 'market-az') return a.market.localeCompare(b.market);
+    if (sortMode === 'pms-az') return a.pms.localeCompare(b.pms);
+    return 0;
+  });
+
+  return list;
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    renderCards(getFiltered());
+  });
+});
+
+let searchTimer;
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    searchQuery = e.target.value.trim();
+    renderCards(getFiltered());
+  }, 150);
+});
+
+document.getElementById('sortSelect').addEventListener('change', (e) => {
+  sortMode = e.target.value;
+  renderCards(getFiltered());
+});
+
+// ===== PIPELINE METRICS TOGGLE =====
+document.getElementById('metricsToggle').addEventListener('click', () => {
+  const toggle = document.getElementById('metricsToggle');
+  const body = document.getElementById('metricsBody');
+  const isOpen = body.classList.contains('open');
+  toggle.classList.toggle('open');
+  body.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', !isOpen);
+});
+
+// ===== STICKY FILTER BAR =====
+const filterBarOuter = document.getElementById('filterBarOuter');
+const sentinel = document.createElement('div');
+sentinel.style.height = '1px';
+filterBarOuter.parentNode.insertBefore(sentinel, filterBarOuter);
+
+const stickyObserver = new IntersectionObserver(
+  ([entry]) => {
+    filterBarOuter.classList.toggle('stuck', !entry.isIntersecting);
+  },
+  { threshold: 0, rootMargin: '-61px 0px 0px 0px' }
+);
+stickyObserver.observe(sentinel);
+
+// ===== ANIMATED STATS COUNTER =====
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+function animateStat(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1200;
+  const start = performance.now();
+
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const value = Math.round(easeOut(progress) * target);
+    el.textContent = value + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+const statsObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.stat-num[data-target]').forEach(animateStat);
+        statsObserver.disconnect();
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+statsObserver.observe(document.querySelector('.stats-bar'));
+
+// ===== INIT =====
+computeMetrics();
+renderCards(getFiltered());
+</script>
 </body>
 </html>
