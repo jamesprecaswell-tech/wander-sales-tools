@@ -413,16 +413,16 @@ footer a:hover{color:rgba(255,255,255,.7)}
             <div class="slider-label">Estimated Occupancy Rate<small>Annual average &mdash; percentage of nights booked</small></div>
             <div class="slider-right">
               <div class="custom-input-wrap">
-                <input type="number" id="inp-occ" class="custom-num-input" value="55" min="10" max="100" step="1" style="width:72px" aria-label="Occupancy rate percent">
+                <input type="number" id="inp-occ" class="custom-num-input" value="55" min="1" max="100" step="1" style="width:72px" aria-label="Occupancy rate percent">
                 <span class="custom-input-suffix">%</span>
               </div>
             </div>
           </div>
           <div class="slider-wrapper" id="wrap-occ">
             <div class="slider-tooltip" id="tip-occ">55%</div>
-            <input type="range" id="sl-occ" min="10" max="90" value="55" step="1">
+            <input type="range" id="sl-occ" min="20" max="90" value="55" step="1">
           </div>
-          <div class="slider-ticks"><span class="slider-tick">10%</span><span class="slider-tick">30%</span><span class="slider-tick">55%</span><span class="slider-tick">75%</span><span class="slider-tick">90%</span></div>
+          <div class="slider-ticks"><span class="slider-tick">20%</span><span class="slider-tick">40%</span><span class="slider-tick">55%</span><span class="slider-tick">75%</span><span class="slider-tick">90%</span></div>
           <div class="occ-hint" id="occ-hint" style="font-size:.75rem;color:var(--content-muted);margin-top:4px;font-weight:500">US national average: ~55%. Adjust for your market and property tier.</div>
         </div>
 
@@ -690,7 +690,7 @@ function parseHash(){
     if(!isNaN(a)&&a>=1){state.adr=a;document.getElementById('sl-adr').value=Math.min(a,1500);document.getElementById('inp-adr').value=a}
     if(!isNaN(d)&&d>=0&&d<=100){state.direct=d/100;document.getElementById('sl-direct').value=d;document.getElementById('inp-direct').value=d}
     const o=parseInt(p.get('o'));
-    if(!isNaN(o)&&o>=10&&o<=100){state.occ=o;document.getElementById('sl-occ').value=Math.min(o,90);document.getElementById('inp-occ').value=o}
+    if(!isNaN(o)&&o>=1&&o<=100){state.occ=o;document.getElementById('sl-occ').value=Math.min(Math.max(o,20),90);document.getElementById('inp-occ').value=o}
     const ota=parseFloat(p.get('ota'));
     if(!isNaN(ota)&&ota>0&&ota<1){state.otaRate=ota;document.querySelectorAll('.ota-chip').forEach(c=>{c.classList.toggle('active',parseFloat(c.dataset.rate)===ota)})}
     const mkt=p.get('mkt');
@@ -940,15 +940,15 @@ wireSliderAndInput('sl-units','inp-units','tip-units','wrap-units',()=>state.uni
 wireSliderAndInput('sl-adr','inp-adr','tip-adr','wrap-adr',()=>state.adr,v=>{state.adr=v},v=>'$'+v.toLocaleString()+'/night',50,1500);
 
 const slOcc=document.getElementById('sl-occ'),inpOcc=document.getElementById('inp-occ'),tipOcc=document.getElementById('tip-occ'),wrapOcc=document.getElementById('wrap-occ'),occHint=document.getElementById('occ-hint');
-function reposOccTip(){const min=10,max=90,val=parseFloat(slOcc.value);const pct=(val-min)/(max-min);const tw=slOcc.getBoundingClientRect().width||slOcc.offsetWidth||300;tipOcc.style.left=(pct*(tw-22)+11)+'px';tipOcc.textContent=state.occ+'% occupancy'}
-function updateOccHint(){const a=state.adr;if(a<150)occHint.textContent='Budget tier \u2014 typical occupancy 55-62%. US avg ~55%.';else if(a<300)occHint.textContent='Mid-market \u2014 typical occupancy 50-56%. US avg ~55%.';else if(a<600)occHint.textContent='Premium tier \u2014 typical occupancy 42-50%.';else occHint.textContent='Luxury tier \u2014 typical occupancy 35-45%. High ADR = lower occupancy.'}
+function reposOccTip(){const min=20,max=90,val=parseFloat(slOcc.value);const pct=(val-min)/(max-min);const tw=slOcc.getBoundingClientRect().width||slOcc.offsetWidth||300;tipOcc.style.left=(pct*(tw-22)+11)+'px';tipOcc.textContent=state.occ+'% occupancy'}
+function updateOccHint(){const a=state.adr;if(a<150)occHint.textContent='Budget tier \u2014 typical 55-62%. US national average ~55%.';else if(a<=300)occHint.textContent='Mid-market \u2014 typical 50-56%. US national average ~55%.';else if(a<=600)occHint.textContent='Premium \u2014 typical 42-50%.';else occHint.textContent='Luxury \u2014 typical 35-45%. High ADR = lower occupancy.'}
 slOcc.addEventListener('input',()=>{const v=parseInt(slOcc.value);state.occ=v;inpOcc.value=v;reposOccTip();updateAll()});
 slOcc.addEventListener('mousedown',()=>{wrapOcc.classList.add('dragging');reposOccTip()});
 slOcc.addEventListener('touchstart',()=>{wrapOcc.classList.add('dragging');reposOccTip()});
 slOcc.addEventListener('mouseup',()=>wrapOcc.classList.remove('dragging'));
 slOcc.addEventListener('touchend',()=>wrapOcc.classList.remove('dragging'));
-inpOcc.addEventListener('input',()=>{const r=parseInt(inpOcc.value)||0;const c=Math.min(100,Math.max(10,r));state.occ=c;slOcc.value=Math.min(c,90);reposOccTip();updateAll()});
-inpOcc.addEventListener('blur',()=>{const v=parseInt(inpOcc.value);if(isNaN(v)||v<10)inpOcc.value=10;if(v>100)inpOcc.value=100});
+inpOcc.addEventListener('input',()=>{const r=parseInt(inpOcc.value)||0;const c=Math.min(100,Math.max(1,r));state.occ=c;slOcc.value=Math.min(Math.max(c,20),90);reposOccTip();updateAll()});
+inpOcc.addEventListener('blur',()=>{const v=parseInt(inpOcc.value);if(isNaN(v)||v<1)inpOcc.value=1;if(v>100)inpOcc.value=100});
 window.addEventListener('resize',reposOccTip);
 
 const slDirect=document.getElementById('sl-direct'),inpDirect=document.getElementById('inp-direct'),tipDirect=document.getElementById('tip-direct'),wrapDirect=document.getElementById('wrap-direct');
